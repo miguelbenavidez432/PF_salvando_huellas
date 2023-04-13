@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
   sequelize.define('users', {
 
     id_User: {
-      type: DataTypes.INTEGER,
+      type: DataTypes,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true
@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
     },
 
     idNumbU: {
-      type: DataTypes.INTEGER(8),
+      type: DataTypes,
       allowNull: false,
     },
 
@@ -62,5 +62,5 @@ module.exports = (sequelize) => {
     // Invalidates: Date and time fields
     { timestamps: false }
 
-  )
+  );
 }
