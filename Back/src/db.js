@@ -15,7 +15,7 @@ const {
 
 // Instance: Conection from DB to Sequelize
 // UDI: string conection DB ( DBMS, User Postgres, Password Postgres, Puerto, DB name )
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/salvadohuellas`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 })
@@ -42,7 +42,7 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 sequelize.models = Object.fromEntries(capsEntries)
 
 // Destructures: the models to make relationships
-const { donations, articles, users, opinions, stock, dogs, posts, references } = sequelize.models
+const { Donations, Articles, Users, Opinions, Stock, Dogs, Posts, References } = sequelize.models
 
 // Declare: relationship
 users.hasMany(donations)
