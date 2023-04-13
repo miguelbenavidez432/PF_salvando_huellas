@@ -3,10 +3,10 @@ const {
   getAllDogsHandler,
   getDogsByIdHandler,
   getDogsByNameHandler,
-} = require("../controllers/dogController");
+} = require("../handlers/dogHandler");
 
 dogsRoutes.get("/", getAllDogsHandler);
+dogsRoutes.get("/", getDogsByNameHandler);
 dogsRoutes.get("/:id", getDogsByIdHandler);
-dogsRoutes.get("/?name", getDogsByNameHandler);
 
 module.exports = dogsRoutes;

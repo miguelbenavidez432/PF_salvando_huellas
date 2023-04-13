@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
   sequelize.define('opinions', {
 
     id_Opinion: {
-      type: DataTypes,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true
@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
     },
 
     qualificationO: {
-      type: DataTypes,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },

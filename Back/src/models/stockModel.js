@@ -7,14 +7,14 @@ module.exports = (sequelize) => {
   sequelize.define('stock', {
 
     id_Stock: {
-      type: DataTypes,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true
     },
 
     amountS: {
-      type: DataTypes,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },

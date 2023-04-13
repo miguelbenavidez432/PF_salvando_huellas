@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
   sequelize.define('donations', {
 
     id_Donations: {
-      type: DataTypes,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true
