@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
   sequelize.define('posts', {
 
     id_Article: {
-      type: DataTypes.INTEGER,
+      type: DataTypes,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true
