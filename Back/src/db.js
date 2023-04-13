@@ -15,7 +15,7 @@ const {
 
 // Instance: Conection from DB to Sequelize
 // UDI: string conection DB ( DBMS, User Postgres, Password Postgres, Puerto, DB name )
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/salvandohuellas`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 })
@@ -42,32 +42,32 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 sequelize.models = Object.fromEntries(capsEntries)
 
 // Destructures: the models to make relationships
-const { donations, articles, users, opinions, stock, dogs, posts, references } = sequelize.models
+const { Donations, Articles, Users, Opinions, Stock, Dogs, Posts, References } = sequelize.models
 
 // Declare: relationship
-users.hasMany(donations)
-donations.belongsTo(users)
+Users.hasMany(Donations)
+Donations.belongsTo(Users)
 
-users.hasMany(dogs)
-dogs.belongsTo(users)
+Users.hasMany(Dogs)
+Dogs.belongsTo(Users)
 
-dogs.belongsToMany(references, { through: 'dogsReferences' })
-references.belongsToMany(dogs, { through: 'dogsReferences'})
+Dogs.belongsToMany(References, { through: 'dogsReferences' })
+References.belongsToMany(Dogs, { through: 'dogsReferences'})
 
-users.hasMany(posts)
-posts.belongsTo(users)
+Users.hasMany(Posts)
+Posts.belongsTo(Users)
 
-users.hasMany(articles)
-articles.belongsTo(users)
+Users.hasMany(Articles)
+Articles.belongsTo(Users)
 
-articles.hasMany(opinions)
-opinions.belongsTo(articles)
+Articles.hasMany(Opinions)
+Opinions.belongsTo(Articles)
 
-users.hasMany(opinions)
-opinions.belongsTo(users)
+Users.hasMany(Opinions)
+Opinions.belongsTo(Users)
 
-articles.hasOne(stock)
-stock.belongsTo(articles)
+Articles.hasOne(Stock)
+Stock.belongsTo(Articles)
 
 module.exports = {
   // Export: the property where all models are to be saved

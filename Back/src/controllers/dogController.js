@@ -1,6 +1,5 @@
-const axios = require("axios");
 const { Op } = require("sequelize");
-const { dogs } = require("../models");
+const { dogs } = require('../db');
 
 async function getAllDogs() {
   const allDogs = await dogs.findAll();

@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
   sequelize.define('references', {
 
     id_Reference: {
-      type: DataTypes.INTEGER,
+      type: DataTypes,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true

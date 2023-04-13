@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
   sequelize.define('dogs', {
 
     id_Dog: {
-      type: DataTypes.INTEGER,
+      type: DataTypes,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true
