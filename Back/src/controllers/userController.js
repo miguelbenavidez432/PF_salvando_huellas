@@ -14,7 +14,7 @@ async function getUserById(id) {
 async function getUserByName(name) {
   const userByName = await Users.findAll({
     where: {
-      nameD: {
+      nameU: {
         [Op.like]: `%${name}%`,
       },
     },
@@ -22,28 +22,20 @@ async function getUserByName(name) {
   return userByName;
 }
 
-async function createUser(name, lastName, password, idNumbU, email, phone, address, reason ){
+async function createUser(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU, reasonU ){
 
-    const userExists = getUserByName(name)
-
-    if(!userExists){
         const newUser = await Users.create({
-            nameU: name.toLowerCase(),
-            lastNameU: lastName, 
-            passwordU: password,
+            nameU: nameU.toLowerCase(),
+            lastNameU: lastNameU, 
+            passwordU: passwordU,
             idNumbU: idNumbU,
-            emailU: email, 
-            phoneU: phone, 
-            addressU: address, 
-            reasonU: reason
+            emailU: emailU, 
+            phoneU: phoneU, 
+            addressU: addressU, 
+            reasonU: reasonU,
         })
         return newUser
-    }else{
-        return `User ${name} already exists. Choose another name`
-    }
 }
-
-
 
 module.exports = {
   getAllUsers,
