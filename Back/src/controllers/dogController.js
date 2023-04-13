@@ -1,4 +1,3 @@
-const axios = require("axios");
 const { Op } = require("sequelize");
 const { Dogs } = require("../db");
 

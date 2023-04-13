@@ -22,11 +22,11 @@ async function getDogsByIdHandler(req, res) {
     if (!dogId) {
       return res
         .status(404)
-        .json({ message: `No se encontraron perros con el ID ${id}` });
+        .json({ message: `Dog whit ID ${id} not found` });
     }
     res.status(200).json(dogId);
   } catch (error) {
-    res.status(404).json({ message: "Error al buscar por ID" });
+    res.status(404).json({ message: "Error trying to find the ID" });
   }
 }
 
@@ -38,11 +38,11 @@ async function getDogsByNameHandler(req, res) {
     if (dogName.lenght === 0) {
       return res
         .status(404)
-        .json({ message: `No se encontraron perros con ese nombre ${name}` });
+        .json({ message: `Dogs whit name ${name} not found` });
     }
     res.status(200).json(dogName);
   } catch (error) {
-    res.status(404).json({ message: "Error al buscar por name" });
+    res.status(404).json({ message: "Error trying to find the name" });
   }
 }
 

@@ -1,8 +1,8 @@
-const { Router } = require("express");
-
+const router = require('express').Router();
 const dogsRouter = require("./dogs");
-const router = Router();
+const userRouter = require('./userRoutes')
 
 router.use("/dogs", dogsRouter);
+router.use('/users', userRouter)
 
 module.exports = router;
