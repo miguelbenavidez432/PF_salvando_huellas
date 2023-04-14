@@ -20,9 +20,7 @@ async function getDogsByIdHandler(req, res) {
   try {
     const dogId = await getDogsById(id);
     if (!dogId) {
-      return res
-        .status(404)
-        .json({ message: `Dog whit ID ${id} not found` });
+      return res.status(404).json({ message: `Dog whit ID ${id} not found` });
     }
     res.status(200).json(dogId);
   } catch (error) {

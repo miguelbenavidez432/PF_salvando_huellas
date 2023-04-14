@@ -6,9 +6,9 @@ const {
   postDogsHandler,
 } = require("../controllers/dogController");
 
-router.get("/", getAllDogsHandler);
-router.get("/:id", getDogsByIdHandler);
-router.get("/", getDogsByNameHandler);
-router.post("/newdog", postDogsHandler);
+dogsRoutes.get("/", getAllDogsHandler);
+dogsRoutes.get("/:id", getDogsByIdHandler);
+dogsRoutes.get("/", getDogsByNameHandler);
+dogsRoutes.post("/newdog", postDogsHandler);
 
 module.exports = dogsRoutes;
