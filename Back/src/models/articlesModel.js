@@ -27,6 +27,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+
+    photoA: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
 
     // Invalidates: Date and time fields
