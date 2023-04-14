@@ -6,17 +6,25 @@ module.exports = (sequelize) => {
   // Defines: the model (model name, attributes )
   sequelize.define('posts', {
 
-    id_Article: {
+    id_Post: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       allowNull: false,
       primaryKey: true
     },
-
-    commentP: {
+    titleP:{
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
+    commentP: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   },
 
     // Invalidates: Date and time fields

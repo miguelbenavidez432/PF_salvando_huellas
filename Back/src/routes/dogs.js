@@ -4,7 +4,7 @@ const {
   getDogsByIdHandler,
   getDogsByNameHandler,
   postDogsHandler,
-} = require("../controllers/dogController");
+} = require('../handlers/dogHandler');
 
 dogsRoutes.get("/", getAllDogsHandler);
 dogsRoutes.get("/:id", getDogsByIdHandler);
