@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Dogs } = require('../db');
+const { Dogs } = require("../db");
 
 async function getAllDogs() {
   const allDogs = await Dogs.findAll();
@@ -7,8 +7,8 @@ async function getAllDogs() {
 }
 
 async function getDogsById(id) {
-  const dog = await Dogs.findByPk(id);
-  return dog;
+  const dogId = await Dogs.findByPk(id);
+  return dogId;
 }
 
 async function getDogsByName(name) {
@@ -22,8 +22,20 @@ async function getDogsByName(name) {
   return dogsByName;
 }
 
+async function dogCreate(idDog, nameD, sexD, sizeD, historyD, photoD) {
+  const newDog = await Dogs.create({
+    idDog: idDog,
+    nameD: nameD.toLowerCase(),
+    sexD: sexD,
+    sizeD: sizeD,
+    historyD: historyD,
+    photoD: photoD,
+  });
+  return newDog;
+}
 module.exports = {
   getAllDogs,
   getDogsById,
   getDogsByName,
+  dogCreate,
 };
