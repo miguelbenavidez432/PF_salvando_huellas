@@ -23,10 +23,10 @@ const getUserByIdHandler = async (req, res) => {
         if(user){
             res.status(200).json(user)
         }else{
-            return res.status(500).json({message: `User not found`})
+            return res.status(400).json({message: `User not found`})
         }
     } catch (error) {
-        res.status(400).json({message: `Error trying to find the userID`})
+        res.status(500).json({message: `Error trying to find the userID`})
     }
 }
 
@@ -45,17 +45,17 @@ const getUserByNameHandler = async (req, res) => {
 }
 
 const createUserHandler = async (req, res) => {    
+    const { nameU, 
+        lastNameU, 
+        passwordU, 
+        idNumbU, 
+        emailU, 
+        phoneU, 
+        addressU, 
+        reasonU 
+    } = req.body
+    
     try {
-        const { nameU, 
-            lastNameU, 
-            passwordU, 
-            idNumbU, 
-            emailU, 
-            phoneU, 
-            addressU, 
-            reasonU 
-        } = req.body
-
         if(!nameU || !lastNameU || !passwordU || !idNumbU || !emailU || !phoneU || !addressU || !reasonU){
             return res.status(400).send(`You must complete all fields 😅`)
         }else{
