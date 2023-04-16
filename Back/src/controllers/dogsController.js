@@ -1,25 +1,25 @@
-const { Op } = require("sequelize");
-const { Dogs } = require("../db");
+const { Op } = require("sequelize")
+const { Dogs } = require("../db")
 
 async function getAllDogs() {
-  const allDogs = await Dogs.findAll();
-  return allDogs;
+  const allDogs = await Dogs.findAll()
+  return allDogs
 }
 
-async function getDogsById(id) {
-  const dogId = await Dogs.findByPk(id);
-  return dogId;
+async function getDogById(id) {
+  const dogId = await Dogs.findByPk(id)
+  return dogId
 }
 
-async function getDogsByName(name) {
+async function getDogByName(name) {
   const dogsByName = await Dogs.findAll({
     where: {
       nameD: {
         [Op.like]: `%${name}%`,
       },
     },
-  });
-  return dogsByName;
+  })
+  return dogsByName
 }
 
 async function dogCreate(idDog, nameD, sexD, sizeD, historyD, photoD) {
@@ -31,11 +31,11 @@ async function dogCreate(idDog, nameD, sexD, sizeD, historyD, photoD) {
     historyD: historyD,
     photoD: photoD,
   });
-  return newDog;
+  return newDog
 }
 module.exports = {
   getAllDogs,
-  getDogsById,
-  getDogsByName,
+  getDogById,
+  getDogByName,
   dogCreate,
-};
+}

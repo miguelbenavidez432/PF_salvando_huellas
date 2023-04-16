@@ -1,10 +1,10 @@
-const { getAllPost,
+const { getAllPosts,
     getPostById,
     getPostByTitle,
     createPost
-} = require('../controllers/postsController');
+} = require('../controllers/postsController')
 
-const getAllPostHandler = async(req, res) => {
+const getAllPostsHandler = async(req, res) => {
     const { titleP } = req.body
 
     if(titleP){
@@ -55,7 +55,7 @@ const createPostHandler = async (req, res) =>{
 }
 
 module.exports = {
-    getAllPostHandler,
+    getAllPostsHandler,
     getPostByIdHandler,
     createPostHandler,
 }
