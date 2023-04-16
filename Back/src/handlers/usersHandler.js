@@ -3,13 +3,13 @@ const {
     getUserById,
     getUserByName,
     createUser,
-  } = require('../controllers/userController')
+  } = require('../controllers/usersController')
 
-const getUsersHandler = async (req, res, next) => {
+const getAllUsersHandler = async (req, res, next) => {
     const { name } = req.query
     if(req.query.name) return next()
     try {
-        const allUsers = await getAllUsers();
+        const allUsers = await getAllUsers()
         res.status(200).json(allUsers)
     } catch (error) {
         res.status(400).json({ message: error.message})
@@ -68,7 +68,7 @@ const createUserHandler = async (req, res) => {
 }
 
 module.exports = {
-    getUsersHandler,
+    getAllUsersHandler,
     getUserByIdHandler,
     getUserByNameHandler,
     createUserHandler,

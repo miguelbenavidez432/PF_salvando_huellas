@@ -1,14 +1,14 @@
-const { Op } = require("sequelize");
-const { Users } = require('../db');
+const { Op } = require("sequelize")
+const { Users } = require('../db')
 
 async function getAllUsers() {
-  const allUsers = await Users.findAll();
-  return allUsers;
+  const allUsers = await Users.findAll()
+  return allUsers
 }
 
 async function getUserById(id) {
-  const user = await Users.findByPk(id);
-  return user;
+  const user = await Users.findByPk(id)
+  return user
 }
 
 async function getUserByName(name) {
@@ -18,8 +18,8 @@ async function getUserByName(name) {
         [Op.like]: `%${name}%`,
       },
     },
-  });
-  return userByName;
+  })
+  return userByName
 }
 
 async function createUser(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU, reasonU ){
@@ -42,4 +42,4 @@ module.exports = {
   getUserById,
   getUserByName,
   createUser,
-};
+}

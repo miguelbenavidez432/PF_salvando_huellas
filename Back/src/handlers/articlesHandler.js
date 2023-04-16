@@ -3,7 +3,7 @@ const {
   getArticleById,
   getArticleByName,
   createArticle,
-} = require('../controllers/ArticlesController')
+} = require('../controllers/articlesController')
 
 const getAllArticlesHandler = async (req, res, next) => {
   const { name } = req.query
