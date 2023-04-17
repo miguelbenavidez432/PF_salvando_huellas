@@ -57,7 +57,7 @@ const createArticleHandler = async (req, res) => {
       return res.status(400).send(`You must complete all fields 😅`)
     } else {
       await createArticle(nameA, priceA, descriptionA, photoA)
-      res.status(200).send(`Article ${nameU} created successfully`)
+      res.status(200).send(`Article ${nameA} created successfully`)
     }
   } catch (error) {
     res.status(400).json({ message: error.message })

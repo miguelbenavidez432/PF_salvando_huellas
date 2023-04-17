@@ -21,7 +21,7 @@ const getAllPostsHandler = async(req, res) => {
             res.status(400).json(error.message)
         }
     }else{
-        res.status(200).json(getAllPost())
+        res.status(200).json(getAllPosts())
     }
 };
 
