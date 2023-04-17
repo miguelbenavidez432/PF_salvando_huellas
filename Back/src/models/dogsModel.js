@@ -20,8 +20,13 @@ module.exports = (sequelize) => {
       },
 
       sexD: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.STRING,
         allowNull: false,
+      },
+
+      ageD:{
+        type: DataTypes.STRING,
+        allowNull: false
       },
 
       sizeD: {

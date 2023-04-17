@@ -2,17 +2,17 @@ const { Op } = require("sequelize")
 const { Articles } = require('../db')
 
 async function getAllArticles() {
-  const allArticles = await Article.findAll()
+  const allArticles = await Articles.findAll()
   return allArticles
 }
 
 async function getArticleById(id) {
-  const article = await Article.findByPk(id)
+  const article = await Articles.findByPk(id)
   return article
 }
 
 async function getArticleByName(name) {
-  const articleByName = await Article.findAll({
+  const articleByName = await Articles.findAll({
     where: {
       nameA: {
         [Op.like]: `%${name}%`

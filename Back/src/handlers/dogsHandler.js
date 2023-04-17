@@ -46,12 +46,12 @@ async function getDogByNameHandler(req, res) {
 
 async function postDogHandler(req, res) {
   try {
-    const { idDog, nameD, sexD, sizeD, historyD, photoD } = req.body
+    const { nameD, sexD, sizeD, historyD, photoD } = req.body
 
-    if (!idDog || !nameD || !sexD || !sizeD || !historyD || !photoD) {
+    if (!nameD || !sexD || !sizeD || !historyD || !photoD) {
       return res.status(404).send("You must complete all fields!")
     } else {
-      await dogCreate(idDog, nameD, sexD, sizeD, historyD, photoD)
+      await dogCreate(nameD, sexD, sizeD, historyD, photoD)
       res.status(200).send(`Dog ${nameD} created sucessfully!`)
     }
   } catch (error) {
