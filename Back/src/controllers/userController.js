@@ -26,7 +26,7 @@ async function createUser(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, 
 
         const newUser = await Users.create({
             nameU: nameU.toLowerCase(),
-            lastNameU: lastNameU, 
+            lastNameU: lastNameU.toLowerCase(), 
             passwordU: passwordU,
             idNumbU: idNumbU,
             emailU: emailU, 

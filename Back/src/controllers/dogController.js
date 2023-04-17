@@ -22,9 +22,8 @@ async function getDogsByName(name) {
   return dogsByName;
 }
 
-async function dogCreate(idDog, nameD, sexD, sizeD, historyD, photoD) {
+async function dogCreate(nameD, sexD, sizeD, historyD, photoD) {
   const newDog = await Dogs.create({
-    idDog: idDog,
     nameD: nameD.toLowerCase(),
     sexD: sexD,
     sizeD: sizeD,
