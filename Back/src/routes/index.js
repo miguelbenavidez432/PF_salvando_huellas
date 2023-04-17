@@ -4,13 +4,15 @@ const usersRoute = require("./usersRoute")
 const opinionsRoute = require("./opinionsRoute")
 const postsRoute = require('./postsRoute')
 const articlesRoute = require('./articlesRoute')
-const referencesRoute = require('./referencesRoute')
+const donationsRoute = require('./donationsRoute')
+
 
 router.use("/dogs", dogsRoute)
 router.use("/users", usersRoute)
 router.use("/opinions", opinionsRoute)
 router.use('/posts', postsRoute)
 router.use('/articles', articlesRoute)
-router.use('/references', referencesRoute)
+router.use('/donations', donationsRoute)
+
 
 module.exports = router
