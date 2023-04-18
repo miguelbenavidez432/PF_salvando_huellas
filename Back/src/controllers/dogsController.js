@@ -15,38 +15,40 @@ async function getDogs({ name, size, sex }) {
   }
 }
 
-function createQueryByFilter(name, size, sex) {
-  let query = {};
+function createQueryByFilter(age, size, sex) {
+  const whereCondition = {
+    //Devolver lo que de todas las condiciones den true
+    [Op.and]: [
+      size
+        ? {
+            sizeD: {
+              [Op.iLike]: `%${size}%`,
+            },
+          }
+        : {},
 
-  if (name) {
-    query.where = {
-      nameD: {
-        [Op.iLike]: `%${name}%`,
-      },
-    };
-  }
+      sex
+        ? {
+            sexD: {
+              [Op.iLike]: `%${sex}%`,
+            },
+          }
+        : {},
 
-  if (size) {
-    query.where = {
-      sizeD: {
-        [Op.iLike]: `%${size}%`,
-      },
-    };
-  }
-
-  if (sex) {
-    query.where = {
-      sexD: {
-        [Op.iLike]: `%${sex}%`,
-      },
-    };
-  }
-
-  return query;
+      age
+        ? {
+            ageD: {
+              [Op.iLike]: `%${age}%`,
+            },
+          }
+        : {},
+    ],
+  };
+  return whereCondition;
 }
 
 async function getDogsByParams(query) {
-  return await Dogs.findAll(query);
+  return await Dogs.findAll({ where: query });
 }
 
 async function getAllDogs() {
@@ -60,21 +62,11 @@ async function getDogById(id) {
   return dogId;
 }
 
-async function getDogByName(name) {
-  const dogsByName = await Dogs.findAll({
-    where: {
-      nameD: {
-        [Op.iLike]: `%${name}%`,
-      },
-    },
-  });
-  return dogsByName;
-}
-
-async function dogCreate(nameD, sexD, sizeD, historyD, photoD) {
+async function dogCreate(nameD, sexD, sizeD, historyD, photoD, ageD) {
   const newDog = await Dogs.create({
     nameD: nameD.toLowerCase(),
     sexD: sexD,
+    ageD: ageD,
     sizeD: sizeD,
     historyD: historyD,
     photoD: photoD,
@@ -86,6 +78,5 @@ module.exports = {
   getAllDogs,
   getDogs,
   getDogById,
-  getDogByName,
   dogCreate,
 };

@@ -28,24 +28,6 @@ async function getDogByIdHandler(req, res) {
   }
 }
 
-async function getDogByNameHandler(req, res) {
-  const name = req.query.name;
-
-  try {
-    console.log(req);
-    const dogName = await getDogByName(name);
-    console.log(dogName);
-    if (dogName.lenght === 0) {
-      return res
-        .status(404)
-        .json({ message: `Dogs whit name ${name} not found` });
-    }
-    res.status(200).json(dogName);
-  } catch (error) {
-    res.status(404).json({ message: "Error trying to find the name" });
-  }
-}
-
 async function postDogHandler(req, res) {
   try {
     const { nameD, sexD, sizeD, historyD, photoD } = req.body;
@@ -62,7 +44,6 @@ async function postDogHandler(req, res) {
 }
 
 module.exports = {
-  getDogByNameHandler,
   getDogByIdHandler,
   postDogHandler,
   getDogsHandler,
