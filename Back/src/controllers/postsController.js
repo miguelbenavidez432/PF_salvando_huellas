@@ -21,7 +21,7 @@ const getPostById = async (id) => {
 }
 
 const getPostByTitle = async (titleP) => {
-    const postByTitle = await Posts.findAll({
+    const postByTitle = await Posts.findOne({
         where: {
             titleP: {
             [Op.like]: `%${titleP}%`,

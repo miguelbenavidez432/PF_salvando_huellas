@@ -5,7 +5,7 @@ const { getAllPosts,
 } = require('../controllers/postsController')
 
 const getAllPostsHandler = async(req, res) => {
-    const { titleP } = req.body
+    const { titleP } = req.query
 
     if(titleP){
         try {
@@ -21,7 +21,7 @@ const getAllPostsHandler = async(req, res) => {
             res.status(400).json(error.message)
         }
     }else{
-        res.status(200).json(getAllPosts())
+        res.status(200).json(await getAllPosts())
     }
 };
 

@@ -24,6 +24,10 @@ module.exports = (sequelize) => {
     category: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    photoP:{
+      type: DataTypes.STRING,
+      defaultValue: "https://desarrollowp.com/wp-content/uploads/2018/01/error-404.jpg"
     }
   },
 

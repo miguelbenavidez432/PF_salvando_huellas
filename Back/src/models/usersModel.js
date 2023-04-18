@@ -31,11 +31,13 @@ module.exports = (sequelize) => {
     idNumbU: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      unique: true,
     },
 
     emailU: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
 
     phoneU: {

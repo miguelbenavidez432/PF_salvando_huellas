@@ -1,7 +1,6 @@
 const {
   getDogs,
   getDogById,
-  getDogByName,
   dogCreate,
 } = require("../controllers/dogsController");
 
