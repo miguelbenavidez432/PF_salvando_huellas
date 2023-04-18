@@ -27,6 +27,17 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+
+    photoA: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "https://desarrollowp.com/wp-content/uploads/2018/01/error-404.jpg"
+    },
+
+    stockA: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    }
   },
 
     // Invalidates: Date and time fields

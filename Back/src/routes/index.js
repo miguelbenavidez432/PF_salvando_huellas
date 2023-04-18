@@ -1,12 +1,18 @@
-const router = require("express").Router();
-const dogsRouter = require("./dogs");
-const userRouter = require("./userRoutes");
-const opinionsRoutes = require("./opinionsRouter");
-const postRoutes = require('./postRoutes');
+const router = require("express").Router()
+const dogsRoute = require("./dogsRoute")
+const usersRoute = require("./usersRoute")
+const opinionsRoute = require("./opinionsRoute")
+const postsRoute = require('./postsRoute')
+const articlesRoute = require('./articlesRoute')
+const donationsRoute = require('./donationsRoute')
 
-router.use("/dogs", dogsRouter);
-router.use("/users", userRouter);
-router.use("/opinions", opinionsRoutes);
-router.use('/posts', postRoutes)
 
-module.exports = router;
+router.use("/dogs", dogsRoute)
+router.use("/users", usersRoute)
+router.use("/opinions", opinionsRoute)
+router.use('/posts', postsRoute)
+router.use('/articles', articlesRoute)
+router.use('/donations', donationsRoute)
+
+
+module.exports = router

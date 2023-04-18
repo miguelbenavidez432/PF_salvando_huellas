@@ -1,20 +1,21 @@
-const server = require('./src/index.js');
-const { conn } = require('./src/db.js');
+const server = require('./src/index.js')
+const { conn } = require('./src/db.js')
 const port = process.env.PORT || 3001
-const {
-  saveDogs,
-    saveUsers,
-    savePost,
-    saveArticles,
-} = require('../Back/src/handlers/saveData.js')
+const { saveDogs,
+  saveUsers,
+  savePost,
+  saveArticles,
+} = require('./src/handlers/saveData.js')
+
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   server.listen(port, async () => {
-    saveDogs(),
-    saveUsers(),
-    savePost(),
-    saveArticles(),
+  await saveDogs(),
+  saveUsers(),
+  saveArticles(),
+  savePost(),
+
   console.log(`%s listening at ${port}`); // eslint-disable-line no-console
   });
 });

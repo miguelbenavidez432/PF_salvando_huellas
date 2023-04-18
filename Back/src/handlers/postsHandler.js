@@ -1,11 +1,11 @@
-const { getAllPost,
+const { getAllPosts,
     getPostById,
     getPostByTitle,
     createPost
-} = require('../controllers/postsController');
+} = require('../controllers/postsController')
 
-const getAllPostHandler = async(req, res) => {
-    const { titleP } = req.body
+const getAllPostsHandler = async(req, res) => {
+    const { titleP } = req.query
 
     if(titleP){
         try {
@@ -21,7 +21,7 @@ const getAllPostHandler = async(req, res) => {
             res.status(400).json(error.message)
         }
     }else{
-        res.status(200).json(getAllPost())
+        res.status(200).json(await getAllPosts())
     }
 };
 
@@ -55,7 +55,7 @@ const createPostHandler = async (req, res) =>{
 }
 
 module.exports = {
-    getAllPostHandler,
+    getAllPostsHandler,
     getPostByIdHandler,
     createPostHandler,
 }
