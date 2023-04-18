@@ -1,11 +1,12 @@
 const { Op } = require("sequelize");
 const { Dogs } = require("../db");
 
+// Esta función se encarga de obtener todos los perros en la base de datos que coincidan con ciertas condiciones, como el nombre, tamaño y género. Si no se especifican condiciones, esta función devolverá todos los perros.
 async function getDogs({ name, size, sex }) {
   try {
     if (name || size || sex) {
       let queryByFilter = createQueryByFilter(name, size, sex);
-      return await getDogsByParams(queryByFilter);
+      return await getDogsByQuery(queryByFilter);
     } else {
       const allDogs = await getAllDogs();
       return allDogs;
@@ -15,6 +16,7 @@ async function getDogs({ name, size, sex }) {
   }
 }
 
+// Esta función se utiliza para crear la consulta de base de datos a partir de las condiciones especificadas en la función getDogs.
 function createQueryByFilter(age, size, sex) {
   const whereCondition = {
     //Devolver lo que de todas las condiciones den true
@@ -47,7 +49,7 @@ function createQueryByFilter(age, size, sex) {
   return whereCondition;
 }
 
-async function getDogsByParams(query) {
+async function getDogsByQuery(query) {
   return await Dogs.findAll({ where: query });
 }
 
