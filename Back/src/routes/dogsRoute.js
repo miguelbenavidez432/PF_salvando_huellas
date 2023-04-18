@@ -1,14 +1,12 @@
-const dogsRoute = require("express").Router()
+const dogsRoute = require("express").Router();
 const {
-  getAllDogsHandler,
+  getDogsHandler,
   getDogByIdHandler,
-  getDogByNameHandler,
   postDogHandler,
-} = require('../handlers/dogsHandler')
+} = require("../handlers/dogsHandler");
 
-dogsRoute.get("/", getAllDogsHandler)
-dogsRoute.get("/:id", getDogByIdHandler)
-dogsRoute.get("/", getDogByNameHandler)
-dogsRoute.post("/newdog", postDogHandler)
+dogsRoute.get("/", getDogsHandler);
+dogsRoute.post("/newdog", postDogHandler);
+dogsRoute.get("/:id", getDogByIdHandler);
 
-module.exports = dogsRoute
+module.exports = dogsRoute;

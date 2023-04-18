@@ -1,40 +1,84 @@
-const { Op } = require("sequelize")
-const { Dogs } = require("../db")
+const { Op } = require("sequelize");
+const { Dogs } = require("../db");
+
+// Esta función se encarga de obtener todos los perros en la base de datos que coincidan con ciertas condiciones, como el nombre, tamaño y género. Si no se especifican condiciones, esta función devolverá todos los perros.
+async function getDogs({ name, size, sex }) {
+  try {
+    if (name || size || sex) {
+      let queryByFilter = createQueryByFilter(name, size, sex);
+      return await getDogsByQuery(queryByFilter);
+    } else {
+      const allDogs = await getAllDogs();
+      return allDogs;
+    }
+  } catch (error) {
+    console.error("message", error.message);
+  }
+}
+
+// Esta función se utiliza para crear la consulta de base de datos a partir de las condiciones especificadas en la función getDogs.
+function createQueryByFilter(age, size, sex) {
+  const whereCondition = {
+    //Devolver lo que de todas las condiciones den true
+    [Op.and]: [
+      size
+        ? {
+            sizeD: {
+              [Op.iLike]: `%${size}%`,
+            },
+          }
+        : {},
+
+      sex
+        ? {
+            sexD: {
+              [Op.iLike]: `%${sex}%`,
+            },
+          }
+        : {},
+
+      age
+        ? {
+            ageD: {
+              [Op.iLike]: `%${age}%`,
+            },
+          }
+        : {},
+    ],
+  };
+  return whereCondition;
+}
+
+async function getDogsByQuery(query) {
+  return await Dogs.findAll({ where: query });
+}
 
 async function getAllDogs() {
-  const allDogs = await Dogs.findAll()
-  return allDogs
+  const allDogs = await Dogs.findAll();
+
+  return allDogs;
 }
 
 async function getDogById(id) {
-  const dogId = await Dogs.findByPk(id)
-  return dogId
+  const dogId = await Dogs.findByPk(id);
+  return dogId;
 }
 
-async function getDogByName(name) {
-  const dogsByName = await Dogs.findAll({
-    where: {
-      nameD: {
-        [Op.like]: `%${name}%`,
-      },
-    },
-  })
-  return dogsByName
-}
-
-async function dogCreate(nameD, sexD, sizeD, historyD, photoD) {
+async function dogCreate(nameD, sexD, sizeD, historyD, photoD, ageD) {
   const newDog = await Dogs.create({
     nameD: nameD.toLowerCase(),
     sexD: sexD,
+    ageD: ageD,
     sizeD: sizeD,
     historyD: historyD,
     photoD: photoD,
   });
-  return newDog
+  return newDog;
 }
+
 module.exports = {
   getAllDogs,
+  getDogs,
   getDogById,
-  getDogByName,
   dogCreate,
-}
+};
