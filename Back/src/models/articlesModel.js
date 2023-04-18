@@ -31,6 +31,7 @@ module.exports = (sequelize) => {
     photoA: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue: "https://desarrollowp.com/wp-content/uploads/2018/01/error-404.jpg"
     },
 
     stockA: {

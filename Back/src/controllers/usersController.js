@@ -11,15 +11,26 @@ async function getUserById(id) {
   return user
 }
 
-async function getUserByName(name) {
+async function getUserByName(nameU) {
   const userByName = await Users.findAll({
     where: {
       nameU: {
-        [Op.like]: `%${name}%`,
+        [Op.like]: `%${nameU}%`,
       },
     },
   })
   return userByName
+}
+
+async function getUserByLastName(lastNameU) {
+  const userByLastName = await Users.findAll({
+    where: {
+      lastNameU: {
+        [Op.like]: `%${lastNameU}%`,
+      },
+    },
+  })
+  return userByLastName
 }
 
 async function createUser(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU, reasonU ){
@@ -41,5 +52,6 @@ module.exports = {
   getAllUsers,
   getUserById,
   getUserByName,
+  getUserByLastName,
   createUser,
 }

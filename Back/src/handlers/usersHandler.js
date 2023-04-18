@@ -2,19 +2,38 @@ const {
     getAllUsers,
     getUserById,
     getUserByName,
+    getUserByLastName,
     createUser,
   } = require('../controllers/usersController')
 
-const getAllUsersHandler = async (req, res, next) => {
-    const { name } = req.query
-    if(req.query.name) return next()
+const getAllUsersHandler = async (req, res) => {
+    const { nameU, lastNameU  } = req.query
+
     try {
+        if(nameU){
+            const userName = await getUserByName(nameU.toLowerCase())
+            if(userName){
+                res.status(200).json(nameU)
+            }else{
+                return res.status(500).json({message: `User ${nameU} not found`})
+            }
+    }
+    else if(lastNameU){
+        const userLastName = await getUserByLastName(lastNameU.toLowerCase())
+        if(userLastName){
+            res.status(200).json(lastNameU)
+        }else{
+            return res.status(500).json({message: `User ${lastNameU} not found`})
+        }
+    }
+    else{
         const allUsers = await getAllUsers()
         res.status(200).json(allUsers)
-    } catch (error) {
-        res.status(400).json({ message: error.message})
     }
-}
+    
+    } catch (error) {
+        res.status(400).json({ message: error.message})    
+    }}
 
 const getUserByIdHandler = async (req, res) => {
     const { id } = req.params
@@ -31,7 +50,7 @@ const getUserByIdHandler = async (req, res) => {
 }
 
 const getUserByNameHandler = async (req, res) => {
-    const { name } = req.body
+    const { name } = req.query
     try {
         const user = await getUserByName(name.toLowerCase())
         if(user){
