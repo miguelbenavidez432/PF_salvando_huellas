@@ -32,6 +32,6 @@ const createReferenceHandler = async (req, res) => {
 }
 
 module.exports = {
-  getAllArticlesHandler,
-  createArticleHandler
+  getAllReferencesHandler,
+  createReferenceHandler
 }
