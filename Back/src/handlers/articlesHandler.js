@@ -51,12 +51,13 @@ const createArticleHandler = async (req, res) => {
       priceA,
       descriptionA,
       photoA,
+      stockA
     } = req.body
 
-    if (!nameA || !priceA || !descriptionA || !photoA) {
+    if (!nameA || !priceA || !descriptionA || !photoA || !stockA) {
       return res.status(400).send(`You must complete all fields 😅`)
     } else {
-      await createArticle(nameA, priceA, descriptionA, photoA)
+      await createArticle(nameA, priceA, descriptionA, photoA, stockA)
       res.status(200).send(`Article ${nameA} created successfully`)
     }
   } catch (error) {

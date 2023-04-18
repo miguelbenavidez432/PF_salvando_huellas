@@ -32,6 +32,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+
+    stockA: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    }
   },
 
     // Invalidates: Date and time fields
