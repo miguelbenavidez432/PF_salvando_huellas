@@ -128,27 +128,31 @@ const saveArticles = async() => {
     const articles = [
         {
             nameA: "Article A",
-            priceA: 546.4,
+            priceA: 546.0,
             descriptionA: "Color blue",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_uRkWh3G_5orgl61GZ6M_s5rgQk8hrI6XBCJAs-NXXZcShgk6b-CbvAkvFK36uMY-ydI&usqp=CAU",
+            stockA: 20
         },
         {
             nameA: "Article B",
             priceA: 12.0,
             descriptionA: "Color red",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoa1CvBTJdm5im80ExuTXDLu9aXN4d07M74w&usqp=CAU",
+            stockA: 30
         },
         {
             nameA: "Article C",
             priceA: 12.0,
             descriptionA: "Color green",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0BmVSfCfOCEAN2sJ719GrAlw7NgRUc_i84w&usqp=CAUU",
+            stockA: 10
         },
         {
             nameA: "Article D",
             priceA: 1452.0,
             descriptionA: "Color yellow",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6zDreRNYH_tl8koWDVb_IDfmUPrZQ2Zpkiw&usqp=CAU",
+            stockA: 4
         },
     ]
         await Articles.bulkCreate(articles)

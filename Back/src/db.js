@@ -66,8 +66,8 @@ Opinions.belongsTo(Articles)
 Users.hasMany(Opinions)
 Opinions.belongsTo(Users)
 
-Articles.hasOne(Stock)
-Stock.belongsTo(Articles)
+// Articles.hasOne(Stock)
+// Stock.belongsTo(Articles)
 
 module.exports = {
   // Export: the property where all models are to be saved

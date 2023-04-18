@@ -22,13 +22,14 @@ async function getArticleByName(name) {
   return articleByName
 }
 
-async function createArticle(nameA, priceA, descriptionA, photoA){
+async function createArticle(nameA, priceA, descriptionA, photoA, stockA){
 
         const newArticle = await Articles.create({
           nameA: nameA.toLowerCase(),
           priceA: priceA, 
           descriptionA: descriptionA,
           photoA: photoA,
+          stockA: stockA
         })
         return newArticle
 }
