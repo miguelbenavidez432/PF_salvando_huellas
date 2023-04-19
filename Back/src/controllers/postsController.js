@@ -3,7 +3,7 @@ const { Op } = require("sequelize")
 
 const createPost = async (titleP, commentP, category) => {
     const newPost = await Posts.create({
-        titleP: titleP, 
+        titleP: titleP.toLowerCase(), 
         commentP: commentP, 
         category: category,})
     
@@ -21,7 +21,7 @@ const getPostById = async (id) => {
 }
 
 const getPostByTitle = async (titleP) => {
-    const postByTitle = await Posts.findOne({
+    const postByTitle = await Posts.findAll({
         where: {
             titleP: {
             [Op.like]: `%${titleP}%`,
@@ -31,10 +31,37 @@ const getPostByTitle = async (titleP) => {
       return postByTitle
 }
 
+const deletePost = async (id) => {
+    await Posts.destroy({
+        where: {
+          id_Post: {
+            [Op.eq]: id,
+          }
+        }
+      })
+}
+
+const updatePost = async (id, titleP, commentP, category, photoP) => {
+    await Posts.update({
+        titleP: titleP.toLowerCase(),
+        commentP: commentP,
+        category: category,
+        photoP: photoP,
+    }, {
+        where: {
+          id_Post: {
+            [Op.eq]: id,
+          }
+        }
+      })
+}
+
 module.exports = {
     getAllPosts,
     getPostById,
     getPostByTitle,
-    createPost
+    createPost,
+    deletePost,
+    updatePost,
   }
   

@@ -1,7 +1,9 @@
 const { getAllPosts,
     getPostById,
     getPostByTitle,
-    createPost
+    createPost,
+    deletePost,
+    updatePost,
 } = require('../controllers/postsController')
 
 const getAllPostsHandler = async(req, res) => {
@@ -9,7 +11,7 @@ const getAllPostsHandler = async(req, res) => {
 
     if(titleP){
         try {
-            const post = await getPostByTitle(titleP);
+            const post = await getPostByTitle(titleP.toLowerCase());
             if(post){
                 res.status(200).json(post)
             }else{
@@ -54,8 +56,45 @@ const createPostHandler = async (req, res) =>{
     }
 }
 
+const deletePostHandler = async (req, res) => {
+    const { id } = req.params
+  
+    try {
+      const getPost = await getPostById(id)
+      if(getPost){
+        await deletePost(id)
+        res.status(200).send(`Post ${getPost.titleP} delete`)
+      }else{
+        return res.status(500).json({ message: `Post ${getPost.titleP} not found` })
+      }
+    } catch (error) {
+      res.status(400).json({ message: error.message })
+    }
+  }
+  
+  const updatPostHandler = async (req, res) => {
+    const { titleP, commentP, category, photoP } = req.body
+    const { id } = req.params
+  
+    try {
+      const getPost = await getPostById(id)
+      if(getPost){
+        await updatePost(id, titleP, commentP, category, photoP)
+        res.status(200).send(`Post ${titleP} updated`)
+      }else{
+        return res.status(500).json({ message: `Post whit title ${titleP} not found` })
+      }
+    } catch (error) {
+      res.status(400).json({ message: error.message })
+    }
+  }
+
+
+
 module.exports = {
     getAllPostsHandler,
     getPostByIdHandler,
     createPostHandler,
+    updatPostHandler,
+    deletePostHandler
 }
