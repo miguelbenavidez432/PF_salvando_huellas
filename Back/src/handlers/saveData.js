@@ -3,34 +3,34 @@ const {  Donations, Articles, Users, Opinions, Stock, Dogs, Posts, References } 
 const saveDogs = async () => {
     const dogs = [
         {
-            nameD: "Dog 1",
-            sexD: "",
-            ageD: "Adult",
-            sizeD: "1",
+            nameD: "dog 1",
+            sexD: "male",
+            ageD: "adult",
+            sizeD: "small",
             historyD: "New Dog",
             photoD: "https://i.pinimg.com/736x/2c/31/97/2c3197c9add1109018fd89beda4cbe4b.jpg",
         },
         {
-            nameD: "Dog 2",
-            sexD: "true",
-            ageD: "Adult",
-            sizeD: "14",
+            nameD: "dog 2",
+            sexD: "male",
+            ageD: "adult",
+            sizeD: "medium",
             historyD: "Old Dog",
             photoD: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtnd2zxCezN-AR47pOjggSSeFrrWaLjZhvlA&usqp=CAU",
         },
         {
             nameD: "Dog 3",
-            sexD: "false",
-            ageD: "Adult",
-            sizeD: "5",
+            sexD: "female",
+            ageD: "adult",
+            sizeD: "small",
             historyD: "Puppy",
             photoD: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUEdlACgU32acz7QAIzSJN5-ZqExmwmcznogVwU_vqT4Qnfa8EpFVYR0SWqFBAzo3canw&usqp=CAU",
         },
         {
             nameD: "Dog 4",
-            sexD: "true",
-            ageD: "Adult",
-            sizeD: "2",
+            sexD: "female",
+            ageD: "adult",
+            sizeD: "small",
             historyD: "Puppy 2",
             photoD: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRipb_gvLUoqKw0f5jBpYpmqd1H_uY44eP6kQ&usqp=CAU",
         },
@@ -96,27 +96,27 @@ const saveUsers = async () => {
 const savePost = async() => {
     const posts = [
         {
-            titleP: "Titulo 1",
+            titleP: "titulo 1",
             commentP: "First comment en this post",
             category: "Adoption"
         },
         {
-            titleP: "Titulo 2",
+            titleP: "titulo 2",
             commentP: "First comment en this post",
             category: "Donation"
         },
         {
-            titleP: "Titulo 3",
+            titleP: "titulo 3",
             commentP: "First comment en this post",
             category: "Event"
         },
         {
-            titleP: "Titulo 4",
+            titleP: "titulo 4",
             commentP: "First comment en this post",
             category: "Event"
         },
         {
-            titleP: "Titulo 5",
+            titleP: "titulo 5",
             commentP: "First comment en this post",
             category: "Donation"
         },

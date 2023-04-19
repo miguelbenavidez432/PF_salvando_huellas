@@ -1,7 +1,7 @@
 const { References } = require('../db')
 
 async function getAllReferences() {
-  const allReferences = await Reference.findAll()
+  const allReferences = await References.findAll()
   return allReferences
 }
 

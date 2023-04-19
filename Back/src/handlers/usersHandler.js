@@ -9,54 +9,31 @@ const {
 const getAllUsersHandler = async (req, res) => {
     const { nameU, lastNameU  } = req.query
 
-    if(!nameU && !lastNameU) return res.status(200).json(await getAllUsers())
-    if(nameU){
-        try {
+    try {
+        if(nameU){
             const userName = await getUserByName(nameU.toLowerCase())
             if(userName){
-                res.status(200).json(userName)
+                res.status(200).json(nameU)
             }else{
-                return res.status(500).json({message: `User whit name ${nameU} not found`})
-            }            
-        } catch (error) {
-            res.status(400).json({ message: error.message})
-        }
+                return res.status(500).json({message: `User ${nameU} not found`})
+            }
     }
     else if(lastNameU){
         const userLastName = await getUserByLastName(lastNameU.toLowerCase())
-            if(userLastName){
-                res.status(200).json(lastNameU)
-            }else{
-                return res.status(500).json({message: `User ${lastNameU} not found`})
-            }
+        if(userLastName){
+            res.status(200).json(lastNameU)
+        }else{
+            return res.status(500).json({message: `User ${lastNameU} not found`})
+        }
     }
-
-    // try {
-    //     if(nameU){
-    //         const userName = await getUserByName(nameU.toLowerCase())
-    //         if(userName){
-    //             res.status(200).json(nameU)
-    //         }else{
-    //             return res.status(500).json({message: `User ${nameU} not found`})
-    //         }
-    // }
-    // else if(lastNameU){
-    //     const userLastName = await getUserByLastName(lastNameU.toLowerCase())
-    //     if(userLastName){
-    //         res.status(200).json(lastNameU)
-    //     }else{
-    //         return res.status(500).json({message: `User ${lastNameU} not found`})
-    //     }
-    // }
-    // else{
-    //     const allUsers = await getAllUsers()
-    //     res.status(200).json(allUsers)
-    // }
+    else{
+        const allUsers = await getAllUsers()
+        res.status(200).json(allUsers)
+    }
     
-    // } catch (error) {
-    //     res.status(400).json({ message: error.message})    
-    // }
-}
+    } catch (error) {
+        res.status(400).json({ message: error.message})    
+    }}
 
 const getUserByIdHandler = async (req, res) => {
     const { id } = req.params
