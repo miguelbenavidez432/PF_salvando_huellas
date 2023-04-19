@@ -1,10 +1,11 @@
 const { Opinions, Articles } = require("../db")
+
 const {  getArticleById,} = require('../controllers/articlesController')
 
 async function createOpinion( commentO, qualificationO, id) {
   const idExists = await getArticleById(id)
+
   const newOpinion = await Opinions.create({
-    idOpinion: idOpinion,
     commentO: commentO,
     qualificationO: qualificationO,
     articleId: idExists.id_Article
@@ -12,8 +13,7 @@ async function createOpinion( commentO, qualificationO, id) {
     include: [{ 
       model: Articles
     }]
-  }
-  )
+  })
   return newOpinion
 }
 

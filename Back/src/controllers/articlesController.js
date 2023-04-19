@@ -1,5 +1,17 @@
-const { Op } = require("sequelize")
 const { Articles } = require('../db')
+const { Op } = require("sequelize")
+
+async function createArticle(nameA, priceA, descriptionA, photoA, stockA){
+
+  const newArticle = await Articles.create({
+    nameA: nameA.toLowerCase(),
+    priceA: priceA, 
+    descriptionA: descriptionA,
+    photoA: photoA,
+    stockA: stockA
+  })
+  return newArticle
+}
 
 async function getAllArticles() {
   const allArticles = await Articles.findAll()
@@ -11,28 +23,17 @@ async function getArticleById(id) {
   return article
 }
 
-async function getArticleByName(name) {
+async function getArticleByName(nameA) {
   const articleByName = await Articles.findAll({
     where: {
       nameA: {
-        [Op.like]: `%${name}%`
-      }
-    }
+        [Op.like]: `%${nameA}%`,
+      },
+    },
   })
   return articleByName
 }
 
-async function createArticle(nameA, priceA, descriptionA, photoA, stockA){
-
-        const newArticle = await Articles.create({
-          nameA: nameA.toLowerCase(),
-          priceA: priceA, 
-          descriptionA: descriptionA,
-          photoA: photoA,
-          stockA: stockA
-        })
-        return newArticle
-}
 
 const deleteArticle = async(id) =>{
   await Articles.destroy({

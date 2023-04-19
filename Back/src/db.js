@@ -66,9 +66,6 @@ Opinions.belongsTo(Articles, {foreignKey: 'articleId', as: "article"} )
 Users.hasMany(Opinions)
 Opinions.belongsTo(Users)
 
-// Articles.hasOne(Stock)
-// Stock.belongsTo(Articles)
-
 module.exports = {
   // Export: the property where all models are to be saved
   ...sequelize.models,

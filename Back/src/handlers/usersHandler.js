@@ -4,59 +4,37 @@ const {
     getUserByName,
     getUserByLastName,
     createUser,
+    updateUser,
   } = require('../controllers/usersController')
 
 const getAllUsersHandler = async (req, res) => {
     const { nameU, lastNameU  } = req.query
 
-    if(!nameU && !lastNameU) return res.status(200).json(await getAllUsers())
-    if(nameU){
-        try {
+    try {
+        if(nameU){
             const userName = await getUserByName(nameU.toLowerCase())
             if(userName){
                 res.status(200).json(userName)
             }else{
-                return res.status(500).json({message: `User whit name ${nameU} not found`})
-            }            
-        } catch (error) {
-            res.status(400).json({ message: error.message})
-        }
+                return res.status(500).json({message: `User ${nameU} not found`})
+            }
     }
     else if(lastNameU){
         const userLastName = await getUserByLastName(lastNameU.toLowerCase())
-            if(userLastName){
-                res.status(200).json(lastNameU)
-            }else{
-                return res.status(500).json({message: `User ${lastNameU} not found`})
-            }
+        if(userLastName){
+            res.status(200).json(userLastName)
+        }else{
+            return res.status(500).json({message: `User ${lastNameU} not found`})
+        }
     }
-
-    // try {
-    //     if(nameU){
-    //         const userName = await getUserByName(nameU.toLowerCase())
-    //         if(userName){
-    //             res.status(200).json(nameU)
-    //         }else{
-    //             return res.status(500).json({message: `User ${nameU} not found`})
-    //         }
-    // }
-    // else if(lastNameU){
-    //     const userLastName = await getUserByLastName(lastNameU.toLowerCase())
-    //     if(userLastName){
-    //         res.status(200).json(lastNameU)
-    //     }else{
-    //         return res.status(500).json({message: `User ${lastNameU} not found`})
-    //     }
-    // }
-    // else{
-    //     const allUsers = await getAllUsers()
-    //     res.status(200).json(allUsers)
-    // }
+    else{
+        const allUsers = await getAllUsers()
+        res.status(200).json(allUsers)
+    }
     
-    // } catch (error) {
-    //     res.status(400).json({ message: error.message})    
-    // }
-}
+    } catch (error) {
+        res.status(400).json({ message: error.message})    
+    }}
 
 const getUserByIdHandler = async (req, res) => {
     const { id } = req.params
@@ -102,10 +80,27 @@ const createUserHandler = async (req, res) => {
             return res.status(400).send(`You must complete all fields 😅`)
         }else{
             await createUser(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU, reasonU)
-            res.status(200).send(`User ${nameU} created successfully`)
+            res.status(200).send(`User ${nameU} ${lastNameU} created successfully`)
         }
     } catch (error) {
         res.status(400).json({message: error.message})
+    }
+}
+
+const updateUserHandler = async (req, res) => {
+    const { nameU, lastNameU, passwordU, phoneU, addressU, reasonU, isAdminU } = req.body
+    const { id } = req.params
+  
+    try {
+      const getUser = await getUserById(id)
+      if(getUser){
+        await updateUser(id, nameU, lastNameU, passwordU, phoneU, addressU, reasonU, isAdminU)
+        res.status(200).send(`User ${getUser.nameU} ${getUser.lastNameU} updated`)
+      }else{
+        return res.status(500).json({ message: `User ${getUser.nameU} ${getUser.lastNameU} not found` })
+      }
+    } catch (error) {
+      res.status(400).json({ message: error.message })
     }
 }
 
@@ -114,4 +109,5 @@ module.exports = {
     getUserByIdHandler,
     getUserByNameHandler,
     createUserHandler,
+    updateUserHandler,
 }

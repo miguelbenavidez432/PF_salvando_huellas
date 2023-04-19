@@ -12,14 +12,14 @@ async function getUserById(id) {
 }
 
 async function getUserByName(nameU) {
-  const userName = await Users.findAll({
+  const userByName = await Users.findAll({
     where: {
       nameU: {
         [Op.like]: `%${nameU}%`,
       },
     },
   })
-  return userName
+  return userByName
 }
 
 async function getUserByLastName(lastNameU) {
@@ -33,12 +33,29 @@ async function getUserByLastName(lastNameU) {
   return userByLastName
 }
 
+const updateUser = async (id, nameU, lastNameU, passwordU, phoneU, addressU, reasonU, isAdminU) =>{
+  await Users.update({ 
+    nameU: nameU,
+    lastNameU: lastNameU,
+    passwordU: passwordU,
+    phoneU: phoneU,
+    addressU: addressU,
+    reasonU: reasonU,
+    isAdminU: isAdminU,
+   }, {
+    where: {
+      id_User: {
+        [Op.eq]: id,
+      }
+    }
+  })
+}
+
 async function createUser(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU, reasonU ){
-        const nameLower = nameU.toLowerCase()
-        const lastNameLower = lastNameU.toLowerCase()
+
         const newUser = await Users.create({
-            nameU: nameLower,
-            lastNameU: lastNameLower, 
+            nameU: nameU.toLowerCase(),
+            lastNameU: lastNameU.toLowerCase(), 
             passwordU: passwordU,
             idNumbU: idNumbU,
             emailU: emailU, 
@@ -55,4 +72,5 @@ module.exports = {
   getUserByName,
   getUserByLastName,
   createUser,
+  updateUser,
 }
