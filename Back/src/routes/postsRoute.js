@@ -9,7 +9,7 @@ const {
 
 postsRoute.get('/', getAllPostsHandler)
 postsRoute.get('/:id', getPostByIdHandler)
-postsRoute.post('/create', createPostHandler)
+postsRoute.post('/register', createPostHandler)
 postsRoute.put('/update/:id', updatPostHandler)
 postsRoute.delete('/delete/:id', deletePostHandler)
 

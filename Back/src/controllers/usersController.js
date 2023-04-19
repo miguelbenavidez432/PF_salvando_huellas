@@ -33,6 +33,24 @@ async function getUserByLastName(lastNameU) {
   return userByLastName
 }
 
+const updateUser = async (id, nameU, lastNameU, passwordU, phoneU, addressU, reasonU, isAdminU) =>{
+  await Users.update({ 
+    nameU: nameU,
+    lastNameU: lastNameU,
+    passwordU: passwordU,
+    phoneU: phoneU,
+    addressU: addressU,
+    reasonU: reasonU,
+    isAdminU: isAdminU,
+   }, {
+    where: {
+      id_User: {
+        [Op.eq]: id,
+      }
+    }
+  })
+}
+
 async function createUser(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU, reasonU ){
 
         const newUser = await Users.create({
@@ -54,4 +72,5 @@ module.exports = {
   getUserByName,
   getUserByLastName,
   createUser,
+  updateUser,
 }

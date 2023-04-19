@@ -42,7 +42,6 @@ const getArticleByIdHandler = async (req, res) => {
 }
 
 const createArticleHandler = async (req, res) => {
-
   const {
     nameA,
     priceA,
@@ -51,7 +50,7 @@ const createArticleHandler = async (req, res) => {
     stockA
   } = req.body
   try {
-    if (!nameA || !priceA || !descriptionA || !photoA || !stockA) {
+    if (!nameA || !priceA || !descriptionA || !stockA) {
       return res.status(400).send(`You must complete all fields 😅`)
     } else {
       await createArticle(nameA, priceA, descriptionA, photoA, stockA)

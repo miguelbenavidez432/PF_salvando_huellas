@@ -16,35 +16,33 @@ const saveDogs = async () => {
     const dogs = [
         {
             nameD: "Dog 1",
-            sexD: "",
-            ageD: "Puppy",
-            sizeD: "Small",
-            sexD: "Female",
-          
+            sexD: "male",
+            ageD: "puppy",
+            sizeD: "small",          
             historyD: "New Dog",
             photoD: "https://i.pinimg.com/736x/2c/31/97/2c3197c9add1109018fd89beda4cbe4b.jpg",
         },
         {
             nameD: "Dog 2",
-            sexD: "Male",
-            ageD: "Adult",
-            sizeD: "Large",
+            sexD: "male",
+            ageD: "adult",
+            sizeD: "large",
             historyD: "Old Dog",
             photoD: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtnd2zxCezN-AR47pOjggSSeFrrWaLjZhvlA&usqp=CAU",
         },
         {
             nameD: "Dog 3",
-            sexD: "Female",
-            ageD: "Adult",
-            sizeD: "Medium",
+            sexD: "female",
+            ageD: "adult",
+            sizeD: "medium",
             historyD: "Puppy",
             photoD: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUEdlACgU32acz7QAIzSJN5-ZqExmwmcznogVwU_vqT4Qnfa8EpFVYR0SWqFBAzo3canw&usqp=CAU",
         },
         {
             nameD: "Dog 4",
-            sexD: "Male",
-            ageD: "Adult",
-            sizeD: "Small",
+            sexD: "male",
+            ageD: "adult",
+            sizeD: "small",
             historyD: "Puppy 2",
             photoD: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRipb_gvLUoqKw0f5jBpYpmqd1H_uY44eP6kQ&usqp=CAU",
         },
@@ -110,29 +108,29 @@ const saveUsers = async () => {
 const savePost = async() => {
     const posts = [
         {
-            titleP: "Titulo 1",
+            titleP: "titulo 1",
             commentP: "First comment en this post",
-            category: "Adoption"
+            category: "adoption"
         },
         {
-            titleP: "Titulo 2",
+            titleP: "titulo 2",
             commentP: "First comment en this post",
-            category: "Donation"
+            category: "donation"
         },
         {
-            titleP: "Titulo 3",
+            titleP: "titulo 3",
             commentP: "First comment en this post",
-            category: "Event"
+            category: "event"
         },
         {
-            titleP: "Titulo 4",
+            titleP: "titulo 4",
             commentP: "First comment en this post",
-            category: "Event"
+            category: "event"
         },
         {
-            titleP: "Titulo 5",
+            titleP: "titulo 5",
             commentP: "First comment en this post",
-            category: "Donation"
+            category: "donation"
         },
     ]
         await Posts.bulkCreate(posts)
@@ -143,28 +141,28 @@ const saveArticles = async() => {
         {
             nameA: "article a",
             priceA: 546.0,
-            descriptionA: "Color blue",
+            descriptionA: "color blue",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_uRkWh3G_5orgl61GZ6M_s5rgQk8hrI6XBCJAs-NXXZcShgk6b-CbvAkvFK36uMY-ydI&usqp=CAU",
             stockA: 20
         },
         {
             nameA: "article b",
             priceA: 12.0,
-            descriptionA: "Color red",
+            descriptionA: "color red",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoa1CvBTJdm5im80ExuTXDLu9aXN4d07M74w&usqp=CAU",
             stockA: 30
         },
         {
             nameA: "article c",
             priceA: 12.0,
-            descriptionA: "Color green",
+            descriptionA: "color green",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0BmVSfCfOCEAN2sJ719GrAlw7NgRUc_i84w&usqp=CAUU",
             stockA: 10
         },
         {
             nameA: "article d",
             priceA: 1452.0,
-            descriptionA: "Color yellow",
+            descriptionA: "color yellow",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6zDreRNYH_tl8koWDVb_IDfmUPrZQ2Zpkiw&usqp=CAU",
             stockA: 4
         },

@@ -47,9 +47,9 @@ const deleteArticle = async(id) =>{
 
 const updateArticle = async (id, nameA, priceA, descriptionA, photoA, stockA)  => {
   await Articles.update({ 
-    nameA: nameA.toLowerCase(),
+    nameA: nameA,
     priceA: priceA,
-    descriptionA: descriptionA.toLowerCase(),
+    descriptionA: descriptionA,
     photoA: photoA,
     stockA: stockA,
    }, {
