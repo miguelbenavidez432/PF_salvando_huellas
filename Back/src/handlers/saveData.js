@@ -4,7 +4,7 @@ const saveDogs = async () => {
     const dogs = [
         {
             nameD: "Dog 1",
-            sexD: "",
+            sexD: "Female",
             ageD: "Adult",
             sizeD: "1",
             historyD: "New Dog",
@@ -12,7 +12,7 @@ const saveDogs = async () => {
         },
         {
             nameD: "Dog 2",
-            sexD: "true",
+            sexD: "Male",
             ageD: "Adult",
             sizeD: "14",
             historyD: "Old Dog",
@@ -20,7 +20,7 @@ const saveDogs = async () => {
         },
         {
             nameD: "Dog 3",
-            sexD: "false",
+            sexD: "Female",
             ageD: "Adult",
             sizeD: "5",
             historyD: "Puppy",
@@ -28,7 +28,7 @@ const saveDogs = async () => {
         },
         {
             nameD: "Dog 4",
-            sexD: "true",
+            sexD: "Male",
             ageD: "Adult",
             sizeD: "2",
             historyD: "Puppy 2",
