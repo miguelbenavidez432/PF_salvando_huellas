@@ -96,27 +96,27 @@ const saveUsers = async () => {
 const savePost = async() => {
     const posts = [
         {
-            titleP: "Titulo 1",
+            titleP: "titulo 1",
             commentP: "First comment en this post",
             category: "Adoption"
         },
         {
-            titleP: "Titulo 2",
+            titleP: "titulo 2",
             commentP: "First comment en this post",
             category: "Donation"
         },
         {
-            titleP: "Titulo 3",
+            titleP: "titulo 3",
             commentP: "First comment en this post",
             category: "Event"
         },
         {
-            titleP: "Titulo 4",
+            titleP: "titulo 4",
             commentP: "First comment en this post",
             category: "Event"
         },
         {
-            titleP: "Titulo 5",
+            titleP: "titulo 5",
             commentP: "First comment en this post",
             category: "Donation"
         },
@@ -127,28 +127,28 @@ const savePost = async() => {
 const saveArticles = async() => {
     const articles = [
         {
-            nameA: "Article A",
+            nameA: "article A",
             priceA: 546.0,
             descriptionA: "Color blue",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_uRkWh3G_5orgl61GZ6M_s5rgQk8hrI6XBCJAs-NXXZcShgk6b-CbvAkvFK36uMY-ydI&usqp=CAU",
             stockA: 20
         },
         {
-            nameA: "Article B",
+            nameA: "article B",
             priceA: 12.0,
             descriptionA: "Color red",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoa1CvBTJdm5im80ExuTXDLu9aXN4d07M74w&usqp=CAU",
             stockA: 30
         },
         {
-            nameA: "Article C",
+            nameA: "article C",
             priceA: 12.0,
             descriptionA: "Color green",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0BmVSfCfOCEAN2sJ719GrAlw7NgRUc_i84w&usqp=CAUU",
             stockA: 10
         },
         {
-            nameA: "Article D",
+            nameA: "article D",
             priceA: 1452.0,
             descriptionA: "Color yellow",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6zDreRNYH_tl8koWDVb_IDfmUPrZQ2Zpkiw&usqp=CAU",

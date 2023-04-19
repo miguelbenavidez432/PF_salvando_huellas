@@ -4,7 +4,7 @@ const {
   getAllOpinionsHandler,
 } = require("../handlers/opinionsHandler");
 
-opinionsRoute.post("/opinion", createOpinionHandler);
+opinionsRoute.post("/register", createOpinionHandler);
 opinionsRoute.get("/", getAllOpinionsHandler)
 
 module.exports = opinionsRoute
