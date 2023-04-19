@@ -1,11 +1,17 @@
-const { Opinions } = require("../db")
+const { Opinions, Articles } = require("../db")
 
-async function createOpinion(idOpinion, commentO, qualificationO) {
+async function createOpinion( commentO, qualificationO, id) {
   const newOpinion = await Opinions.create({
-    idOpinion: idOpinion,
     commentO: commentO,
     qualificationO: qualificationO,
-  })
+  }, { 
+    include: [{ 
+      model: Articles, 
+      as: 'article', 
+      foreignKey: 'articleIdArticle' 
+    }]
+  }
+  )
   return newOpinion
 }
 

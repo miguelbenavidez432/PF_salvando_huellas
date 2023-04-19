@@ -33,16 +33,16 @@ const getArticleByIdHandler = async (req, res) => {
 }
 
 const getArticleByNameHandler = async (req, res) => {
-  const { name } = req.body
+  const { nameA } = req.body
   try {
-    const article = await getArticleByName(name.toLowerCase())
+    const article = await getArticleByName(nameA.toLowerCase())
     if (article) {
       res.status(200).json(article)
     } else {
-      return res.status(500).json({ message: `article ${name} not found` })
+      return res.status(500).json({ message: `article ${nameA} not found` })
     }
   } catch (error) {
-    res.status(400).json({ message: `Error trying to find the article ${name}` })
+    res.status(400).json({ message: `Error trying to find the article ${nameA}` })
   }
 }
 
@@ -56,7 +56,7 @@ const createArticleHandler = async (req, res) => {
       stockA
     } = req.body
 
-    if (!nameA || !priceA || !descriptionA || !photoA || !stockA) {
+    if (!nameA || !priceA || !descriptionA || !stockA) {
       return res.status(400).send(`You must complete all fields 😅`)
     } else {
       await createArticle(nameA, priceA, descriptionA, photoA, stockA)
@@ -76,7 +76,7 @@ const deleteArticleHandler = async (req, res) => {
       await deleteArticle(id)
       res.status(200).send(`Article ${getArticle.id_Article} delete`)
     }else{
-      return res.status(500).json({ message: `article ${nameA} not found` })
+      return res.status(500).json({ message: `article ${getArticle.id_Article} not found` })
     }
   } catch (error) {
     res.status(400).json({ message: error.message })

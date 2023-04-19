@@ -15,7 +15,7 @@ async function getArticleByName(name) {
   const articleByName = await Articles.findAll({
     where: {
       nameA: {
-        [Op.like]: `%${name}%`
+        [Op.like]: `${name}`
       }
     }
   })
@@ -46,9 +46,9 @@ const deleteArticle = async(id) =>{
 
 const updateArticle = async (id, nameA, priceA, descriptionA, photoA, stockA)  => {
   await Articles.update({ 
-    nameA: nameA.toLowerCase(),
+    nameA: nameA,
     priceA: priceA,
-    descriptionA: descriptionA.toLowerCase(),
+    descriptionA: descriptionA,
     photoA: photoA,
     stockA: stockA,
    }, {
