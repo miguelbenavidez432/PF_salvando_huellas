@@ -1,5 +1,17 @@
 const {  Donations, Articles, Users, Opinions, Stock, Dogs, Posts, References } = require('../db')
 
+const saveReferences = async () => {
+    const references = [
+        {
+            textR: "referenciasreferenciasreferenciasreferencias",
+        },
+        {
+            textR: "referenciareferenciareferenciareferencia",
+        },
+    ];
+    await References.bulkCreate(references)
+}
+
 const saveDogs = async () => {
     const dogs = [
         {
