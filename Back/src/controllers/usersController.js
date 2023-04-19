@@ -12,14 +12,14 @@ async function getUserById(id) {
 }
 
 async function getUserByName(nameU) {
-  const userByName = await Users.findAll({
+  const userName = await Users.findAll({
     where: {
       nameU: {
         [Op.like]: `%${nameU}%`,
       },
     },
   })
-  return userByName
+  return userName
 }
 
 async function getUserByLastName(lastNameU) {
@@ -34,10 +34,11 @@ async function getUserByLastName(lastNameU) {
 }
 
 async function createUser(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU, reasonU ){
-
+        const nameLower = nameU.toLowerCase()
+        const lastNameLower = lastNameU.toLowerCase()
         const newUser = await Users.create({
-            nameU: nameU.toLowerCase(),
-            lastNameU: lastNameU, 
+            nameU: nameLower,
+            lastNameU: lastNameLower, 
             passwordU: passwordU,
             idNumbU: idNumbU,
             emailU: emailU, 

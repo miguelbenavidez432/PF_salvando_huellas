@@ -34,9 +34,37 @@ async function createArticle(nameA, priceA, descriptionA, photoA, stockA){
         return newArticle
 }
 
+const deleteArticle = async(id) =>{
+  await Articles.destroy({
+    where: {
+      id_Article: {
+        [Op.eq]: id,
+      }
+    }
+  })
+}
+
+const updateArticle = async (id, nameA, priceA, descriptionA, photoA, stockA)  => {
+  await Articles.update({ 
+    nameA: nameA,
+    priceA: priceA,
+    descriptionA: descriptionA,
+    photoA: photoA,
+    stockA: stockA,
+   }, {
+    where: {
+      id_Article: {
+        [Op.eq]: id,
+      }
+    }
+  });
+}
+
 module.exports = {
   getAllArticles,
   getArticleById,
   getArticleByName,
   createArticle,
+  deleteArticle,
+  updateArticle,
 }

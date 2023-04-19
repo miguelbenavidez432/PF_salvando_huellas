@@ -3,6 +3,8 @@ const {
   getArticleById,
   getArticleByName,
   createArticle,
+  deleteArticle,
+  updateArticle,
 } = require('../controllers/articlesController')
 
 const getAllArticlesHandler = async (req, res, next) => {
@@ -65,9 +67,44 @@ const createArticleHandler = async (req, res) => {
   }
 }
 
+const deleteArticleHandler = async (req, res) => {
+  const { id } = req.params
+
+  try {
+    const getArticle = await getArticleById(id)
+    if(getArticle){
+      await deleteArticle(id)
+      res.status(200).send(`Article ${getArticle.id_Article} delete`)
+    }else{
+      return res.status(500).json({ message: `article ${nameA} not found` })
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message })
+  }
+}
+
+const updateArticleHandler = async (req, res) => {
+  const { nameA, priceA, descriptionA, stockA, photoA } = req.body
+  const { id } = req.params
+
+  try {
+    const getArticle = await getArticleById(id)
+    if(getArticle){
+      await updateArticle(id, nameA, priceA, descriptionA, photoA, stockA)
+      res.status(200).send(`Article ${nameA} updated`)
+    }else{
+      return res.status(500).json({ message: `article ${nameA} not found` })
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message })
+  }
+}
+
 module.exports = {
   getAllArticlesHandler,
   getArticleByIdHandler,
   getArticleByNameHandler,
   createArticleHandler,
+  deleteArticleHandler,
+  updateArticleHandler,
 }

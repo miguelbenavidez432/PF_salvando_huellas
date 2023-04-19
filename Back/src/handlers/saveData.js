@@ -44,8 +44,8 @@ const saveDogs = async () => {
 const saveUsers = async () => {
     const users = [
         {
-            nameU: "Juan",
-            lastNameU: "Perez",
+            nameU: "juan",
+            lastNameU: "perez",
             passwordU: "123",
             idNumbU: 32323232,
             emailU: "juanperez@gmail.com",
@@ -55,8 +55,8 @@ const saveUsers = async () => {
             isAdminU: false
         },
         {
-            nameU: "Lucas",
-            lastNameU: "Diaz",
+            nameU: "lucas",
+            lastNameU: "diaz",
             passwordU: "1234",
             idNumbU: 32321232,
             emailU: "LucasDiaz@gmail.com",
@@ -66,8 +66,8 @@ const saveUsers = async () => {
             isAdminU: true
         },
         {
-            nameU: "Daniel",
-            lastNameU: "Gonzalez",
+            nameU: "daniel",
+            lastNameU: "gonzalez",
             passwordU: "123456",
             idNumbU: 22354552,
             emailU: "Dgonzalez@gmail.com",
@@ -77,8 +77,8 @@ const saveUsers = async () => {
             isAdminU: false
         },
         {
-            nameU: "Rodrigo",
-            lastNameU: "Perez",
+            nameU: "rodrigo",
+            lastNameU: "perez",
             passwordU: "777",
             idNumbU: 3237192,
             emailU: "rodri@gmail.com",
