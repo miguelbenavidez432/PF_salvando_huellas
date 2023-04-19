@@ -1,9 +1,4 @@
-const mercadopago = require("mercadopago");
-
-mercadopago.configure({
-  access_token:
-    "TEST-2189009441301413-041816-8faa35a8748558097ba6222785cb07ea-612397503",
-});
+const { createPreference } = require("../handlers/paymentHandler");
 
 async function createPayment(req, res) {
   const { unit_price } = req.body;
@@ -18,15 +13,8 @@ async function createPayment(req, res) {
     ],
   };
 
-  mercadopago.preferences
-    .create(donations)
-    .then(function (response) {
-      console.log(response);
-    })
-
-    .catch(function (error) {
-      console.log(error);
-    });
+  const preferenceId = await createPreference(donations);
+  res.status(200).json({ preferenceId });
 }
 
 module.exports = {
