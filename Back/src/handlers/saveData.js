@@ -1,36 +1,50 @@
 const {  Donations, Articles, Users, Opinions, Stock, Dogs, Posts, References } = require('../db')
 
+const saveReferences = async () => {
+    const references = [
+        {
+            textR: "referenciasreferenciasreferenciasreferencias",
+        },
+        {
+            textR: "referenciareferenciareferenciareferencia",
+        },
+    ];
+    await References.bulkCreate(references)
+}
+
 const saveDogs = async () => {
     const dogs = [
         {
-            nameD: "dog 1",
-            sexD: "male",
-            ageD: "adult",
-            sizeD: "small",
+            nameD: "Dog 1",
+            sexD: "",
+            ageD: "Puppy",
+            sizeD: "Small",
+            sexD: "Female",
+          
             historyD: "New Dog",
             photoD: "https://i.pinimg.com/736x/2c/31/97/2c3197c9add1109018fd89beda4cbe4b.jpg",
         },
         {
-            nameD: "dog 2",
-            sexD: "male",
-            ageD: "adult",
-            sizeD: "medium",
+            nameD: "Dog 2",
+            sexD: "Male",
+            ageD: "Adult",
+            sizeD: "Large",
             historyD: "Old Dog",
             photoD: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtnd2zxCezN-AR47pOjggSSeFrrWaLjZhvlA&usqp=CAU",
         },
         {
             nameD: "Dog 3",
-            sexD: "female",
-            ageD: "adult",
-            sizeD: "small",
+            sexD: "Female",
+            ageD: "Adult",
+            sizeD: "Medium",
             historyD: "Puppy",
             photoD: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUEdlACgU32acz7QAIzSJN5-ZqExmwmcznogVwU_vqT4Qnfa8EpFVYR0SWqFBAzo3canw&usqp=CAU",
         },
         {
             nameD: "Dog 4",
-            sexD: "female",
-            ageD: "adult",
-            sizeD: "small",
+            sexD: "Male",
+            ageD: "Adult",
+            sizeD: "Small",
             historyD: "Puppy 2",
             photoD: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRipb_gvLUoqKw0f5jBpYpmqd1H_uY44eP6kQ&usqp=CAU",
         },
@@ -96,27 +110,27 @@ const saveUsers = async () => {
 const savePost = async() => {
     const posts = [
         {
-            titleP: "titulo 1",
+            titleP: "Titulo 1",
             commentP: "First comment en this post",
             category: "Adoption"
         },
         {
-            titleP: "titulo 2",
+            titleP: "Titulo 2",
             commentP: "First comment en this post",
             category: "Donation"
         },
         {
-            titleP: "titulo 3",
+            titleP: "Titulo 3",
             commentP: "First comment en this post",
             category: "Event"
         },
         {
-            titleP: "titulo 4",
+            titleP: "Titulo 4",
             commentP: "First comment en this post",
             category: "Event"
         },
         {
-            titleP: "titulo 5",
+            titleP: "Titulo 5",
             commentP: "First comment en this post",
             category: "Donation"
         },
@@ -163,4 +177,5 @@ module.exports = {
     saveUsers,
     savePost,
     saveArticles,
+    saveReferences,
 }
