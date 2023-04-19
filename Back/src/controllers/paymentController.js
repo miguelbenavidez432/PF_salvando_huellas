@@ -1,6 +1,9 @@
-const { createPreference } = require("../handlers/paymentHandler");
+const {
+  createPreferenceArticles,
+  createPreferenceDonation,
+} = require("../handlers/paymentHandler");
 
-async function createPayment(req, res) {
+async function createPaymentDonations(req, res) {
   const { unit_price } = req.body;
 
   let donations = {
@@ -13,10 +16,22 @@ async function createPayment(req, res) {
     ],
   };
 
-  const preferenceId = await createPreference(donations);
+  const preferenceId = await createPreferenceDonation(donations);
   res.status(200).json({ preferenceId });
 }
 
+async function createPaymentArticles(req, res) {
+  const { articles } = req.body;
+  if (articles && articles.length > 0) {
+    const articlesToSend = {
+      items: articles,
+    };
+    const preferenceId = await createPreferenceArticles(articlesToSend);
+    res.status(200).json({ preferenceId });
+  }
+}
+
 module.exports = {
-  createPayment,
+  createPaymentDonations,
+  createPaymentArticles,
 };
