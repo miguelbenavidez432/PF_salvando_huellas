@@ -16,9 +16,11 @@ const saveDogs = async () => {
     const dogs = [
         {
             nameD: "Dog 1",
-            sexD: "Female",
-            ageD: "Adult",
+            sexD: "",
+            ageD: "Puppy",
             sizeD: "Small",
+            sexD: "Female",
+          
             historyD: "New Dog",
             photoD: "https://i.pinimg.com/736x/2c/31/97/2c3197c9add1109018fd89beda4cbe4b.jpg",
         },
