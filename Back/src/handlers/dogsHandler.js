@@ -2,6 +2,7 @@ const {
   getDogs,
   getDogById,
   dogCreate,
+  dogDelete,
 } = require("../controllers/dogsController");
 
 async function getDogsHandler(req, res) {
@@ -42,8 +43,24 @@ async function postDogHandler(req, res) {
   }
 }
 
+async function deleteDogHandler(req,res){
+  const { id } = req.params.id
+  try {
+    const getDog = await getDogById(id)
+    if(getDog){
+      await dogDelete(id)
+      res.status(200).send(`Dog ${getDog.id_Dog} delete`)
+    }else{
+      return res.status(500).json({ message: `Dog ${nameD} not found` })
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message })
+  }
+}
+
 module.exports = {
   getDogByIdHandler,
   postDogHandler,
   getDogsHandler,
+  deleteDogHandler,
 };
