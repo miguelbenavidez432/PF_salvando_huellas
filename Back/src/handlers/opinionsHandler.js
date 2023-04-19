@@ -24,7 +24,7 @@ const createOpinionHandler = async (req, res) => {
       res.status(200).send("Thanks for your opinion!")
     }
   } catch (error) {
-    res.status(404).json({ message: "error in opinions" })
+    res.status(404).json({ message: "error creating opinion", error })
   }
 }
 

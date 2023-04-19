@@ -60,8 +60,8 @@ Posts.belongsTo(Users)
 Users.hasMany(Articles)
 Articles.belongsTo(Users)
 
-Articles.hasMany(Opinions)
-Opinions.belongsTo(Articles)
+Articles.hasMany(Opinions, {foreignKey: 'articleId', as: "opinion"})
+Opinions.belongsTo(Articles, {foreignKey: 'articleId', as: "article"} )
 
 Users.hasMany(Opinions)
 Opinions.belongsTo(Users)
