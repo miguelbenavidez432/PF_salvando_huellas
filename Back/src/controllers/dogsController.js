@@ -86,6 +86,7 @@ async function dogUpdate(nameD, sexD, sizeD, historyD, photoD, ageD, id) {
       photoD: photoD,
       ageD: ageD,
     },
+
     {
       where: {
         id_Dog: {
