@@ -3,6 +3,9 @@ const {
   getDogById,
   dogCreate,
   dogDelete,
+  dogDisable,
+  dogEnable,
+  dogUpdate,
 } = require("../controllers/dogsController");
 
 async function getDogsHandler(req, res) {
@@ -43,18 +46,73 @@ async function postDogHandler(req, res) {
   }
 }
 
-async function deleteDogHandler(req,res){
-  const { id } = req.params
+async function updateDogHandler(req, res) {
   try {
-    const getDog = await getDogById(id)
-    if(getDog){
-      await dogDelete(id)
-      res.status(200).send(`Dog ${getDog.id_Dog} delete`)
-    }else{
-      return res.status(500).json({ message: `Dog ${nameD} not found` })
+    const { nameD, sexD, sizeD, historyD, photoD, ageD } = req.body;
+    const id = req.params.id;
+
+    const updatedDog = await dogUpdate(
+      nameD,
+      sexD,
+      sizeD,
+      historyD,
+      photoD,
+      ageD,
+      id
+    );
+
+    if (updatedDog[0] === 0) {
+      res.status(404).json({ message: `Dog with ID ${id} not found` });
+    } else {
+      res.status(200).send(`Dog ${nameD} updated sucessfully!`);
     }
   } catch (error) {
-    res.status(400).json({ message: error.message })
+    res.status(500).json({ message: "Error updating dog" });
+  }
+}
+
+async function deleteDogHandler(req, res) {
+  const { id } = req.params;
+  try {
+    const getDog = await getDogById(id);
+    if (getDog) {
+      await dogDelete(id);
+      res.status(200).send(`Dog ${getDog.id_Dog} delete`);
+    } else {
+      return res.status(500).json({ message: `Dog ${nameD} not found` });
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}
+
+async function disableDogHandler(req, res) {
+  const id = req.params.id;
+
+  try {
+    await dogDisable(id);
+    res
+      .status(200)
+      .json({ message: "El perro ha sido desactivado correctamente" });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "Ha ocurrido un error al deshabilitar el perro" });
+  }
+}
+
+async function enableDogHandler(req, res) {
+  const id = req.params.id;
+
+  try {
+    await dogEnable(id);
+    res
+      .status(200)
+      .json({ message: "El perro ha sido activado correctamente" });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "Ha ocurrido un error al activar el perro" });
   }
 }
 
@@ -63,4 +121,7 @@ module.exports = {
   postDogHandler,
   getDogsHandler,
   deleteDogHandler,
+  disableDogHandler,
+  enableDogHandler,
+  updateDogHandler,
 };
