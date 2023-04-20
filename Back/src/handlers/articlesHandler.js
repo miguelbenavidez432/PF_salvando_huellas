@@ -5,6 +5,7 @@ const {
   createArticle,
   deleteArticle,
   updateArticle,
+  getArticleOpinion,
 } = require('../controllers/articlesController')
 
 // Function: obtains an article by name according to parameter, if there is no parameter it obtains all the articles
@@ -99,10 +100,15 @@ const deleteArticleHandler = async (req, res) => {
   }
 }
 
+const getArticleOpinionHandler = async(req, res) =>{
+  getArticleOpinion()
+}
+
 module.exports = {
   getAllArticlesHandler,
   getArticleByIdHandler,
   createArticleHandler,
   updateArticleHandler,
-  deleteArticleHandler
+  deleteArticleHandler,
+  getArticleOpinionHandler,
 }

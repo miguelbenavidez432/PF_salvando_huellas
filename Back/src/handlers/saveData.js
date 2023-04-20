@@ -109,27 +109,27 @@ const savePost = async() => {
     const posts = [
         {
             titleP: "titulo 1",
-            commentP: "First comment en this post",
-            category: "adoption"
+            commentP: "Muy buenos productos!!",
+            category: "store"
         },
         {
             titleP: "titulo 2",
-            commentP: "First comment en this post",
+            commentP: "Pude adoptar a un perrito y ahora estamos feliz por el nuevo integrante",
             category: "donation"
         },
         {
             titleP: "titulo 3",
-            commentP: "First comment en this post",
-            category: "event"
+            commentP: "La mejor pagina para encontrar productos de calidad",
+            category: "store"
         },
         {
             titleP: "titulo 4",
-            commentP: "First comment en this post",
+            commentP: "Que lindo poder adoptar a una mascota de manera tan fácil!!",
             category: "event"
         },
         {
             titleP: "titulo 5",
-            commentP: "First comment en this post",
+            commentP: "A mi perrito le encanta el alimento de esta página!!",
             category: "donation"
         },
     ]
