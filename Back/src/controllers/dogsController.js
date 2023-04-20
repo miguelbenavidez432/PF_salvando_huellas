@@ -19,9 +19,8 @@ async function getDogs({ age, size, sex }) {
 // Esta función se utiliza para crear la consulta de base de datos a partir de las condiciones especificadas en la función getDogs.
 function createQueryByFilter(age, size, sex) {
   if (sex && sex !== "male" && sex !== "female") {
-    throw new Error("Sex parameter must be either 'male' or 'female'");
+    throw new Error("Sex must be either 'male' or 'female'");
   }
-
   const whereCondition = {
     //Devolver lo que de todas las condiciones den true
     [Op.and]: [
