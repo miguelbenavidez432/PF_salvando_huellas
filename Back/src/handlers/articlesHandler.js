@@ -8,6 +8,7 @@ const {
   getArticleOpinion,
 } = require('../controllers/articlesController')
 
+// Function: obtains an article by name according to parameter, if there is no parameter it obtains all the articles
 const getAllArticlesHandler = async (req, res) => {
   const { nameA } = req.query
   if (nameA) {
@@ -17,7 +18,7 @@ const getAllArticlesHandler = async (req, res) => {
         res.status(200).json(article)
       } else {
         return res.status(400).json({
-          message: `Article whit title ${nameA} not found`
+          message: `Article ${nameA} not found`
         })
       }
     } catch (error) {
@@ -28,6 +29,7 @@ const getAllArticlesHandler = async (req, res) => {
   }
 }
 
+// Function: get an article according to the id
 const getArticleByIdHandler = async (req, res) => {
   const { id } = req.params
   try {
@@ -42,19 +44,21 @@ const getArticleByIdHandler = async (req, res) => {
   }
 }
 
+// Function: Create an article
 const createArticleHandler = async (req, res) => {
   const {
     nameA,
     priceA,
     descriptionA,
     photoA,
-    stockA
+    stockA,
+    activeA
   } = req.body
   try {
     if (!nameA || !priceA || !descriptionA || !stockA) {
       return res.status(400).send(`You must complete all fields 😅`)
     } else {
-      await createArticle(nameA, priceA, descriptionA, photoA, stockA)
+      await createArticle(nameA, priceA, descriptionA, photoA, stockA, activeA)
       res.status(200).send(`Article ${nameA} created successfully`)
     }
   } catch (error) {
@@ -62,33 +66,34 @@ const createArticleHandler = async (req, res) => {
   }
 }
 
-const deleteArticleHandler = async (req, res) => {
+// Function: update an article specified by id
+const updateArticleHandler = async (req, res) => {
+  const { nameA, priceA, descriptionA, stockA, photoA } = req.body
   const { id } = req.params
-
   try {
     const getArticle = await getArticleById(id)
     if (getArticle) {
-      await deleteArticle(id)
-      res.status(200).send(`Article ${getArticle.NameA} delete`)
+      await updateArticle(id, nameA, priceA, descriptionA, photoA, stockA)
+      res.status(200).send(`Article ${id} updated`)
     } else {
-      return res.status(500).json({ message: `Article ${getArticle.nameA} not found` })
+      return res.status(500).json({ message: `article ${id} not found` })
     }
   } catch (error) {
     res.status(400).json({ message: error.message })
   }
 }
 
-const updateArticleHandler = async (req, res) => {
-  const { nameA, priceA, descriptionA, stockA, photoA } = req.body
+// Function: delete(active:false) an article according to the id
+const deleteArticleHandler = async (req, res) => {
   const { id } = req.params
-
+  const { activeA } = req.body
   try {
     const getArticle = await getArticleById(id)
     if (getArticle) {
-      await updateArticle(id, nameA, priceA, descriptionA, photoA, stockA)
-      res.status(200).send(`Article ${nameA} updated`)
+      await deleteArticle(id, activeA)
+      res.status(200).send(`Article ${getArticle.nameA} delete`)
     } else {
-      return res.status(500).json({ message: `article ${nameA} not found` })
+      return res.status(500).json({ message: `Article ${getArticle.nameA} not found` })
     }
   } catch (error) {
     res.status(400).json({ message: error.message })
