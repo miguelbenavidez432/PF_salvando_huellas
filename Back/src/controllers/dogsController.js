@@ -18,6 +18,9 @@ async function getDogs({ age, size, sex }) {
 
 // Esta función se utiliza para crear la consulta de base de datos a partir de las condiciones especificadas en la función getDogs.
 function createQueryByFilter(age, size, sex) {
+  if (sex && sex !== "male" && sex !== "female") {
+    throw new Error("Sex parameter must be either 'male' or 'female'");
+  }
   const whereCondition = {
     //Devolver lo que de todas las condiciones den true
     [Op.and]: [
@@ -32,7 +35,7 @@ function createQueryByFilter(age, size, sex) {
       sex
         ? {
             sexD: {
-              [Op.iLike]: `%${sex}%`,
+              [Op.iLike]: sex,
             },
           }
         : {},
@@ -76,14 +79,14 @@ async function dogCreate(nameD, sexD, sizeD, historyD, photoD, ageD) {
   return newDog;
 }
 
-async function dogDelete (id) {
+async function dogDelete(id) {
   await Dogs.destroy({
     where: {
       id_Dog: {
-        [Op.eq]: id
-      }
-    }
-  })
+        [Op.eq]: id,
+      },
+    },
+  });
 }
 
 module.exports = {
