@@ -52,8 +52,7 @@ const updateArticle = async (id, nameA, priceA, descriptionA, photoA, stockA, ac
   }, {
     where: {
       id_Article: {
-        [Op.eq]: id,
-        activeA: true
+        [Op.eq]: id
       }
     }
   })

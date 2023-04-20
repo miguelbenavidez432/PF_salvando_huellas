@@ -66,7 +66,7 @@ async function getDogById(id) {
 
 async function dogCreate(nameD, sexD, sizeD, historyD, photoD, ageD) {
   const newDog = await Dogs.create({
-    nameD: nameD.toLowerCase(),
+    nameD: nameD,
     sexD: sexD.toLowerCase(),
     ageD: ageD.toLowerCase(),
     sizeD: sizeD.toLowerCase(),

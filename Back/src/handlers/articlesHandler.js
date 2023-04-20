@@ -68,15 +68,15 @@ const createArticleHandler = async (req, res) => {
 
 // Function: update an article specified by id
 const updateArticleHandler = async (req, res) => {
-  const { nameA, priceA, descriptionA, stockA, photoA } = req.body
+  const { nameA, priceA, descriptionA, stockA, photoA, activeA } = req.body
   const { id } = req.params
   try {
     const getArticle = await getArticleById(id)
     if (getArticle) {
-      await updateArticle(id, nameA, priceA, descriptionA, photoA, stockA)
-      res.status(200).send(`Article ${id} updated`)
+      await updateArticle(id, nameA, priceA, descriptionA, photoA, stockA, activeA)
+      res.status(200).send(`Article ${nameA} updated`)
     } else {
-      return res.status(500).json({ message: `article ${id} not found` })
+      return res.status(500).json({ message: `article ${nameA} not found` })
     }
   } catch (error) {
     res.status(400).json({ message: error.message })
