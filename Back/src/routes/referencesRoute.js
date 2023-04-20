@@ -1,11 +1,11 @@
 const referencesRoute = require('express').Router()
 
 const {
-    getAllReferencesHandlers,
+    getAllReferencesHandler,
     createReferenceHandler
 } = require('../handlers/referencesHandler')
 
-referencesRoute.get('/', getAllReferencesHandlers)
+referencesRoute.get('/', getAllReferencesHandler)
 referencesRoute.post('/register', createReferenceHandler)
 
 module.exports = referencesRoute

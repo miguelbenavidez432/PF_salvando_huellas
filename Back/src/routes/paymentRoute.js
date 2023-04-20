@@ -1,6 +1,10 @@
 const paymentRoute = require("express").Router();
-const { createPayment } = require("../controllers/paymentController");
+const {
+  createPaymentDonations,
+  createPaymentArticles,
+} = require("../controllers/paymentController");
 
-paymentRoute.post("/", createPayment);
+paymentRoute.post("/purchases", createPaymentArticles);
+paymentRoute.post("/donations", createPaymentDonations);
 
 module.exports = paymentRoute;

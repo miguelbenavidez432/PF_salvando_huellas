@@ -76,9 +76,20 @@ async function dogCreate(nameD, sexD, sizeD, historyD, photoD, ageD) {
   return newDog;
 }
 
+async function dogDelete (id) {
+  await Dogs.destroy({
+    where: {
+      id_Dog: {
+        [Op.eq]: id
+      }
+    }
+  })
+}
+
 module.exports = {
   getAllDogs,
   getDogs,
   getDogById,
   dogCreate,
+  dogDelete,
 };
