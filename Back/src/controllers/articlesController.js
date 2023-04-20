@@ -1,5 +1,6 @@
-const { Articles } = require('../db')
+const { Articles, Opinions } = require('../db')
 const { Op } = require("sequelize")
+
 
 async function createArticle(nameA, priceA, descriptionA, photoA, stockA){
 
@@ -61,6 +62,15 @@ const updateArticle = async (id, nameA, priceA, descriptionA, photoA, stockA)  =
   });
 }
 
+const getArticleOpinion = async () => {
+  const getAllProducts = await Articles.findAll({
+    include: [{
+      model: Opinions,
+      as: "opinion"
+    }], where : {id: 2}
+  })
+}
+
 module.exports = {
   getAllArticles,
   getArticleById,
@@ -68,4 +78,5 @@ module.exports = {
   createArticle,
   deleteArticle,
   updateArticle,
+  getArticleOpinion,
 }
