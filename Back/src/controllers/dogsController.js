@@ -76,14 +76,48 @@ async function dogCreate(nameD, sexD, sizeD, historyD, photoD, ageD) {
   return newDog;
 }
 
-async function dogDelete (id) {
+async function dogUpdate(nameD, sexD, sizeD, historyD, photoD, ageD, id) {
+  const updatedDog = await Dogs.update(
+    {
+      nameD: nameD,
+      sexD: sexD,
+      sizeD: sizeD,
+      historyD: historyD,
+      photoD: photoD,
+      ageD: ageD,
+    },
+
+    {
+      where: {
+        id_Dog: {
+          [Op.eq]: id,
+        },
+      },
+    }
+  );
+  return updatedDog;
+}
+
+async function dogDelete(id) {
   await Dogs.destroy({
     where: {
       id_Dog: {
-        [Op.eq]: id
-      }
-    }
-  })
+        [Op.eq]: id,
+      },
+    },
+  });
+}
+
+async function dogDisable(id) {
+  const dog = await Dogs.findByPk(id);
+  dog.is_disabled = true;
+  await dog.save();
+}
+
+async function dogEnable(id) {
+  const dog = await Dogs.findByPk(id);
+  dog.is_disabled = false;
+  await dog.save();
 }
 
 module.exports = {
@@ -92,4 +126,7 @@ module.exports = {
   getDogById,
   dogCreate,
   dogDelete,
+  dogDisable,
+  dogEnable,
+  dogUpdate,
 };
