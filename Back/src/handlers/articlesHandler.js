@@ -5,6 +5,7 @@ const {
   createArticle,
   deleteArticle,
   updateArticle,
+  getArticleOpinion,
 } = require('../controllers/articlesController')
 
 const getAllArticlesHandler = async (req, res) => {
@@ -94,10 +95,15 @@ const updateArticleHandler = async (req, res) => {
   }
 }
 
+const getArticleOpinionHandler = async(req, res) =>{
+  getArticleOpinion()
+}
+
 module.exports = {
   getAllArticlesHandler,
   getArticleByIdHandler,
   createArticleHandler,
   updateArticleHandler,
-  deleteArticleHandler
+  deleteArticleHandler,
+  getArticleOpinionHandler,
 }

@@ -6,6 +6,7 @@ const {
     createArticleHandler,
     updateArticleHandler,
     deleteArticleHandler,
+    getArticleOpinionHandler, 
 } = require('../handlers/articlesHandler')
 
 const { createOpinionHandler, getAllOpinionsHandler } = require('../handlers/opinionsHandler')
@@ -18,5 +19,6 @@ articlesRoute.delete('/delete/:id', deleteArticleHandler)
 
 articlesRoute.post('/register', createOpinionHandler)
 articlesRoute.get('/opinions', getAllOpinionsHandler)
+articlesRoute.get('/getopinions', getArticleOpinionHandler)
 
 module.exports = articlesRoute
