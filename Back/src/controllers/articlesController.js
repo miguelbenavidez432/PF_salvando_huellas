@@ -1,64 +1,84 @@
-const { Articles } = require('../db')
+const { Articles, Opinions } = require('../db')
 const { Op } = require("sequelize")
 
-async function createArticle(nameA, priceA, descriptionA, photoA, stockA){
+// Function: get all active articles
+async function getAllArticles() {
+  const allArticles = await Articles.findAll({
+    where: {
+      activeA: true
+    }
+  })
+  return allArticles
+}
 
+// Function: get an article by name active
+async function getArticleByName(nameA) {
+  const articleByName = await Articles.findAll({
+    where: {
+      nameA: { [Op.like]: `%${nameA}%` },
+    },
+  })
+  if (articleByName.activeA === true) return articleByName
+}
+
+// Function: get an article by Id active
+async function getArticleById(id) {
+  const article = await Articles.findByPk(id)
+  if (article.activeA === true) return article
+}
+
+// Function: Create an article
+async function createArticle(nameA, priceA, descriptionA, photoA, stockA, activeA) {
   const newArticle = await Articles.create({
     nameA: nameA.toLowerCase(),
-    priceA: priceA, 
+    priceA: priceA,
     descriptionA: descriptionA,
     photoA: photoA,
-    stockA: stockA
+    stockA: stockA,
+    activeA: activeA
   })
   return newArticle
 }
 
-async function getAllArticles() {
-  const allArticles = await Articles.findAll()
-  return allArticles
-}
-
-async function getArticleById(id) {
-  const article = await Articles.findByPk(id)
-  return article
-}
-
-async function getArticleByName(nameA) {
-  const articleByName = await Articles.findAll({
-    where: {
-      nameA: {
-        [Op.like]: `%${nameA}%`,
-      },
-    },
-  })
-  return articleByName
-}
-
-
-const deleteArticle = async(id) =>{
-  await Articles.destroy({
-    where: {
-      id_Article: {
-        [Op.eq]: id,
-      }
-    }
-  })
-}
-
-const updateArticle = async (id, nameA, priceA, descriptionA, photoA, stockA)  => {
-  await Articles.update({ 
+// Function: update an article specified by id active
+const updateArticle = async (id, nameA, priceA, descriptionA, photoA, stockA, activeA) => {
+  await Articles.update({
     nameA: nameA,
     priceA: priceA,
     descriptionA: descriptionA,
     photoA: photoA,
     stockA: stockA,
-   }, {
+    activeA: activeA
+  }, {
+    where: {
+      id_Article: {
+        [Op.eq]: id,
+        activeA: true
+      }
+    }
+  })
+}
+
+// Function: delete(active:false) an article according to the id
+const deleteArticle = async (id, activeA) => {
+  await Articles.update({
+    activeA: false
+  }, {
     where: {
       id_Article: {
         [Op.eq]: id,
       }
     }
-  });
+  })
+}
+
+const getArticleOpinion = async () => {
+  const getAllProducts = await Articles.findAll({
+    include: [{
+      model: Opinions,
+      as: "opinion"
+    }], where : {id: 2}
+  })
 }
 
 module.exports = {
@@ -68,4 +88,5 @@ module.exports = {
   createArticle,
   deleteArticle,
   updateArticle,
+  getArticleOpinion,
 }

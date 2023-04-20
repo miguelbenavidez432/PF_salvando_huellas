@@ -109,27 +109,27 @@ const savePost = async() => {
     const posts = [
         {
             titleP: "titulo 1",
-            commentP: "First comment en this post",
-            category: "adoption"
+            commentP: "Muy buenos productos!!",
+            category: "store"
         },
         {
             titleP: "titulo 2",
-            commentP: "First comment en this post",
+            commentP: "Pude adoptar a un perrito y ahora estamos feliz por el nuevo integrante",
             category: "donation"
         },
         {
             titleP: "titulo 3",
-            commentP: "First comment en this post",
-            category: "event"
+            commentP: "La mejor pagina para encontrar productos de calidad",
+            category: "store"
         },
         {
             titleP: "titulo 4",
-            commentP: "First comment en this post",
+            commentP: "Que lindo poder adoptar a una mascota de manera tan fácil!!",
             category: "event"
         },
         {
             titleP: "titulo 5",
-            commentP: "First comment en this post",
+            commentP: "A mi perrito le encanta el alimento de esta página!!",
             category: "donation"
         },
     ]
@@ -145,7 +145,8 @@ const saveArticles = async() => {
             priceA: 546.0,
             descriptionA: "color blue",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_uRkWh3G_5orgl61GZ6M_s5rgQk8hrI6XBCJAs-NXXZcShgk6b-CbvAkvFK36uMY-ydI&usqp=CAU",
-            stockA: 20
+            stockA: 20,
+            activeA: true
         },
         {
 
@@ -154,7 +155,8 @@ const saveArticles = async() => {
             priceA: 12.0,
             descriptionA: "color red",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoa1CvBTJdm5im80ExuTXDLu9aXN4d07M74w&usqp=CAU",
-            stockA: 30
+            stockA: 30,
+            activeA: true
         },
         {
 
@@ -163,16 +165,17 @@ const saveArticles = async() => {
             priceA: 12.0,
             descriptionA: "color green",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0BmVSfCfOCEAN2sJ719GrAlw7NgRUc_i84w&usqp=CAUU",
-            stockA: 10
+            stockA: 10,
+            activeA: true
         },
         {
 
             nameA: "article d",
-
             priceA: 1452.0,
             descriptionA: "color yellow",
             photoA: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6zDreRNYH_tl8koWDVb_IDfmUPrZQ2Zpkiw&usqp=CAU",
-            stockA: 4
+            stockA: 4,
+            activeA: true
         },
     ]
         await Articles.bulkCreate(articles)

@@ -1,5 +1,6 @@
 const { Op } = require("sequelize")
 const { Users } = require('../db')
+const jwt = require("jsonwebtoken");
 
 async function getAllUsers() {
   const allUsers = await Users.findAll()
@@ -33,6 +34,17 @@ async function getUserByLastName(lastNameU) {
   return userByLastName
 }
 
+async function getUserByEmail(emailU) {
+  const userByEmail = await Users.findOne({
+    where: {
+      emailU: {
+        [Op.like]: `%${emailU}%`,
+      },
+    },
+  })
+  return userByEmail
+}
+
 const updateUser = async (id, nameU, lastNameU, passwordU, phoneU, addressU, reasonU, isAdminU) =>{
   await Users.update({ 
     nameU: nameU,
@@ -63,6 +75,7 @@ async function createUser(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, 
             addressU: addressU, 
             reasonU: reasonU,
         })
+
         return newUser
 }
 
@@ -73,4 +86,5 @@ module.exports = {
   getUserByLastName,
   createUser,
   updateUser,
+  getUserByEmail,
 }

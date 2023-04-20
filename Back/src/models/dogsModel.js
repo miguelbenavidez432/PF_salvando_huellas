@@ -24,9 +24,9 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
 
-      ageD:{
+      ageD: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
 
       sizeD: {
@@ -42,7 +42,14 @@ module.exports = (sequelize) => {
       photoD: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtnd2zxCezN-AR47pOjggSSeFrrWaLjZhvlA&usqp=CAU",
+        defaultValue:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtnd2zxCezN-AR47pOjggSSeFrrWaLjZhvlA&usqp=CAU",
+      },
+
+      is_disabled: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
     },
 
