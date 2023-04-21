@@ -5,7 +5,9 @@ const {
   createArticle,
   deleteArticle,
   updateArticle,
-  getArticleOpinion,
+  getAllArticlesPriceAsc,
+  getAllArticlesDesc,
+  getAllArticlesPriceDesc,
 } = require('../controllers/articlesController')
 
 // Function: obtains an article by name according to parameter, if there is no parameter it obtains all the articles
@@ -100,8 +102,67 @@ const deleteArticleHandler = async (req, res) => {
   }
 }
 
-const getArticleOpinionHandler = async(req, res) =>{
-  getArticleOpinion()
+// Function: get all active articles in order by name desc
+const getAllArticlesDescHandler = async (req, res) => {
+  const { nameA } = req.query
+  if (nameA) {
+    try {
+      const article = await getArticleByName(nameA.toLowerCase());
+      if (article) {
+        res.status(200).json(article)
+      } else {
+        return res.status(400).json({
+          message: `Article ${nameA} not found`
+        })
+      }
+    } catch (error) {
+      res.status(400).json(error.message)
+    }
+  } else {
+    res.status(200).json(await getAllArticlesDesc())
+  }
+}
+
+// Function: get all active articles in order by price asc
+const getAllArticlesPriceAscHandler = async (req, res) => {
+  const { nameA } = req.query
+  if (nameA) {
+    try {
+      const article = await getArticleByName(nameA.toLowerCase());
+      if (article) {
+        res.status(200).json(article)
+      } else {
+        return res.status(400).json({
+          message: `Article ${nameA} not found`
+        })
+      }
+    } catch (error) {
+      res.status(400).json(error.message)
+    }
+  } else {
+    res.status(200).json(await getAllArticlesPriceAsc())
+  }
+}
+
+// Function: get all active articles in order by price desc
+const getAllArticlesPriceDescHandler = async (req, res) => {
+  const { nameA } = req.query
+  if (nameA) {
+    try {
+      const article = await getArticleByName(nameA.toLowerCase());
+      if (article) {
+        res.status(200).json(article)
+      } else {
+        return res.status(400).json({
+          message: `Article ${nameA} not found`
+        })
+      }
+    } catch (error) {
+      res.status(400).json(error.message)
+    }
+  } else {
+    res.status(200).json(await getAllArticlesPriceDesc())
+  }
 }
 
 module.exports = {
@@ -110,5 +171,7 @@ module.exports = {
   createArticleHandler,
   updateArticleHandler,
   deleteArticleHandler,
-  getArticleOpinionHandler,
+  getAllArticlesDescHandler,
+  getAllArticlesPriceAscHandler,
+  getAllArticlesPriceDescHandler,
 }
