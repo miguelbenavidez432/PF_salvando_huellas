@@ -181,10 +181,45 @@ const saveArticles = async() => {
         await Articles.bulkCreate(articles)
 }
 
+const saveOpinions = async () => {
+    const opinions = [
+      {
+        id_Opinion: 1,
+        commentO: "Este artículo es increíble",
+        qualificationO: 5,
+        articleId: 2,
+        userIdUser: 1,
+      },
+      {
+        id_Opinion: 2,
+        commentO: "Estoy muy satisfecho con este artículo",
+        qualificationO: 4,
+        articleId: 1,
+        userIdUser: 2,
+      },
+      {
+        id_Opinion: 3,
+        commentO: "¡Excelente servicio al cliente!",
+        qualificationO: 4,
+        articleId: 3,
+        userIdUser: 3,
+      },
+      {
+        id_Opinion: 4,
+        commentO: "¡Excelente servicio al cliente!",
+        qualificationO: 5,
+        articleId: 4,
+        userIdUser: 4,
+      },
+    ];
+    await Opinions.bulkCreate(opinions);
+  };
+
 module.exports = {
     saveDogs,
     saveUsers,
     savePost,
     saveArticles,
     saveReferences,
+    saveOpinions
 }
