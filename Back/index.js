@@ -6,6 +6,7 @@ const { saveDogs,
   savePost,
   saveArticles,
   saveOpinions,
+  saveReferences,
 } = require('./src/handlers/saveData.js')
 
 // Syncing all the models at once.
@@ -15,7 +16,8 @@ conn.sync({ force: true }).then(() => {
   saveUsers(),
   saveArticles(),
   savePost(),
-  saveOpinions()
+  saveOpinions(),
+  saveReferences()
   console.log(`%s listening at ${port}`); // eslint-disable-line no-console
   });
 });
