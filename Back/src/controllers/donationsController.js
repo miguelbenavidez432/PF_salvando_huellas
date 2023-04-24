@@ -6,10 +6,11 @@ async function getAllDonations() {
   return allDonations
 }
 
-async function createDonation(amountD){
+async function createDonation(amountD, userId){
 
         const newDonation = await Donations.create({
-          amountD: amountD
+          amountD: amountD, 
+          userId: userId,
         })
         return newDonation
 }

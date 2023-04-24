@@ -1,6 +1,5 @@
 const { Op } = require("sequelize")
 const { Users } = require('../db')
-const jwt = require("jsonwebtoken");
 
 async function getAllUsers() {
   const allUsers = await Users.findAll()
