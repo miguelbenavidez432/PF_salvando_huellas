@@ -71,12 +71,12 @@ const deleteArticle = async (id, activeA) => {
   })
 }
 
-const getArticleOpinion = async () => {
+const getArticleOpinion = async (articleId) => {
   const getAllProducts = await Articles.findAll({
     include: [{
       model: Opinions,
       as: "opinion"
-    }], where : {id: 2}
+    }], where : {id: articleId}
   })
 }
 

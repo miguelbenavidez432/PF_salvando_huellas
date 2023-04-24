@@ -43,13 +43,13 @@ const getPostByIdHandler = async (req, res) => {
 }
 
 const createPostHandler = async (req, res) => {
-  const { titleP, commentP, category } = req.body
+  const { titleP, commentP, category, userId } = req.body
 
   try {
     if (!titleP || !commentP || !category) {
       return res.status(400).send(`You must complete all fields 😅`)
     } else {
-      await createPost(titleP, commentP, category)
+      await createPost(titleP, commentP, category, userId)
       res.status(200).send(`Post ${titleP} created successfully`)
     }
   } catch (error) {

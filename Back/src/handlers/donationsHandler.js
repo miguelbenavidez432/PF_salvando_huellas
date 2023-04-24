@@ -17,13 +17,13 @@ const getAllDonationsHandler = async (req, res, next) => {
 const createDonationHandler = async (req, res) => {
   try {
     const {
-      amountD,
+      amountD, userId
     } = req.body
 
     if (!amountD) {
       return res.status(400).send(`You must complete all fields 😅`)
     } else {
-      await createDonation(amountD)
+      await createDonation(amountD, userId)
       res.status(200).send(`Donation ${amountD} created successfully`)
     }
   } catch (error) {

@@ -1,17 +1,23 @@
 const { Posts } = require('../db')
-const { Op } = require("sequelize")
+const { Op, where } = require("sequelize")
 
-const createPost = async (titleP, commentP, category) => {
+const createPost = async (titleP, commentP, category, userId) => {
     const newPost = await Posts.create({
         titleP: titleP.toLowerCase(), 
         commentP: commentP, 
-        category: category,})
+        category: category,
+        userId: userId
+      })
     
     return newPost
 }
 
 const getAllPosts = async () => {
-    const allUsers = await Posts.findAll()
+    const allUsers = await Posts.findAll({
+      where: {
+        isActive: true
+      }
+    })
     return allUsers
 }
 
@@ -26,17 +32,20 @@ const getPostByTitle = async (titleP) => {
             titleP: {
             [Op.like]: `%${titleP}%`,
           },
+          isActive: true
         },
       })
       return postByTitle
 }
 
 const deletePost = async (id) => {
-    await Posts.destroy({
+    await Posts.update({
+      isActive: false
+    },{
         where: {
           id_Post: {
             [Op.eq]: id,
-          }
+          },
         }
       })
 }

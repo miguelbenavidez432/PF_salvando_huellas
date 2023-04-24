@@ -28,6 +28,11 @@ module.exports = (sequelize) => {
     photoP:{
       type: DataTypes.STRING,
       defaultValue: "https://desarrollowp.com/wp-content/uploads/2018/01/error-404.jpg"
+    },
+    isActive:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+
     }
   },
 

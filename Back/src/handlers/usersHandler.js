@@ -7,8 +7,9 @@ const {
     updateUser,
     getUserByEmail
   } = require('../controllers/usersController')
-  const bcrypt = require("bcrypt")
-  const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+require('dotenv').config()
 
 const getAllUsersHandler = async (req, res) => {
     const { nameU, lastNameU  } = req.query
@@ -121,10 +122,10 @@ const updateUserHandler = async (req, res) => {
     }
 }
 
-const login = async (req, res) => {
+const loginUserHandler = async (req, res) => {
     try {
    const { emailU, passwordU } = req.body;
-   
+      
       //find a user by their email
       const user = await getUserByEmail(emailU)
    
@@ -137,16 +138,17 @@ const login = async (req, res) => {
    
         if (isSame) {
           let token = jwt.sign({ id: user.id_User }, process.env.secretKey, {
-            expiresIn: 1 * 24 * 60 * 60 * 1000,
+            expiresIn: 864000000,
           });
    
           //if password matches wit the one in the database
           //go ahead and generate a cookie for the user
+          //res.header('authorization', token).json({token: token})
           res.cookie("jwt", token, { maxAge: 1 * 24 * 60 * 60, httpOnly: true });
           console.log("user", JSON.stringify(user, null, 2));
           console.log(token);
           //send user data
-          return res.status(201).send(user);
+          return res.status(201).send({token});
         } else {
           return res.status(401).send("Authentication failed");
         }
@@ -156,7 +158,9 @@ const login = async (req, res) => {
     } catch (error) {
       console.log(error);
     }
-   };
+   }
+
+
 
 module.exports = {
     getAllUsersHandler,
@@ -164,5 +168,5 @@ module.exports = {
     getUserByNameHandler,
     createUserHandler,
     updateUserHandler,
-    login,
+    loginUserHandler,
 }
