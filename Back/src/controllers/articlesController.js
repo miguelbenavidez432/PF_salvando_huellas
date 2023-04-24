@@ -117,7 +117,7 @@ const getArticleOpinion = async (articleId) => {
       model: Opinions,
       as: "opinion"
     }], where : {id: articleId}
- }
+ })}
 
 module.exports = {
   getAllArticles,
