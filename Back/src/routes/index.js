@@ -7,6 +7,7 @@ const articlesRoute = require("./articlesRoute");
 const donationsRoute = require("./donationsRoute");
 const paymentRoute = require("./paymentRoute");
 const referencesRoute = require("./referencesRoute");
+const imagesRoute = require("./imagesRoute");
 
 router.use("/dogs", dogsRoute);
 router.use("/users", usersRoute);
@@ -16,5 +17,6 @@ router.use("/articles", articlesRoute);
 router.use("/donations", donationsRoute);
 router.use("/payment", paymentRoute);
 router.use("/references", referencesRoute);
+router.use("/images", imagesRoute);
 
 module.exports = router;

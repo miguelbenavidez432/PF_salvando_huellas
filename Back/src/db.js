@@ -15,15 +15,20 @@ const {
 
 // Instance: Conection from DB to Sequelize
 // UDI: string conection DB ( DBMS, User Postgres, Password Postgres, Puerto, DB name )
-// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/salvandohuellas`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/salvandohuellas`, {
+  logging: false, // set to console.log to see the raw SQL queries
+  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+})
+
+// const sequelize = new Sequelize(DB_DEPLOY, {
 //   logging: false, // set to console.log to see the raw SQL queries
 //   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 // })
 
-const sequelize = new Sequelize(DB_DEPLOY, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-})
+// const sequelize = new Sequelize(DB_DEPLOY, {
+//   logging: false, // set to console.log to see the raw SQL queries
+//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// })
 
 //
 const basename = path.basename(__filename)
@@ -50,26 +55,26 @@ sequelize.models = Object.fromEntries(capsEntries)
 const { Donations, Articles, Users, Opinions, Stock, Dogs, Posts, References } = sequelize.models
 
 // Declare: relationship
-Users.hasMany(Donations)
-Donations.belongsTo(Users)
+Users.hasMany(Donations, {foreignKey: 'userId', as: "donation"})
+Donations.belongsTo(Users, {foreignKey: 'userId', as: "user"})
 
-Users.hasMany(Dogs)
-Dogs.belongsTo(Users)
+Users.hasMany(Dogs, {foreignKey: 'userId', as: "dog"})
+Dogs.belongsTo(Users, {foreignKey: 'userId', as: "user"})
 
 Dogs.belongsToMany(References, { through: 'dogsReferences' })
 References.belongsToMany(Dogs, { through: 'dogsReferences'})
 
-Users.hasMany(Posts)
-Posts.belongsTo(Users)
+Users.hasMany(Posts, {foreignKey: 'userId', as: "post"})
+Posts.belongsTo(Users, {foreignKey: 'userId', as: "user"})
 
-Users.hasMany(Articles)
-Articles.belongsTo(Users)
+Users.hasMany(Articles, {foreignKey: 'userId', as: "article"})
+Articles.belongsTo(Users, {foreignKey: 'userId', as: "user"})
 
 Articles.hasMany(Opinions, {foreignKey: 'articleId', as: "opinion"})
 Opinions.belongsTo(Articles, {foreignKey: 'articleId', as: "article"} )
 
-Users.hasMany(Opinions)
-Opinions.belongsTo(Users)
+Users.hasMany(Opinions, {foreignKey: 'userId', as: "opinion"})
+Opinions.belongsTo(Users, {foreignKey: 'userId', as: "user"})
 
 module.exports = {
   // Export: the property where all models are to be saved
