@@ -5,7 +5,7 @@ const {
 } = require("../handlers/opinionsHandler");
 const authjwt = require('../Middleware/authjwt')
 
-opinionsRoute.post("/register/:id", createOpinionHandler);
-opinionsRoute.get("/",  getAllOpinionsHandler)
+opinionsRoute.post("/register/:id", authjwt.authjwt, createOpinionHandler);
+opinionsRoute.get("/", getAllOpinionsHandler)
 
 module.exports = opinionsRoute
