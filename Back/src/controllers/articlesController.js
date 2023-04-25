@@ -30,7 +30,7 @@ async function getArticleById(id) {
 // Function: Create an article
 async function createArticle(nameA, priceA, descriptionA, photoA, stockA, activeA) {
   const newArticle = await Articles.create({
-    nameA: nameA.toLowerCase(),
+    nameA: nameA,
     priceA: priceA,
     descriptionA: descriptionA,
     photoA: photoA,

@@ -33,12 +33,12 @@ async function getDogByIdHandler(req, res) {
 
 async function postDogHandler(req, res) {
   try {
-    const { nameD, sexD, sizeD, historyD, photoD, ageD, userId} = req.body;
+    const { nameD, sexD, sizeD, historyD, photoD, ageD, userId, references} = req.body;
 
     if (!nameD || !sexD || !sizeD || !historyD || !ageD) {
       return res.status(404).send("You must complete all fields!");
     } else {
-      await dogCreate(nameD, sexD, sizeD, historyD, photoD, ageD, userId);
+      await dogCreate(nameD, sexD, sizeD, historyD, photoD, ageD, userId, references);
       res.status(200).send(`Dog ${nameD} created sucessfully!`);
     }
   } catch (error) {
@@ -48,7 +48,7 @@ async function postDogHandler(req, res) {
 
 async function updateDogHandler(req, res) {
   try {
-    const { nameD, sexD, sizeD, historyD, photoD, ageD } = req.body;
+    const { nameD, sexD, sizeD, historyD, photoD, ageD, references } = req.body;
     const id = req.params.id;
 
     const updatedDog = await dogUpdate(
@@ -58,7 +58,8 @@ async function updateDogHandler(req, res) {
       historyD,
       photoD,
       ageD,
-      id
+      id,
+      references
     );
 
     if (updatedDog[0] === 0) {

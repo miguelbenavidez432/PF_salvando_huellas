@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Dogs } = require("../db");
+const { Dogs, References, dogsReferences } = require("../db");
 
 // Esta función se encarga de obtener todos los perros en la base de datos que coincidan con ciertas condiciones, como el nombre, tamaño y género. Si no se especifican condiciones, esta función devolverá todos los perros.
 async function getDogs({ age, size, sex }) {
@@ -67,7 +67,7 @@ async function getDogById(id) {
   return dogId;
 }
 
-async function dogCreate(nameD, sexD, sizeD, historyD, photoD, ageD, userId) {
+async function dogCreate(nameD, sexD, sizeD, historyD, photoD, ageD, userId, references) {
   const newDog = await Dogs.create({
     nameD: nameD,
     sexD: sexD.toLowerCase(),
@@ -77,10 +77,14 @@ async function dogCreate(nameD, sexD, sizeD, historyD, photoD, ageD, userId) {
     photoD: photoD,
     userId: userId
   });
+  await references.forEach(async(ref) => {
+    const reference = await References.findOne({where: {textR: ref}})
+    await newDog.addReferences(reference)
+  });
   return newDog;
 }
 
-async function dogUpdate(nameD, sexD, sizeD, historyD, photoD, ageD, id) {
+async function dogUpdate(nameD, sexD, sizeD, historyD, photoD, ageD, id, references) {
   const updatedDog = await Dogs.update(
     {
       nameD: nameD,
@@ -99,6 +103,25 @@ async function dogUpdate(nameD, sexD, sizeD, historyD, photoD, ageD, id) {
       },
     }
   );
+  const dog = await Dogs.findByPk(id)
+  const relations = await dogsReferences.findAll({where: {dogIdDog: id}})
+  await references.forEach(async(ref) => {
+    let alreadyIs = false
+    const foundRef = await References.findOne({where: {textR: ref}})
+    await relations.forEach(async(rel) => {
+      if (foundRef.id_Reference === rel.referenceIdReference){
+        alreadyIs = true
+      }
+      const checkRef = await References.findByPk(rel.referenceIdReference)
+      if (!references.includes(checkRef.textR)){
+        await dog.removeReferences(checkRef)
+      }
+    })
+    if(!alreadyIs){
+      await dog.addReferences(foundRef)
+    }
+  })
+  
   return updatedDog;
 }
 
