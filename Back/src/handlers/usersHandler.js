@@ -70,21 +70,21 @@ const getUserByNameHandler = async (req, res) => {
   }
 };
 
-const createUserHandler = async (req, res) => {
-  const {
-    nameU,
-    lastNameU,
-    passwordU,
-    idNumbU,
-    emailU,
-    phoneU,
-    addressU,
-    reasonU,
-  } = req.body;
+const createUserHandler = async (req, res) => {    
+    const { nameU, 
+        lastNameU, 
+        passwordU, 
+        idNumbU, 
+        emailU, 
+        phoneU, 
+        addressU, 
+        reasonU,
+        isAdminU 
+    } = req.body
 
-  hashPassword = await bcrypt.hash(passwordU, 10);
-
-  try {
+    hashPassword = await bcrypt.hash(passwordU, 10)
+    
+    try {
     if (
       !nameU ||
       !lastNameU ||
@@ -105,7 +105,8 @@ const createUserHandler = async (req, res) => {
         emailU,
         phoneU,
         addressU,
-        reasonU
+        reasonU,
+        isAdminU
       );
       if (newUser) {
         let token = jwt.sign({ id: newUser.id_User }, process.env.secretKey, {

@@ -82,7 +82,8 @@ async function createUser(
   emailU,
   phoneU,
   addressU,
-  reasonU
+  reasonU,
+  isAdminU
 ) {
   const newUser = await Users.create({
     nameU: nameU.slice(0, 1).toUpperCase() + nameU.slice(1).toLowerCase(),
@@ -94,8 +95,8 @@ async function createUser(
     phoneU: phoneU,
     addressU: addressU,
     reasonU: reasonU,
+    isAdminU: isAdminU
   });
-
   return newUser;
 }
 
