@@ -7,20 +7,30 @@ const {
   Dogs,
   Posts,
   References,
+  dogsReferences,
 } = require("../db");
 
 const saveReferences = async () => {
   const references = [
     {
-      textR: "referenciasreferenciasreferenciasreferencias",
-      dogsReferences: 1,
+      textR: "Cat friendly", //id 1
     },
     {
-      textR: "referenciareferenciareferenciareferencia",
-      dogsReferences: 2,
+      textR: "Recien rescatado", // id 2
+    },
+    {
+      textR: "Vacunado", // id 3
     },
   ];
   await References.bulkCreate(references);
+  await dogsReferences.bulkCreate([
+    { dogIdDog: 1, referenceIdReference: 2 },
+    { dogIdDog: 2, referenceIdReference: 1 },
+    { dogIdDog: 3, referenceIdReference: 1 },
+    { dogIdDog: 4, referenceIdReference: 1 },
+    { dogIdDog: 4, referenceIdReference: 2 },
+    { dogIdDog: 4, referenceIdReference: 3 },
+  ]);
 };
 
 const saveDogs = async () => {
@@ -269,28 +279,24 @@ const saveArticles = async () => {
 const saveOpinions = async () => {
   const opinions = [
     {
-      id_Opinion: 1,
       commentO: "Este artículo es increíble",
       qualificationO: 5,
       articleId: 2,
       userIdUser: 1,
     },
     {
-      id_Opinion: 2,
       commentO: "Estoy muy satisfecho con este artículo",
       qualificationO: 4,
       articleId: 1,
       userIdUser: 2,
     },
     {
-      id_Opinion: 3,
       commentO: "¡Excelente servicio al cliente!",
       qualificationO: 3,
       articleId: 3,
       userIdUser: 3,
     },
     {
-      id_Opinion: 4,
       commentO: "¡Excelente servicio al cliente!",
       qualificationO: 5,
       articleId: 4,

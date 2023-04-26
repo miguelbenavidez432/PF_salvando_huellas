@@ -3,7 +3,7 @@ const { Op, where } = require("sequelize")
 
 const createPost = async (titleP, commentP, category, userId) => {
     const newPost = await Posts.create({
-        titleP: titleP.toLowerCase(), 
+        titleP: titleP, 
         commentP: commentP, 
         category: category,
         userId: userId

@@ -17,13 +17,14 @@ const getAllReferencesHandler = async (req, res, next) => {
 const createReferenceHandler = async (req, res) => {
   try {
     const {
-      textR
+      textR,
+      idDog
     } = req.body
 
     if (!textR) {
       return res.status(400).send(`You must complete all fields 😅`)
     } else {
-      await createReference(textR)
+      await createReference(textR, idDog)
       res.status(200).send(`Reference ${textR} created successfully`)
     }
   } catch (error) {
