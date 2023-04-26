@@ -11,6 +11,8 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 require('dotenv').config()
 
+const { sendEmail } = require('../controllers/sendEmailController')
+
 const getAllUsersHandler = async (req, res) => {
     const { nameU, lastNameU  } = req.query
 
@@ -95,6 +97,7 @@ const createUserHandler = async (req, res) => {
                 console.log("user", JSON.stringify(newUser, null, 2));
                 console.log(token);
                 //send users details
+                sendEmail(emailU);
                 return res.status(201).send(newUser);
               }else{
                 return res.status(409).send("Details are not correct");
