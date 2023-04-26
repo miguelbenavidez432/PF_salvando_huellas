@@ -1,3 +1,4 @@
+const {createUserHandler} = require('./usersHandler')
 const {
   Donations,
   Articles,
@@ -177,9 +178,23 @@ const saveUsers = async () => {
       reasonU: "Reason",
       isAdminU: false,
     },
+    
   ];
 
   await Users.bulkCreate(users);
+  await createUserHandler({ // Creamos usuario admin
+    body: {
+      nameU: "usuario",
+      lastNameU: "administrador",
+      passwordU: "admin",
+      idNumbU: 123456789,
+      emailU: "admin@mail.com",
+      phoneU: "123456789",
+      addressU: "AV principal 1558",
+      reasonU: "Reason",
+      isAdminU: true,
+    }
+},{status: ()=>{return {json: ()=>{}, send: ()=>{}}} })
 };
 
 const savePost = async () => {

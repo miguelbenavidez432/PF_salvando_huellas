@@ -62,7 +62,7 @@ const updateUser = async (id, nameU, lastNameU, passwordU, phoneU, addressU, rea
   })
 }
 
-async function createUser(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU, reasonU ){
+async function createUser(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU, reasonU, isAdminU ){
 
         const newUser = await Users.create({
             nameU: nameU.slice(0,1).toUpperCase()+nameU.slice(1).toLowerCase(),
@@ -73,6 +73,7 @@ async function createUser(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, 
             phoneU: phoneU, 
             addressU: addressU, 
             reasonU: reasonU,
+            isAdminU: isAdminU
         })
 
         return newUser

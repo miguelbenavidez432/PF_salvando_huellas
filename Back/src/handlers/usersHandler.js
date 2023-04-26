@@ -76,7 +76,8 @@ const createUserHandler = async (req, res) => {
         emailU, 
         phoneU, 
         addressU, 
-        reasonU 
+        reasonU,
+        isAdminU 
     } = req.body
 
     hashPassword = await bcrypt.hash(passwordU, 10)
@@ -85,7 +86,7 @@ const createUserHandler = async (req, res) => {
         if(!nameU || !lastNameU || !hashPassword || !idNumbU || !emailU || !phoneU || !addressU || !reasonU){
             return res.status(400).send(`You must complete all fields 😅`)
         }else{
-            const newUser = await createUser(nameU, lastNameU, hashPassword, idNumbU, emailU, phoneU, addressU, reasonU)
+            const newUser = await createUser(nameU, lastNameU, hashPassword, idNumbU, emailU, phoneU, addressU, reasonU, isAdminU)
             if (newUser) {
                 let token = jwt.sign({ id: newUser.id_User }, process.env.secretKey, {
                   expiresIn: 1 * 24 * 60 * 60 * 1000,
