@@ -58,10 +58,10 @@ const createArticleHandler = async (req, res) => {
   } = req.body
   try {
     if (!nameA || !priceA || !descriptionA || !stockA) {
-      return res.status(400).send(`You must complete all fields 😅`)
+      return res.status(400).send(`Debes completar todos los campos 😅`)
     } else {
       await createArticle(nameA, priceA, descriptionA, photoA, stockA, activeA)
-      res.status(200).send(`Article ${nameA} created successfully`)
+      res.status(200).send(`"${nameA}" creado con éxito`)
     }
   } catch (error) {
     res.status(400).json({ message: error.message })
@@ -76,9 +76,9 @@ const updateArticleHandler = async (req, res) => {
     const getArticle = await getArticleById(id)
     if (getArticle) {
       await updateArticle(id, nameA, priceA, descriptionA, photoA, stockA, activeA)
-      res.status(200).send(`Article ${nameA} updated`)
+      res.status(200).send(`Artículo "${nameA}" actualizado`)
     } else {
-      return res.status(500).json({ message: `article ${nameA} not found` })
+      return res.status(500).json({ message: `artículo "${nameA}" no encontro` })
     }
   } catch (error) {
     res.status(400).json({ message: error.message })
@@ -93,9 +93,9 @@ const deleteArticleHandler = async (req, res) => {
     const getArticle = await getArticleById(id)
     if (getArticle) {
       await deleteArticle(id, activeA)
-      res.status(200).send(`Article ${getArticle.nameA} delete`)
+      res.status(200).send(`Artículo "${getArticle.nameA}" eliminado`)
     } else {
-      return res.status(500).json({ message: `Article ${getArticle.nameA} not found` })
+      return res.status(500).json({ message: `Artículo "${getArticle.nameA}" no encontrado` })
     }
   } catch (error) {
     res.status(400).json({ message: error.message })
@@ -112,7 +112,7 @@ const getAllArticlesDescHandler = async (req, res) => {
         res.status(200).json(article)
       } else {
         return res.status(400).json({
-          message: `Article ${nameA} not found`
+          message: `Artículo "${nameA}" no encontrado`
         })
       }
     } catch (error) {
@@ -133,7 +133,7 @@ const getAllArticlesPriceAscHandler = async (req, res) => {
         res.status(200).json(article)
       } else {
         return res.status(400).json({
-          message: `Article ${nameA} not found`
+          message: `Artículo "${nameA}" no encontrado`
         })
       }
     } catch (error) {
@@ -154,7 +154,7 @@ const getAllArticlesPriceDescHandler = async (req, res) => {
         res.status(200).json(article)
       } else {
         return res.status(400).json({
-          message: `Article ${nameA} not found`
+          message: `Artículo "${nameA}" no encontrado`
         })
       }
     } catch (error) {
