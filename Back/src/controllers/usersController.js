@@ -1,14 +1,14 @@
-const { Op } = require("sequelize")
-const { Users } = require('../db')
+const { Op } = require("sequelize");
+const { Users } = require("../db");
 
 async function getAllUsers() {
-  const allUsers = await Users.findAll()
-  return allUsers
+  const allUsers = await Users.findAll();
+  return allUsers;
 }
 
 async function getUserById(id) {
-  const user = await Users.findByPk(id)
-  return user
+  const user = await Users.findByPk(id);
+  return user;
 }
 
 async function getUserByName(nameU) {
@@ -18,8 +18,8 @@ async function getUserByName(nameU) {
         [Op.like]: `%${nameU}%`,
       },
     },
-  })
-  return userByName
+  });
+  return userByName;
 }
 
 async function getUserByLastName(lastNameU) {
@@ -29,8 +29,8 @@ async function getUserByLastName(lastNameU) {
         [Op.like]: `%${lastNameU}%`,
       },
     },
-  })
-  return userByLastName
+  });
+  return userByLastName;
 }
 
 async function getUserByEmail(emailU) {
@@ -40,42 +40,81 @@ async function getUserByEmail(emailU) {
         [Op.like]: `%${emailU}%`,
       },
     },
-  })
-  return userByEmail
+  });
+  return userByEmail;
 }
 
-const updateUser = async (id, nameU, lastNameU, passwordU, phoneU, addressU, reasonU, isAdminU) =>{
-  await Users.update({ 
-    nameU: nameU,
-    lastNameU: lastNameU,
+const updateUser = async (
+  id,
+  nameU,
+  lastNameU,
+  passwordU,
+  phoneU,
+  addressU,
+  reasonU,
+  isAdminU
+) => {
+  await Users.update(
+    {
+      nameU: nameU,
+      lastNameU: lastNameU,
+      passwordU: passwordU,
+      phoneU: phoneU,
+      addressU: addressU,
+      reasonU: reasonU,
+      isAdminU: isAdminU,
+    },
+    {
+      where: {
+        id_User: {
+          [Op.eq]: id,
+        },
+      },
+    }
+  );
+};
+
+async function createUser(
+  nameU,
+  lastNameU,
+  passwordU,
+  idNumbU,
+  emailU,
+  phoneU,
+  addressU,
+  reasonU
+) {
+  const newUser = await Users.create({
+    nameU: nameU.slice(0, 1).toUpperCase() + nameU.slice(1).toLowerCase(),
+    lastNameU:
+      lastNameU.slice(0, 1).toUpperCase() + lastNameU.slice(1).toLowerCase(),
     passwordU: passwordU,
+    idNumbU: idNumbU,
+    emailU: emailU.toLowerCase(),
     phoneU: phoneU,
     addressU: addressU,
     reasonU: reasonU,
-    isAdminU: isAdminU,
-   }, {
-    where: {
-      id_User: {
-        [Op.eq]: id,
-      }
-    }
-  })
+  });
+
+  return newUser;
 }
 
-async function createUser(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU, reasonU ){
+async function banUser(id) {
+  const user = await Users.findByPk(id);
+  if (user.is_ban) {
+    throw new Error("User already banned");
+  }
+  user.is_ban = true;
+  await user.save();
+}
 
-        const newUser = await Users.create({
-            nameU: nameU.slice(0,1).toUpperCase()+nameU.slice(1).toLowerCase(),
-            lastNameU: lastNameU.slice(0,1).toUpperCase()+lastNameU.slice(1).toLowerCase(), 
-            passwordU: passwordU,
-            idNumbU: idNumbU,
-            emailU: emailU.toLowerCase(), 
-            phoneU: phoneU, 
-            addressU: addressU, 
-            reasonU: reasonU,
-        })
-
-        return newUser
+async function unbanUser(id) {
+  const user = await Users.findByPk(id);
+  if (!user.is_ban) {
+    throw new Error("User already unbanned");
+  }
+  user.is_ban = false;
+  await user.save();
 }
 
 module.exports = {
@@ -86,4 +125,6 @@ module.exports = {
   createUser,
   updateUser,
   getUserByEmail,
-}
+  banUser,
+  unbanUser,
+};
