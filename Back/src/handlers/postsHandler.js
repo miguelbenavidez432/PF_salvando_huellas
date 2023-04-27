@@ -50,7 +50,7 @@ const createPostHandler = async (req, res) => {
       return res.status(400).send(`You must complete all fields 😅`)
     } else {
       await createPost(titleP, commentP, category, userId)
-      res.status(200).send(`Post ${titleP} created successfully`)
+      res.status(200).send(`Post "${titleP}" creado con éxito`)
     }
   } catch (error) {
     res.status(400).json({ message: error.message })

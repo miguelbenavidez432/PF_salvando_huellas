@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer')
 require('dotenv').config()
 
+
 const sendEmail = async (nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU ) =>{
 
     const config = {
@@ -54,6 +55,7 @@ const sendEmailUpdate = async (token, emailU, ) =>{
         <h3>Click en el link para reestablecer su contraseña</h3>
         <p>http://localhost:5173/users/resetpass/${token}</p>
         `
+
     }
 
     const transport = nodemailer.createTransport(config)

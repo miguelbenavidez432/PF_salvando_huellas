@@ -1,3 +1,4 @@
+const {createUserHandler} = require('./usersHandler')
 const {
   Donations,
   Articles,
@@ -13,7 +14,7 @@ const {
 const saveReferences = async () => {
   const references = [
     {
-      textR: "Cat friendly", //id 1
+      textR: "Amigable con los gatos", //id 1
     },
     {
       textR: "Recien rescatado", // id 2
@@ -36,40 +37,95 @@ const saveReferences = async () => {
 const saveDogs = async () => {
   const dogs = [
     {
-      nameD: "Dog 1",
-      sexD: "male",
-      ageD: "puppy",
-      sizeD: "small",
-      historyD: "New Dog",
+      nameD: "Luna",
+      sexD: "hembra",
+      ageD: "cachorra",
+      sizeD: "pequeña",
+      historyD:
+        "Luna era una perra de raza mixta que había sido abandonada en las calles de la ciudad. Cuando la encontramos notamos que estaba muy asustada y necesitaba atención médica.",
       photoD:
-        "https://i.pinimg.com/736x/2c/31/97/2c3197c9add1109018fd89beda4cbe4b.jpg",
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2Fperro5.png?alt=media&token=31c27739-5d1b-4ddf-affa-02acc804e10f",
     },
     {
-      nameD: "Dog 2",
-      sexD: "male",
-      ageD: "adult",
-      sizeD: "large",
+      nameD: "Max",
+      sexD: "macho",
+      ageD: "adulto",
+      sizeD: "grande",
       historyD: "Old Dog",
       photoD:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtnd2zxCezN-AR47pOjggSSeFrrWaLjZhvlA&usqp=CAU",
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2Fperro6.png?alt=media&token=149c9e49-25a3-472e-950b-f32e791a292f",
     },
     {
-      nameD: "Dog 3",
-      sexD: "female",
-      ageD: "adult",
-      sizeD: "medium",
+      nameD: "Bella",
+      sexD: "hembra",
+      ageD: "adulta",
+      sizeD: "mediana",
       historyD: "Puppy",
       photoD:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUEdlACgU32acz7QAIzSJN5-ZqExmwmcznogVwU_vqT4Qnfa8EpFVYR0SWqFBAzo3canw&usqp=CAU",
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2Fperro4.png?alt=media&token=b50d14b7-a201-4f41-8c10-c6e87618172b",
     },
     {
-      nameD: "Dog 4",
-      sexD: "male",
-      ageD: "adult",
-      sizeD: "small",
+      nameD: "Rocky",
+      sexD: "macho",
+      ageD: "adulto",
+      sizeD: "pequeño",
       historyD: "Puppy 2",
       photoD:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRipb_gvLUoqKw0f5jBpYpmqd1H_uY44eP6kQ&usqp=CAU",
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2Fperro7.png?alt=media&token=93945383-a427-47de-898a-6c8c4a05f9ed",
+    },
+    {
+      nameD: "Zeus",
+      sexD: "macho",
+      ageD: "adulto",
+      sizeD: "mediano",
+      historyD: "Puppy 2",
+      photoD:
+        "https://images.pexels.com/photos/895259/pexels-photo-895259.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      nameD: "Lola",
+      sexD: "hembra",
+      ageD: "adulta",
+      sizeD: "pequeña",
+      historyD: "Puppy 2",
+      photoD:
+        "https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      nameD: "Daisy",
+      sexD: "hembra",
+      ageD: "adulta",
+      sizeD: "pequeña",
+      historyD: "Puppy 2",
+      photoD:
+        "https://images.pexels.com/photos/2023384/pexels-photo-2023384.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    },
+    {
+      nameD: "Chiqui",
+      sexD: "hembra",
+      ageD: "adulta",
+      sizeD: "grande",
+      historyD: "Puppy 2",
+      photoD:
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2FChiquiPerra.webp?alt=media&token=614061bf-b8a2-4ded-ba8a-a4314e724015",
+    },
+    {
+      nameD: "Thor",
+      sexD: "macho",
+      ageD: "cachorro",
+      sizeD: "pequeño",
+      historyD: "Puppy 2",
+      photoD:
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2FPerro2.jpg?alt=media&token=5bddddc2-7bbe-4c21-be7d-e614e28f88fe",
+    },
+    {
+      nameD: "Coco",
+      sexD: "hembra",
+      ageD: "cachorra",
+      sizeD: "pequeña",
+      historyD: "Puppy 2",
+      photoD:
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2FPerro3.png?alt=media&token=cb9ea207-0901-4e5d-8425-63f3f9db07a1",
     },
   ];
 
@@ -122,9 +178,23 @@ const saveUsers = async () => {
       reasonU: "Reason",
       isAdminU: false,
     },
+    
   ];
 
   await Users.bulkCreate(users);
+  await createUserHandler({ // Creamos usuario admin
+    body: {
+      nameU: "usuario",
+      lastNameU: "administrador",
+      passwordU: "admin",
+      idNumbU: 123456789,
+      emailU: "admin@mail.com",
+      phoneU: "123456789",
+      addressU: "AV principal 1558",
+      reasonU: "Reason",
+      isAdminU: true,
+    }
+},{status: ()=>{return {json: ()=>{}, send: ()=>{}}} })
 };
 
 const savePost = async () => {
@@ -162,32 +232,33 @@ const savePost = async () => {
 const saveArticles = async () => {
   const articles = [
     {
-      nameA: "article a",
-
-      priceA: 546.0,
-      descriptionA: "color blue",
+      nameA: "HOP! PERRO ADULTO RAZA MEDIANA Y GRANDE 21 KG",
+      priceA: 7780,
+      descriptionA:
+        "ALIMENTOS CANINOS VITAL CAN HOP! ADULTOS - HOP! PERRO ADULTO RAZA MEDIANA Y GRANDE 21 KG",
       photoA:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_uRkWh3G_5orgl61GZ6M_s5rgQk8hrI6XBCJAs-NXXZcShgk6b-CbvAkvFK36uMY-ydI&usqp=CAU",
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2Fhop-perro-11-26d31b40b84122399916226432090152-1024-1024.webp?alt=media&token=005ae83e-381d-472c-8b4c-2c8b8505e6ed",
       stockA: 20,
       activeA: true,
     },
     {
-      nameA: "article b",
-
-      priceA: 12.0,
-      descriptionA: "color red",
+      nameA: "Comedero Bebedero Lovely x500ML Union Pet - 14310",
+      priceA: 3120,
+      descriptionA:
+        "Comedero/Bebedero doble Varios colores (NO INCLUYE LA BOTELLA)",
       photoA:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoa1CvBTJdm5im80ExuTXDLu9aXN4d07M74w&usqp=CAU",
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2F143101-b01e67ce494ac9836716802773619781-1024-1024.webp?alt=media&token=b9f2d995-3eed-4a40-85cf-bac071578a55",
       stockA: 30,
       activeA: true,
     },
     {
-      nameA: "article c",
+      nameA: "Cucha Durapets Roja",
 
       priceA: 12.0,
-      descriptionA: "color green",
+      descriptionA:
+        "La Cucha Durapets, está pensada para darle a tu mascota un espacio cómodo y sobre todo seguro. Está hecha en un material totalmente inyectado, desarrollado con plástico 100% reciclado, que ofrece mayor resistencia, calidad y durabilidad.",
       photoA:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0BmVSfCfOCEAN2sJ719GrAlw7NgRUc_i84w&usqp=CAUU",
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2F229279.webp?alt=media&token=66279f5d-42a1-42d1-882a-1a5ae50596ca",
       stockA: 10,
       activeA: true,
     },
