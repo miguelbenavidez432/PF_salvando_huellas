@@ -63,6 +63,10 @@ module.exports = (sequelize) => {
         defaultValue: false,
       },
 
+      resetLink: {
+        type: DataTypes.STRING,
+        defaultValue: ''
+     },
       is_ban: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
