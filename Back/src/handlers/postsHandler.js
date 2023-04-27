@@ -43,13 +43,13 @@ const getPostByIdHandler = async (req, res) => {
 }
 
 const createPostHandler = async (req, res) => {
-  const { titleP, commentP, category, userId } = req.body
+  const { titleP, commentP, category, photoP, userId } = req.body
 
   try {
     if (!titleP || !commentP || !category) {
       return res.status(400).send(`You must complete all fields 😅`)
     } else {
-      await createPost(titleP, commentP, category, userId)
+      await createPost(titleP, commentP, category, photoP, userId)
       res.status(200).send(`Post "${titleP}" creado con éxito`)
     }
   } catch (error) {
@@ -91,7 +91,6 @@ const updatPostHandler = async (req, res) => {
 }
 
 
-
 module.exports = {
   getAllPostsHandler,
   getPostByIdHandler,
@@ -99,3 +98,4 @@ module.exports = {
   updatPostHandler,
   deletePostHandler
 }
+
