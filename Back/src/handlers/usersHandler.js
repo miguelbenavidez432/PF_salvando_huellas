@@ -242,4 +242,5 @@ module.exports = {
   loginUserHandler,
   banUserHandler,
   unbanUserHandler,
-};
+  forgotPassHandler,
+}
