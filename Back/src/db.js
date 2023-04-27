@@ -52,7 +52,7 @@ let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].s
 sequelize.models = Object.fromEntries(capsEntries)
 
 // Destructures: the models to make relationships
-const { Donations, Articles, Users, Opinions, Stock, Dogs, Posts, References } = sequelize.models
+const { Donations, Articles, Users, Opinions, Stock, Dogs, Posts, References, Adoptions } = sequelize.models
 
 // Declare: relationship
 Users.hasMany(Donations, {foreignKey: 'userId', as: "donation"})
@@ -75,6 +75,12 @@ Opinions.belongsTo(Articles, {foreignKey: 'articleId', as: "article"} )
 
 Users.hasMany(Opinions, {foreignKey: 'userId', as: "opinion"})
 Opinions.belongsTo(Users, {foreignKey: 'userId', as: "user"})
+
+Users.hasMany(Adoptions, {foreignKey: "userId", as: "adoption"})
+Adoptions.belongsTo(Users, {foreignKey: "userId", as: "user"})
+
+Dogs.hasMany(Adoptions, {foreignKey: "dogId", as: "adoption"})
+Adoptions.belongsTo(Dogs, {foreignKey: "dogId", as: "dog"})
 
 module.exports = {
   // Export: the property where all models are to be saved
