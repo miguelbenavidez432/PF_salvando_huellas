@@ -37,7 +37,7 @@ async function getUserByEmail(emailU) {
   const userByEmail = await Users.findOne({
     where: {
       emailU: {
-        [Op.like]: `%${emailU}%`,
+        [Op.eq]: `${emailU}`,
       },
     },
   })
@@ -78,6 +78,30 @@ async function createUser(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, 
         return newUser
 }
 
+const forgotPass = async (token,emailU) =>{
+  await Users.update({
+    resetLink: token
+  }, {
+    where: {
+      emailU: {
+        [Op.eq]: emailU,
+      }
+    }
+  })
+}
+
+const resetPass = async (passwordU, emailU) =>{
+  await Users.update({
+    passwordU: passwordU
+  }, {
+    where: {
+      emailU: {
+        [Op.eq]: emailU,
+      }
+    }
+  })
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -86,4 +110,6 @@ module.exports = {
   createUser,
   updateUser,
   getUserByEmail,
+  forgotPass,
+  resetPass,
 }

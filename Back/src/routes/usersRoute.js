@@ -6,6 +6,8 @@ const {
     createUserHandler,
     updateUserHandler,
     loginUserHandler,
+    forgotPassHandler,
+
 } = require('../handlers/usersHandler')
 const userAuth = require('../Middleware/userAuth')
 const authjwt = require('../Middleware/authjwt')
@@ -16,6 +18,7 @@ usersRoute.get('/:id', getUserByIdHandler)
 usersRoute.get('/', authjwt.authjwt, getUserByNameHandler)
 usersRoute.post('/register', userAuth.saveUser, createUserHandler)
 usersRoute.put('/:id', updateUserHandler)
-usersRoute.post('/login', loginUserHandler )
+usersRoute.post('/login', loginUserHandler),
+usersRoute.put('/forgotpass/:id', forgotPassHandler)
 
 module.exports = usersRoute

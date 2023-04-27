@@ -5,16 +5,20 @@ const {
     getUserByLastName,
     createUser,
     updateUser,
-    getUserByEmail
+    getUserByEmail,
+    forgotPass,
+    resetPass
   } = require('../controllers/usersController')
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 require('dotenv').config()
-
-const { sendEmail } = require('../controllers/sendEmailController')
+const { 
+  sendEmail,
+  sendEmailUpdate,
+ } = require('../controllers/sendEmailController')
 
 const getAllUsersHandler = async (req, res) => {
-    const { nameU, lastNameU  } = req.query
+    const { nameU, lastNameU, emailU  } = req.query
 
     try {
         if(nameU){
@@ -33,9 +37,16 @@ const getAllUsersHandler = async (req, res) => {
             return res.status(500).json({message: `User ${lastNameU} not found`})
         }
     }
-    else{
-        const allUsers = await getAllUsers()
-        res.status(200).json(allUsers)
+    else if(emailU){
+      const userEmail = await getUserByEmail(emailU)
+      if(userEmail){
+        res.status(200).json(userEmail)
+      }else{
+        return res.status(500).json({message: `User email ${emailU} not found`})
+      }
+    }else{
+              const allUsers = await getAllUsers()
+              res.status(200).json(allUsers)
     }
     
     } catch (error) {
@@ -97,7 +108,7 @@ const createUserHandler = async (req, res) => {
                 console.log("user", JSON.stringify(newUser, null, 2));
                 console.log(token);
                 //send users details
-                sendEmail(emailU);
+                sendEmail(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU );
                 return res.status(201).send(newUser);
               }else{
                 return res.status(409).send("Details are not correct");
@@ -163,7 +174,25 @@ const loginUserHandler = async (req, res) => {
     }
    }
 
-
+const forgotPassHandler = async (req, res) =>{
+  try {
+      const { id } = req.params
+      const { emailU } = req.body
+      const user = await getUserById(id)
+      if(user){
+        let token = jwt.sign({ id: user.id_User }, process.env.passKey, {
+          expiresIn: 1 * 24 * 60 * 60 * 1000,
+        });
+        await sendEmailUpdate(token, emailU,)
+        await forgotPass(token, emailU)
+        res.status(200).send(`A email was send to ${emailU}. Check your inbox`)
+      }else{
+        res.status(400).send(`User whit email ${emailU} don't exists`)
+      }
+    } catch (error) {
+      res.status(400).send(`User whit email ${emailU} don't exists`)
+    }
+}
 
 module.exports = {
     getAllUsersHandler,
@@ -172,4 +201,6 @@ module.exports = {
     createUserHandler,
     updateUserHandler,
     loginUserHandler,
+    forgotPassHandler,
+    
 }
