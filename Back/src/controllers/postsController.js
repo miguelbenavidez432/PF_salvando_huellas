@@ -1,11 +1,12 @@
 const { Posts } = require('../db')
 const { Op, where } = require("sequelize")
 
-const createPost = async (titleP, commentP, category, userId) => {
+const createPost = async (titleP, commentP, category, photoP, userId) => {
     const newPost = await Posts.create({
         titleP: titleP, 
         commentP: commentP, 
         category: category,
+        photoP: photoP,
         userId: userId
       })
     
@@ -73,4 +74,3 @@ module.exports = {
     deletePost,
     updatePost,
   }
-  

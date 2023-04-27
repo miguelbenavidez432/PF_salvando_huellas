@@ -38,9 +38,9 @@ const saveDogs = async () => {
   const dogs = [
     {
       nameD: "Luna",
-      sexD: "hembra",
-      ageD: "cachorra",
-      sizeD: "pequeña",
+      sexD: "female",
+      ageD: "puppy",
+      sizeD: "medium",
       historyD:
         "Luna era una perra de raza mixta que había sido abandonada en las calles de la ciudad. Cuando la encontramos notamos que estaba muy asustada y necesitaba atención médica.",
       photoD:
@@ -48,81 +48,81 @@ const saveDogs = async () => {
     },
     {
       nameD: "Max",
-      sexD: "macho",
-      ageD: "adulto",
-      sizeD: "grande",
+      sexD: "male",
+      ageD: "adult",
+      sizeD: "large",
       historyD: "Old Dog",
       photoD:
         "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2Fperro6.png?alt=media&token=149c9e49-25a3-472e-950b-f32e791a292f",
     },
     {
       nameD: "Bella",
-      sexD: "hembra",
-      ageD: "adulta",
-      sizeD: "mediana",
+      sexD: "female",
+      ageD: "adult",
+      sizeD: "medium",
       historyD: "Puppy",
       photoD:
         "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2Fperro4.png?alt=media&token=b50d14b7-a201-4f41-8c10-c6e87618172b",
     },
     {
       nameD: "Rocky",
-      sexD: "macho",
-      ageD: "adulto",
-      sizeD: "pequeño",
+      sexD: "male",
+      ageD: "adult",
+      sizeD: "puppy",
       historyD: "Puppy 2",
       photoD:
         "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2Fperro7.png?alt=media&token=93945383-a427-47de-898a-6c8c4a05f9ed",
     },
     {
       nameD: "Zeus",
-      sexD: "macho",
-      ageD: "adulto",
-      sizeD: "mediano",
+      sexD: "male",
+      ageD: "adult",
+      sizeD: "medium",
       historyD: "Puppy 2",
       photoD:
         "https://images.pexels.com/photos/895259/pexels-photo-895259.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       nameD: "Lola",
-      sexD: "hembra",
-      ageD: "adulta",
-      sizeD: "pequeña",
+      sexD: "female",
+      ageD: "adult",
+      sizeD: "small",
       historyD: "Puppy 2",
       photoD:
         "https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       nameD: "Daisy",
-      sexD: "hembra",
-      ageD: "adulta",
-      sizeD: "pequeña",
+      sexD: "female",
+      ageD: "adult",
+      sizeD: "small",
       historyD: "Puppy 2",
       photoD:
         "https://images.pexels.com/photos/2023384/pexels-photo-2023384.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       nameD: "Chiqui",
-      sexD: "hembra",
-      ageD: "adulta",
-      sizeD: "grande",
+      sexD: "female",
+      ageD: "adult",
+      sizeD: "large",
       historyD: "Puppy 2",
       photoD:
         "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2FChiquiPerra.webp?alt=media&token=614061bf-b8a2-4ded-ba8a-a4314e724015",
     },
     {
       nameD: "Thor",
-      sexD: "macho",
-      ageD: "cachorro",
-      sizeD: "pequeño",
+      sexD: "male",
+      ageD: "puppy",
+      sizeD: "small",
       historyD: "Puppy 2",
       photoD:
         "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2FPerro2.jpg?alt=media&token=5bddddc2-7bbe-4c21-be7d-e614e28f88fe",
     },
     {
       nameD: "Coco",
-      sexD: "hembra",
-      ageD: "cachorra",
-      sizeD: "pequeña",
+      sexD: "female",
+      ageD: "puppy",
+      sizeD: "small",
       historyD: "Puppy 2",
       photoD:
         "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2FPerro3.png?alt=media&token=cb9ea207-0901-4e5d-8425-63f3f9db07a1",
