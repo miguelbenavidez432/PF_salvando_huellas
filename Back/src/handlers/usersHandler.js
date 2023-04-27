@@ -268,6 +268,7 @@ async function unbanUserHandler(req, res) {
         });
     }
   }
+}
 
 
 module.exports = {
@@ -280,4 +281,4 @@ module.exports = {
   banUserHandler,
   unbanUserHandler,
   forgotPassHandler,
-};
+}
