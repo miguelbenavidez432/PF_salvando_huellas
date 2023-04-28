@@ -1,6 +1,6 @@
 const { Opinions } = require("../db")
 
-const {  getArticleById,} = require('../controllers/articlesController')
+const {  getArticleById } = require('../controllers/articlesController')
 
 async function createOpinion( commentO, qualificationO, id) {
   const idExists = await getArticleById(id)
