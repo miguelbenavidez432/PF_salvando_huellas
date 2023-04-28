@@ -1,4 +1,4 @@
-const {createUserHandler} = require('./usersHandler')
+const { createUserHandler } = require("./usersHandler");
 const {
   Donations,
   Articles,
@@ -29,8 +29,8 @@ const saveReferences = async () => {
     { dogIdDog: 2, referenceIdReference: 1 },
     { dogIdDog: 3, referenceIdReference: 1 },
     { dogIdDog: 4, referenceIdReference: 1 },
-    { dogIdDog: 4, referenceIdReference: 2 },
-    { dogIdDog: 4, referenceIdReference: 3 },
+    { dogIdDog: 5, referenceIdReference: 2 },
+    { dogIdDog: 6, referenceIdReference: 3 },
   ]);
 };
 
@@ -178,52 +178,62 @@ const saveUsers = async () => {
       reasonU: "Reason",
       isAdminU: false,
     },
-    
   ];
 
   await Users.bulkCreate(users);
-  await createUserHandler({ // Creamos usuario admin
-    body: {
-      nameU: "usuario",
-      lastNameU: "administrador",
-      passwordU: "admin",
-      idNumbU: 123456789,
-      emailU: "admin@mail.com",
-      phoneU: "123456789",
-      addressU: "AV principal 1558",
-      reasonU: "Reason",
-      isAdminU: true,
+  await createUserHandler(
+    {
+      // Creamos usuario admin
+      body: {
+        nameU: "usuario",
+        lastNameU: "administrador",
+        passwordU: "admin",
+        idNumbU: 123456789,
+        emailU: "admin@mail.com",
+        phoneU: "123456789",
+        addressU: "AV principal 1558",
+        reasonU: "Reason",
+        isAdminU: true,
+      },
+    },
+    {
+      status: () => {
+        return { json: () => {}, send: () => {} };
+      },
     }
-},{status: ()=>{return {json: ()=>{}, send: ()=>{}}} })
+  );
 };
 
 const savePost = async () => {
   const posts = [
     {
-      titleP: "titulo 1",
-      commentP: "Muy buenos productos!!",
-      category: "store",
+      titleP: "Ayuda a cambiar vidas: Haz una donación hoy.",
+      commentP: "¡Únete a nosotros en nuestra misión de hacer una diferencia en la vida de los animales necesitados! Haz una donación hoy y ayuda a proporcionar recursos y apoyo a aquellos que más lo necesitan. Tu contribución puede cambiar vidas y marcar la diferencia en la comunidad. ¡Haz tu donación hoy mismo y sé parte del cambio!",
+      category: "Donación",
     },
     {
-      titleP: "titulo 2",
+      titleP: "Adoptamos a Bianca",
       commentP:
         "Pude adoptar a un perrito y ahora estamos feliz por el nuevo integrante",
-      category: "donation",
+      category: "Adopción",
+      photoP: "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2FPerroconfamilia.jpg?alt=media&token=7bce0f61-d61f-4f33-9b37-360c99f584d8"
     },
     {
-      titleP: "titulo 3",
+      titleP: "",
       commentP: "La mejor pagina para encontrar productos de calidad",
-      category: "store",
+      category: "Tienda",
     },
     {
-      titleP: "titulo 4",
-      commentP: "Que lindo poder adoptar a una mascota de manera tan fácil!!",
-      category: "event",
+      titleP: "Chow",
+      commentP:
+        "Hace 5 meses adoptamos a Chow y se adaptó bastante rápido a nuestro hogar y familia, nos trajo felicidad. Estamos muy agradecidos a Salvando Huellas por haberla rescatado y por darnos la oportunidad de brindarle un hogar y mucho amor.",
+      category: "Adopción",
+      photoP: "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2Fperrito12.png?alt=media&token=1697ac29-24b3-49b6-b83c-2e5fbf297b64"
     },
     {
-      titleP: "titulo 5",
+      titleP: "",
       commentP: "A mi perrito le encanta el alimento de esta página!!",
-      category: "donation",
+      category: "Store",
     },
   ];
   await Posts.bulkCreate(posts);
