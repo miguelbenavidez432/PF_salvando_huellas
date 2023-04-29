@@ -11,6 +11,7 @@ const {
     banUser,
     unbanUser,
     getUserBydata,
+    getEmailLogin,
   } = require('../controllers/usersController')
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
@@ -186,7 +187,7 @@ const loginUserHandler = async (req, res) => {
     const { emailU, passwordU } = req.body;
 
     //find a user by their email
-    const user = await getUserByEmail(emailU);
+    const user = await getEmailLogin(emailU);
 
     //if user email is found, compare password with bcrypt
     if (user) {

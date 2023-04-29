@@ -58,6 +58,17 @@ async function getUserByEmail(emailU) {
   console.log(4)
   return userByEmail;
 }
+async function getEmailLogin(emailU) {
+  const userByEmail = await Users.findOne({
+    where: {
+      emailU: {
+        [Op.eq]: `${emailU}`,
+      },
+    },
+  });
+  console.log(4)
+  return userByEmail;
+}
 
 const updateUser = async (
   id,
@@ -181,5 +192,6 @@ module.exports = {
   banUser,
   unbanUser,
   getUserBydata,
+  getEmailLogin,
 }
 
