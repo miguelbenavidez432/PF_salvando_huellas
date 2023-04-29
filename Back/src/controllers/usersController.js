@@ -22,6 +22,17 @@ async function getUserByName(nameU) {
   return userByName;
 }
 
+async function getUserByDNI(idNumbU){
+  const userByDNI = await Users.findAll({
+    where: {
+      idNumbU: {
+        [Op.like]: `%${Number(idNumbU)}%`
+      }
+    }
+  })
+  return userByDNI;
+}
+
 async function getUserByLastName(lastNameU) {
   const userByLastName = await Users.findAll({
     where: {
@@ -34,7 +45,7 @@ async function getUserByLastName(lastNameU) {
 }
 
 async function getUserByEmail(emailU) {
-  const userByEmail = await Users.findOne({
+  const userByEmail = await Users.findAll({
     where: {
       emailU: {
         [Op.eq]: `${emailU}`,
@@ -142,6 +153,17 @@ const resetPass = async (passwordU, emailU) =>{
   })
 }
 
+const getUserBydata = async (data) =>{
+    const getByName = await getUserByName(data)
+    const getByLastName = await getUserByLastName(data)
+    const getByEmail = await getUserByEmail(data)
+    const getByDNI = await getUserByDNI(data)
+
+    const users = [...getByName, ...getByLastName, ...getByEmail, ...getByDNI]
+
+    return [...new Set(users)]
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -154,5 +176,6 @@ module.exports = {
   resetPass,
   banUser,
   unbanUser,
+  getUserBydata,
 }
 
