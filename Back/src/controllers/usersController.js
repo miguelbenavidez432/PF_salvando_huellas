@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 const { Users } = require("../db");
+const sequelize = require('sequelize')
 
 async function getAllUsers() {
   const allUsers = await Users.findAll();
@@ -19,7 +20,19 @@ async function getUserByName(nameU) {
       },
     },
   });
+  console.log(1)
   return userByName;
+}
+
+async function getUserByDNI(idNumbU){
+  const userByDNI = await Users.findAll({
+    where: sequelize.where( 
+      sequelize.cast(sequelize.col('idNumbU'), 'varchar'),
+      { [Op.iLike]: `%${idNumbU}%`      
+    })
+  })
+  console.log(2)
+  return userByDNI;
 }
 
 async function getUserByLastName(lastNameU) {
@@ -30,17 +43,19 @@ async function getUserByLastName(lastNameU) {
       },
     },
   });
+  console.log(3)
   return userByLastName;
 }
 
 async function getUserByEmail(emailU) {
-  const userByEmail = await Users.findOne({
+  const userByEmail = await Users.findAll({
     where: {
       emailU: {
-        [Op.eq]: `${emailU}`,
+        [Op.like]: `%${emailU}%`,
       },
     },
   });
+  console.log(4)
   return userByEmail;
 }
 
@@ -142,6 +157,17 @@ const resetPass = async (passwordU, emailU) =>{
   })
 }
 
+const getUserBydata = async (data) =>{
+    const getByName = await getUserByName(data)
+    const getByLastName = await getUserByLastName(data)
+    const getByEmail = await getUserByEmail(data)
+    const getByDNI = await getUserByDNI(data)
+
+    const users = [...getByName, ...getByLastName, ...getByEmail, ...getByDNI]
+
+    return [...new Set(users)]
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -154,5 +180,6 @@ module.exports = {
   resetPass,
   banUser,
   unbanUser,
+  getUserBydata,
 }
 
