@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 const { Users } = require("../db");
+const sequelize = require('sequelize')
 
 async function getAllUsers() {
   const allUsers = await Users.findAll();
@@ -19,17 +20,18 @@ async function getUserByName(nameU) {
       },
     },
   });
+  console.log(1)
   return userByName;
 }
 
 async function getUserByDNI(idNumbU){
   const userByDNI = await Users.findAll({
-    where: {
-      idNumbU: {
-        [Op.like]: `%${Number(idNumbU)}%`
-      }
-    }
+    where: sequelize.where( 
+      sequelize.cast(sequelize.col('idNumbU'), 'varchar'),
+      { [Op.iLike]: `%${idNumbU}%`      
+    })
   })
+  console.log(2)
   return userByDNI;
 }
 
@@ -41,6 +43,7 @@ async function getUserByLastName(lastNameU) {
       },
     },
   });
+  console.log(3)
   return userByLastName;
 }
 
@@ -48,10 +51,11 @@ async function getUserByEmail(emailU) {
   const userByEmail = await Users.findAll({
     where: {
       emailU: {
-        [Op.eq]: `${emailU}`,
+        [Op.like]: `%${emailU}%`,
       },
     },
   });
+  console.log(4)
   return userByEmail;
 }
 
