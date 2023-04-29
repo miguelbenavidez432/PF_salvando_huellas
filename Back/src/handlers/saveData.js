@@ -68,7 +68,7 @@ const saveDogs = async () => {
       nameD: "Rocky",
       sexD: "male",
       ageD: "adult",
-      sizeD: "puppy",
+      sizeD: "small",
       historyD: "Puppy 2",
       photoD:
         "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2Fperro7.png?alt=media&token=93945383-a427-47de-898a-6c8c4a05f9ed",
