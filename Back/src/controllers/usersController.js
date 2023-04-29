@@ -78,7 +78,9 @@ const updateUser = async (
   phoneU,
   addressU,
   reasonU,
-  isAdminU
+  idNumbU,
+  emailU,
+  isAdminU = false
 ) => {
   await Users.update(
     {
@@ -88,6 +90,8 @@ const updateUser = async (
       phoneU: phoneU,
       addressU: addressU,
       reasonU: reasonU,
+      idNumbU: idNumbU,
+      emailU: emailU,
       isAdminU: isAdminU,
     },
     {

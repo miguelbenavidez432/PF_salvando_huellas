@@ -152,7 +152,7 @@ const createUserHandler = async (req, res) => {
 };
 
 const updateUserHandler = async (req, res) => {
-  const { nameU, lastNameU, passwordU, phoneU, addressU, reasonU, isAdminU } =
+  const { nameU, lastNameU, passwordU, phoneU, addressU, reasonU, idNumbU, emailU, isAdminU } =
     req.body;
   const { id } = req.params;
 
@@ -167,6 +167,8 @@ const updateUserHandler = async (req, res) => {
         phoneU,
         addressU,
         reasonU,
+        idNumbU,
+        emailU,
         isAdminU
       );
       res
