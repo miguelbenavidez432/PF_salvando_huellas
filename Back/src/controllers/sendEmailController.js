@@ -53,7 +53,7 @@ const sendEmailUpdate = async (token, emailU, ) =>{
         subject: `Solicitud de cambio de contraseña de ${emailU}`,
         text: `
         <h3>Click en el link para reestablecer su contraseña</h3>
-        <p>http://localhost:5173/users/resetpass/${token}</p>
+        <p>http://localhost:5173/resetpass?token=${token}</p>
         `
 
     }

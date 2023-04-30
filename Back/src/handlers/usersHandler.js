@@ -140,7 +140,7 @@ const createUserHandler = async (req, res) => {
         console.log("user", JSON.stringify(newUser, null, 2));
         console.log(token);
         //send users details
-        sendEmail(emailU);
+        sendEmail(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU);
         return res.status(201).send(newUser);
       } else {
         return res.status(409).send("Details are not correct");
