@@ -111,14 +111,6 @@ async function getAllArticlesPriceDesc() {
   return allArticlesPriceDesc
 }
 
-const getArticleOpinion = async (articleId) => {
-  const getAllProducts = await Articles.findAll({
-    include: [{
-      model: Opinions,
-      as: "opinion"
-    }], where : {id: articleId}
- })}
-
 module.exports = {
   getAllArticles,
   getArticleById,

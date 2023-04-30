@@ -10,6 +10,8 @@ const {
     resetPass,
     banUser,
     unbanUser,
+    getUserBydata,
+    getEmailLogin,
   } = require('../controllers/usersController')
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
@@ -20,36 +22,43 @@ const {
  } = require('../controllers/sendEmailController')
 
 const getAllUsersHandler = async (req, res) => {
-    const { nameU, lastNameU, emailU  } = req.query
+    const { data } = req.query
 
     try {
-        if(nameU){
-            const userName = await getUserByName(nameU.toLowerCase())
-            if(userName){
-                res.status(200).json(userName)
-            }else{
-                return res.status(500).json({message: `User ${nameU} not found`})
+          if(data){
+            const result = await getUserBydata(data)
+            res.status(200).json(result)
+          }else{
+                const allUsers = await getAllUsers()
+                res.status(200).json(allUsers)
             }
-    }
-    else if(lastNameU){
-        const userLastName = await getUserByLastName(lastNameU.toLowerCase())
-        if(userLastName){
-            res.status(200).json(userLastName)
-        }else{
-            return res.status(500).json({message: `User ${lastNameU} not found`})
-        }
-    }
-    else if(emailU){
-      const userEmail = await getUserByEmail(emailU)
-      if(userEmail){
-        res.status(200).json(userEmail)
-      }else{
-        return res.status(500).json({message: `User email ${emailU} not found`})
-      }
-    }else{
-              const allUsers = await getAllUsers()
-              res.status(200).json(allUsers)
-    }
+    //     if(nameU){
+    //         const userName = await getUserByName(nameU.toLowerCase())
+    //         if(userName){
+    //             res.status(200).json(userName)
+    //         }else{
+    //             return res.status(500).json({message: `User ${nameU} not found`})
+    //         }
+    // }
+    // else if(lastNameU){
+    //     const userLastName = await getUserByLastName(lastNameU.toLowerCase())
+    //     if(userLastName){
+    //         res.status(200).json(userLastName)
+    //     }else{
+    //         return res.status(500).json({message: `User ${lastNameU} not found`})
+    //     }
+    // }
+    // else if(emailU){
+    //   const userEmail = await getUserByEmail(emailU)
+    //   if(userEmail){
+    //     res.status(200).json(userEmail)
+    //   }else{
+    //     return res.status(500).json({message: `User email ${emailU} not found`})
+    //   }
+    // }else{
+    //           const allUsers = await getAllUsers()
+    //           res.status(200).json(allUsers)
+    // }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -143,7 +152,7 @@ const createUserHandler = async (req, res) => {
 };
 
 const updateUserHandler = async (req, res) => {
-  const { nameU, lastNameU, passwordU, phoneU, addressU, reasonU, isAdminU } =
+  const { nameU, lastNameU, passwordU, phoneU, addressU, reasonU, idNumbU, emailU, isAdminU } =
     req.body;
   const { id } = req.params;
 
@@ -158,6 +167,8 @@ const updateUserHandler = async (req, res) => {
         phoneU,
         addressU,
         reasonU,
+        idNumbU,
+        emailU,
         isAdminU
       );
       res
@@ -178,7 +189,7 @@ const loginUserHandler = async (req, res) => {
     const { emailU, passwordU } = req.body;
 
     //find a user by their email
-    const user = await getUserByEmail(emailU);
+    const user = await getEmailLogin(emailU);
 
     //if user email is found, compare password with bcrypt
     if (user) {
@@ -214,9 +225,9 @@ const loginUserHandler = async (req, res) => {
 
 const forgotPassHandler = async (req, res) =>{
   try {
-      const { id } = req.params
+
       const { emailU } = req.body
-      const user = await getUserById(id)
+      const user = await getUserByEmail(emailU)
       if(user){
         let token = jwt.sign({ id: user.id_User }, process.env.passKey, {
           expiresIn: 1 * 24 * 60 * 60 * 1000,

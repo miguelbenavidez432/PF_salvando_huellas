@@ -4,7 +4,7 @@ const { DataTypes } = require('sequelize')
 // Exports: a function that defines the model with the connection to sequelize
 module.exports = (sequelize) => {
   // Defines: the model (model name, attributes )
-  sequelize.define('adoption', {
+  sequelize.define('adoptions', {
 
     id_Adoption: {
       type: DataTypes.INTEGER,
@@ -14,7 +14,8 @@ module.exports = (sequelize) => {
     },
 
     statusA: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
       allowNull: false,
     },
 
@@ -22,6 +23,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+
+    activeA: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
   },
 
     // Invalidates: Date and time fields

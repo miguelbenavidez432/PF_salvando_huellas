@@ -14,13 +14,13 @@ const getAllOpinionsHandler = async (req, res) => {
 
 const createOpinionHandler = async (req, res) => {
   try {
-    const { commentO, qualificationO } = req.body
+    const { commentO, qualificationO, userId } = req.body
     const { id } = req.params
 
     if ( !commentO || !qualificationO) {
       return res.status(404).send("You must complete all fields")
     } else {
-      await createOpinion( commentO, qualificationO, id)
+      await createOpinion( commentO, qualificationO, id, userId)
       res.status(200).send("Thanks for your opinion!")
     }
   } catch (error) {

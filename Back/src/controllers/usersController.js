@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 const { Users } = require("../db");
+const sequelize = require('sequelize')
 
 async function getAllUsers() {
   const allUsers = await Users.findAll();
@@ -15,25 +16,49 @@ async function getUserByName(nameU) {
   const userByName = await Users.findAll({
     where: {
       nameU: {
-        [Op.like]: `%${nameU}%`,
+        [Op.iLike]: `%${nameU}%`,
       },
     },
   });
+  console.log(1)
   return userByName;
+}
+
+async function getUserByDNI(idNumbU){
+  const userByDNI = await Users.findAll({
+    where: sequelize.where( 
+      sequelize.cast(sequelize.col('idNumbU'), 'varchar'),
+      { [Op.iLike]: `%${idNumbU}%`      
+    })
+  })
+  console.log(2)
+  return userByDNI;
 }
 
 async function getUserByLastName(lastNameU) {
   const userByLastName = await Users.findAll({
     where: {
       lastNameU: {
-        [Op.like]: `%${lastNameU}%`,
+        [Op.iLike]: `%${lastNameU}%`,
       },
     },
   });
+  console.log(3)
   return userByLastName;
 }
 
 async function getUserByEmail(emailU) {
+  const userByEmail = await Users.findAll({
+    where: {
+      emailU: {
+        [Op.iLike]: `%${emailU}%`,
+      },
+    },
+  });
+  console.log(4)
+  return userByEmail;
+}
+async function getEmailLogin(emailU) {
   const userByEmail = await Users.findOne({
     where: {
       emailU: {
@@ -41,6 +66,7 @@ async function getUserByEmail(emailU) {
       },
     },
   });
+  console.log(4)
   return userByEmail;
 }
 
@@ -52,7 +78,9 @@ const updateUser = async (
   phoneU,
   addressU,
   reasonU,
-  isAdminU
+  idNumbU,
+  emailU,
+  isAdminU = false
 ) => {
   await Users.update(
     {
@@ -62,6 +90,8 @@ const updateUser = async (
       phoneU: phoneU,
       addressU: addressU,
       reasonU: reasonU,
+      idNumbU: idNumbU,
+      emailU: emailU,
       isAdminU: isAdminU,
     },
     {
@@ -142,6 +172,17 @@ const resetPass = async (passwordU, emailU) =>{
   })
 }
 
+const getUserBydata = async (data) =>{
+    const getByName = await getUserByName(data)
+    const getByLastName = await getUserByLastName(data)
+    const getByEmail = await getUserByEmail(data)
+    const getByDNI = await getUserByDNI(data)
+
+    const users = [...getByName, ...getByLastName, ...getByEmail, ...getByDNI]
+
+    return [...new Set(users)]
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -154,5 +195,7 @@ module.exports = {
   resetPass,
   banUser,
   unbanUser,
+  getUserBydata,
+  getEmailLogin,
 }
 
