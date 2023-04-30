@@ -225,9 +225,9 @@ const loginUserHandler = async (req, res) => {
 
 const forgotPassHandler = async (req, res) =>{
   try {
-      const { id } = req.params
+
       const { emailU } = req.body
-      const user = await getUserById(id)
+      const user = await getUserByEmail(emailU)
       if(user){
         let token = jwt.sign({ id: user.id_User }, process.env.passKey, {
           expiresIn: 1 * 24 * 60 * 60 * 1000,
