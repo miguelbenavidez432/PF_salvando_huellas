@@ -2,13 +2,14 @@ const { Opinions } = require("../db")
 
 const {  getArticleById } = require('../controllers/articlesController')
 
-async function createOpinion( commentO, qualificationO, id) {
+async function createOpinion( commentO, qualificationO, id, userId) {
   const idExists = await getArticleById(id)
   console.log(idExists)
   const newOpinion = await Opinions.create({
     commentO: commentO,
     qualificationO: qualificationO,
-    articleId: id
+    articleId: id,
+    userId: userId
   })
   return newOpinion
 }

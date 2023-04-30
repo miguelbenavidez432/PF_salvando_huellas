@@ -152,7 +152,7 @@ const createUserHandler = async (req, res) => {
 };
 
 const updateUserHandler = async (req, res) => {
-  const { nameU, lastNameU, passwordU, phoneU, addressU, reasonU, isAdminU } =
+  const { nameU, lastNameU, passwordU, phoneU, addressU, reasonU, idNumbU, emailU, isAdminU } =
     req.body;
   const { id } = req.params;
 
@@ -167,6 +167,8 @@ const updateUserHandler = async (req, res) => {
         phoneU,
         addressU,
         reasonU,
+        idNumbU,
+        emailU,
         isAdminU
       );
       res
@@ -223,9 +225,9 @@ const loginUserHandler = async (req, res) => {
 
 const forgotPassHandler = async (req, res) =>{
   try {
-      const { id } = req.params
+
       const { emailU } = req.body
-      const user = await getUserById(id)
+      const user = await getUserByEmail(emailU)
       if(user){
         let token = jwt.sign({ id: user.id_User }, process.env.passKey, {
           expiresIn: 1 * 24 * 60 * 60 * 1000,
