@@ -9,8 +9,8 @@ const {
     loginUserHandler,
     forgotPassHandler,
     banUserHandler,
-   unbanUserHandler,
-
+    unbanUserHandler,
+    resetPassHandler,
 } = require('../handlers/usersHandler')
 
 const userAuth = require("../Middleware/userAuth");
@@ -26,5 +26,6 @@ usersRoute.post("/login", loginUserHandler);
 usersRoute.put("/ban/:id", banUserHandler);
 usersRoute.put("/unban/:id", unbanUserHandler);
 usersRoute.put('/forgotpass/:id', forgotPassHandler)
+usersRoute.put(':id/resetpass', resetPassHandler)
 
 module.exports = usersRoute
