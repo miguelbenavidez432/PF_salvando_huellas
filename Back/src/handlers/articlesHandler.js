@@ -8,6 +8,7 @@ const {
   getAllArticlesPriceAsc,
   getAllArticlesDesc,
   getAllArticlesPriceDesc,
+  getAllArticlesAsc,
 } = require('../controllers/articlesController')
 
 // Function: obtains an article by name according to parameter, if there is no parameter it obtains all the articles
@@ -122,6 +123,26 @@ const getAllArticlesDescHandler = async (req, res) => {
     res.status(200).json(await getAllArticlesDesc())
   }
 }
+// Function: get all active articles in order by name asc
+const getAllArticlesAscHandler = async (req, res) => {
+  const { nameA } = req.query
+  if (nameA) {
+    try {
+      const article = await getArticleByName(nameA.toLowerCase());
+      if (article) {
+        res.status(200).json(article)
+      } else {
+        return res.status(400).json({
+          message: `Artículo "${nameA}" no encontrado`
+        })
+      }
+    } catch (error) {
+      res.status(400).json(error.message)
+    }
+  } else {
+    res.status(200).json(await getAllArticlesAsc())
+  }
+}
 
 // Function: get all active articles in order by price asc
 const getAllArticlesPriceAscHandler = async (req, res) => {
@@ -174,4 +195,5 @@ module.exports = {
   getAllArticlesDescHandler,
   getAllArticlesPriceAscHandler,
   getAllArticlesPriceDescHandler,
+  getAllArticlesAscHandler,
 }

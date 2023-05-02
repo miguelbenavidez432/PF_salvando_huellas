@@ -16,7 +16,7 @@ async function getUserByName(nameU) {
   const userByName = await Users.findAll({
     where: {
       nameU: {
-        [Op.like]: `%${nameU}%`,
+        [Op.iLike]: `%${nameU}%`,
       },
     },
   });
@@ -39,7 +39,7 @@ async function getUserByLastName(lastNameU) {
   const userByLastName = await Users.findAll({
     where: {
       lastNameU: {
-        [Op.like]: `%${lastNameU}%`,
+        [Op.iLike]: `%${lastNameU}%`,
       },
     },
   });
@@ -51,7 +51,18 @@ async function getUserByEmail(emailU) {
   const userByEmail = await Users.findAll({
     where: {
       emailU: {
-        [Op.like]: `%${emailU}%`,
+        [Op.iLike]: `%${emailU}%`,
+      },
+    },
+  });
+  console.log(4)
+  return userByEmail;
+}
+async function getEmailLogin(emailU) {
+  const userByEmail = await Users.findOne({
+    where: {
+      emailU: {
+        [Op.eq]: `${emailU}`,
       },
     },
   });
@@ -67,7 +78,9 @@ const updateUser = async (
   phoneU,
   addressU,
   reasonU,
-  isAdminU
+  idNumbU,
+  emailU,
+  isAdminU = false
 ) => {
   await Users.update(
     {
@@ -77,6 +90,8 @@ const updateUser = async (
       phoneU: phoneU,
       addressU: addressU,
       reasonU: reasonU,
+      idNumbU: idNumbU,
+      emailU: emailU,
       isAdminU: isAdminU,
     },
     {
@@ -181,5 +196,6 @@ module.exports = {
   banUser,
   unbanUser,
   getUserBydata,
+  getEmailLogin,
 }
 

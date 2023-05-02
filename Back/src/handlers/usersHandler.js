@@ -11,6 +11,7 @@ const {
     banUser,
     unbanUser,
     getUserBydata,
+    getEmailLogin,
   } = require('../controllers/usersController')
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
@@ -139,7 +140,7 @@ const createUserHandler = async (req, res) => {
         console.log("user", JSON.stringify(newUser, null, 2));
         console.log(token);
         //send users details
-        sendEmail(emailU);
+        sendEmail(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU);
         return res.status(201).send(newUser);
       } else {
         return res.status(409).send("Details are not correct");
@@ -151,7 +152,7 @@ const createUserHandler = async (req, res) => {
 };
 
 const updateUserHandler = async (req, res) => {
-  const { nameU, lastNameU, passwordU, phoneU, addressU, reasonU, isAdminU } =
+  const { nameU, lastNameU, passwordU, phoneU, addressU, reasonU, idNumbU, emailU, isAdminU } =
     req.body;
   const { id } = req.params;
 
@@ -166,6 +167,8 @@ const updateUserHandler = async (req, res) => {
         phoneU,
         addressU,
         reasonU,
+        idNumbU,
+        emailU,
         isAdminU
       );
       res
@@ -186,7 +189,7 @@ const loginUserHandler = async (req, res) => {
     const { emailU, passwordU } = req.body;
 
     //find a user by their email
-    const user = await getUserByEmail(emailU);
+    const user = await getEmailLogin(emailU);
 
     //if user email is found, compare password with bcrypt
     if (user) {
@@ -222,9 +225,9 @@ const loginUserHandler = async (req, res) => {
 
 const forgotPassHandler = async (req, res) =>{
   try {
-      const { id } = req.params
+
       const { emailU } = req.body
-      const user = await getUserById(id)
+      const user = await getUserByEmail(emailU)
       if(user){
         let token = jwt.sign({ id: user.id_User }, process.env.passKey, {
           expiresIn: 1 * 24 * 60 * 60 * 1000,

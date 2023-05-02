@@ -9,11 +9,13 @@ const {
   getAllArticlesPriceAscHandler,
   getAllArticlesPriceDescHandler,
   deleteArticleHandler,
+  getAllArticlesAscHandler,
 } = require('../handlers/articlesHandler')
 
 // Routes
 articlesRoute.get('/', getAllArticlesHandler)
 articlesRoute.get('/desc', getAllArticlesDescHandler)
+articlesRoute.get('/asc', getAllArticlesAscHandler)
 articlesRoute.get('/priceasc', getAllArticlesPriceAscHandler)
 articlesRoute.get('/pricedesc', getAllArticlesPriceDescHandler)
 articlesRoute.get('/:id', getArticleByIdHandler)

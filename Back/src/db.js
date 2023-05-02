@@ -100,6 +100,9 @@ Adoptions.belongsTo(Users, { foreignKey: "userId", as: "user" });
 Dogs.hasMany(Adoptions, { foreignKey: "dogId", as: "adoption" });
 Adoptions.belongsTo(Dogs, { foreignKey: "dogId", as: "dog" });
 
+Carts.belongsTo(Users, { foreignKey: "userId", as: "user" });
+Users.hasMany(Carts, { foreignKey: "userId", as: "cart" });
+
 module.exports = {
   // Export: the property where all models are to be saved
   ...sequelize.models,

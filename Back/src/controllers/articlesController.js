@@ -84,6 +84,18 @@ async function getAllArticlesDesc() {
   })
   return allArticlesDesc
 }
+// Function: get all active articles in order by name asc
+async function getAllArticlesAsc() {
+  const allArticlesAsc = await Articles.findAll({
+    where: {
+      activeA: true
+    },
+    order: [
+      ['nameA', 'ASC'],
+    ],
+  })
+  return allArticlesAsc
+}
 
 // Function: get all active articles in order by price asc
 async function getAllArticlesPriceAsc() {
@@ -119,6 +131,7 @@ module.exports = {
   deleteArticle,
   updateArticle,
   getAllArticlesDesc,
+  getAllArticlesAsc,
   getAllArticlesPriceAsc,
   getAllArticlesPriceDesc,
 }
