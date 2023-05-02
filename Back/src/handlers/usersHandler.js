@@ -141,6 +141,7 @@ const createUserHandler = async (req, res) => {
         console.log(token);
         //send users details
         sendEmail(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU);
+
         return res.status(201).send(newUser);
       } else {
         return res.status(409).send("Details are not correct");
@@ -152,7 +153,7 @@ const createUserHandler = async (req, res) => {
 };
 
 const updateUserHandler = async (req, res) => {
-  const { nameU, lastNameU, passwordU, phoneU, addressU, reasonU, idNumbU, emailU, isAdminU } =
+  const { nameU, lastNameU, phoneU, addressU, reasonU, idNumbU, emailU, isAdminU } =
     req.body;
   const { id } = req.params;
 
@@ -163,7 +164,6 @@ const updateUserHandler = async (req, res) => {
         id,
         nameU,
         lastNameU,
-        passwordU,
         phoneU,
         addressU,
         reasonU,
@@ -281,6 +281,25 @@ async function unbanUserHandler(req, res) {
   }
 }
 
+const resetPassHandler = async (req, res) =>{
+    const { token } = req.query
+    const { emailU, passwordU } = req.body
+    hashPassword = await bcrypt.hash(passwordU, 10)
+
+    try {
+      await resetPass(hashPassword, emailU, token)
+      res.status(200).send(`Your password has been changed`)
+    } catch (error) {
+      res
+      .status(400)
+      .json({
+        message:
+          "An error occurred while change the user's password: " + error.message,
+      });
+    }
+    
+}
+
 
 module.exports = {
   getAllUsersHandler,
@@ -292,4 +311,5 @@ module.exports = {
   banUserHandler,
   unbanUserHandler,
   forgotPassHandler,
+  resetPassHandler,
 }
