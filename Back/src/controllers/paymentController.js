@@ -63,10 +63,15 @@ async function createPaymentArticles(req, res) {
 }
 
 async function getCartByUser(req, res) {
-  const { userId } = req.params;
-
+  const userId = req.params.userId; // Usamos "userId" en lugar de "userId" para evitar confusión
+  if (!userId) {
+    res.status(400).json({ message: "userId parameter is missing or invalid" });
+    return;
+  }
   try {
-    const carts = await Carts.findAll({ userId });
+    const carts = await Carts.findAll({
+      where: { userId },
+    });
     res.status(200).json({ carts });
   } catch (error) {
     console.error(error);

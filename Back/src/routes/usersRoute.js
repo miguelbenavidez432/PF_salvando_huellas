@@ -26,6 +26,6 @@ usersRoute.put("/ban/:id", banUserHandler);
 usersRoute.put("/unban/:id", unbanUserHandler);
 usersRoute.put("/forgotpass/:id", forgotPassHandler);
 usersRoute.put(":id/resetpass", resetPassHandler);
-usersRoute.get("/:id/cart", getCartByUser);
+usersRoute.get("/:userId/cart", getCartByUser);
 
 module.exports = usersRoute;
