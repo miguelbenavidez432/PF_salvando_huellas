@@ -5,15 +5,15 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // Defines: the model (model name, attributes )
   sequelize.define(
-    "donations",
+    "purchases",
     {
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      unit_price: {
-        type: DataTypes.FLOAT,
+      articles: {
+        type: DataTypes.JSON,
         allowNull: false,
       },
       created_at: {
@@ -21,13 +21,12 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.NOW,
       },
 
-      status: {
-        type: DataTypes.ENUM("pending", "completed", "cancelled"),
+      payment_status: {
+        type: DataTypes.ENUM("pending", "approved", "rejected"),
         defaultValue: "pending",
-        allowNull: false,
       },
 
-      userId: {
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
@@ -36,6 +35,8 @@ module.exports = (sequelize) => {
         },
       },
     },
+
+    // Invalidates: Date and time fields
     { timestamps: false }
   );
 };
