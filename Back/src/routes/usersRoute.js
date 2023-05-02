@@ -26,6 +26,6 @@ usersRoute.post("/login", loginUserHandler);
 usersRoute.put("/ban/:id", banUserHandler);
 usersRoute.put("/unban/:id", unbanUserHandler);
 usersRoute.put('/forgotpass/:id', forgotPassHandler)
-usersRoute.put(':id/resetpass', resetPassHandler)
+usersRoute.put('/resetpass/:id', resetPassHandler)
 
 module.exports = usersRoute

@@ -283,11 +283,11 @@ async function unbanUserHandler(req, res) {
 
 const resetPassHandler = async (req, res) =>{
     const { token } = req.query
-    const { emailU, passwordU } = req.body
+    const { passwordU } = req.body
     hashPassword = await bcrypt.hash(passwordU, 10)
 
     try {
-      await resetPass(hashPassword, emailU, token)
+      await resetPass(hashPassword, token)
       res.status(200).send(`Your password has been changed`)
     } catch (error) {
       res
