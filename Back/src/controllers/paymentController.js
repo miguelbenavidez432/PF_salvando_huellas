@@ -2,7 +2,7 @@ const {
   createPreferenceArticles,
   createPreferenceDonation,
 } = require("../handlers/paymentHandler");
-const { Donations, Purchases } = require("../db");
+const { Donations, Carts } = require("../db");
 
 async function createPaymentDonations(req, res) {
   const { unit_price } = req.body;
@@ -34,30 +34,14 @@ async function createPaymentDonations(req, res) {
   res.status(200).json({ preferenceId });
 }
 
-async function getCartByUser(userId) {
-  try {
-    const purchases = await Purchases.find({ user_id: userId }).exec();
-    const carts = purchases.map((purchase) => {
-      return {
-        id: purchase._id,
-        date: purchase.date,
-        payment_status: purchase.payment_status,
-        articles: purchase.articles,
-        payment_preference_id: purchase.payment_preference_id,
-      };
-    });
-    return carts;
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-}
-
 async function createPaymentArticles(req, res) {
-  const { articles } = req.body;
+  const { articles, userId } = req.body;
+  console.log(userId);
+
   if (articles && articles.length > 0) {
     const articlesToSend = {
       items: articles,
+      userId,
 
       back_urls: {
         success: "http://127.0.0.1:5173/carrito?status=success",
@@ -67,14 +51,26 @@ async function createPaymentArticles(req, res) {
     };
     const preferenceId = await createPreferenceArticles(articlesToSend);
 
-    const purchase = new Purchases({
+    console.log(userId);
+
+    await Carts.create({
       articles,
-      payment_status: "pending",
-      payment_preference_id: preferenceId,
-      date: new Date(),
+      userId,
     });
-    await purchase.save();
+
     res.status(200).json({ preferenceId });
+  }
+}
+
+async function getCartByUser(req, res) {
+  const { userId } = req.params;
+
+  try {
+    const carts = await Carts.findAll({ userId });
+    res.status(200).json({ carts });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error getting user's carts" });
   }
 }
 
