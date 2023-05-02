@@ -65,6 +65,7 @@ const {
   Users,
   Opinions,
   Stock,
+  Carts,
   Dogs,
   Posts,
   References,
@@ -75,6 +76,9 @@ const {
 // Declare: relationship
 Users.hasMany(Donations, { foreignKey: "userId", as: "donation" });
 Donations.belongsTo(Users, { foreignKey: "userId", as: "user" });
+
+Users.hasMany(Purchases, { foreignKey: "userId", as: "purchases" });
+Purchases.belongsTo(Users, { foreignKey: "userId", as: "user" });
 
 Users.hasMany(Dogs, { foreignKey: "userId", as: "dog" });
 Dogs.belongsTo(Users, { foreignKey: "userId", as: "user" });

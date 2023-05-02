@@ -20,9 +20,22 @@ module.exports = (sequelize) => {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
-    },
 
-    // Invalidates: Date and time fields
+      status: {
+        type: DataTypes.ENUM("pending", "completed", "cancelled"),
+        defaultValue: "pending",
+        allowNull: false,
+      },
+
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+          model: "users",
+          key: "id_User",
+        },
+      },
+    },
     { timestamps: false }
   );
 };

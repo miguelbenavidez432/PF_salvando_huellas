@@ -20,6 +20,20 @@ module.exports = (sequelize) => {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
       },
+
+      payment_status: {
+        type: DataTypes.ENUM("pending", "approved", "rejected"),
+        defaultValue: "pending",
+      },
+
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "users",
+          key: "id_User",
+        },
+      },
     },
 
     // Invalidates: Date and time fields
