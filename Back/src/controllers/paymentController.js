@@ -22,9 +22,9 @@ async function createPaymentDonations(req, res) {
       },
     ],
     back_urls: {
-      success: "http://127.0.0.1:5173/donar?status=success",
-      failure: "http://127.0.0.1:5173/donar?status=failure",
-      pending: "http://127.0.0.1:5173/donar?status=pending",
+      success: "http://localhost:5173/donar?status=success",
+      failure: "http://localhost:5173/donar?status=failure",
+      pending: "http://localhost:5173/donar?status=pending",
     },
     external_reference: donation.id,
   };
@@ -44,9 +44,9 @@ async function createPaymentArticles(req, res) {
       userId,
 
       back_urls: {
-        success: "http://127.0.0.1:5173/carrito?status=success",
-        failure: "http://127.0.0.1:5173/carrito?status=failure",
-        pending: "http://127.0.0.1:5173/carrito?status=pending",
+        success: "http://localhost:5173/carrito?status=success",
+        failure: "http://localhost:5173/carrito?status=failure",
+        pending: "http://localhost:5173/carrito?status=pending",
       },
     };
     const preferenceId = await createPreferenceArticles(articlesToSend);
