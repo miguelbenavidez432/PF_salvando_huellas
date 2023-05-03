@@ -6,6 +6,10 @@ const {
   deleteAdoption
 } = require('../controllers/adoptionsController')
 
+const { getUserById } = require('../controllers/usersController')
+
+const { sendEmailAdoption } = require('../controllers/sendEmailController')
+
 // Create an Adoption
 const createAdoptionHandler = async (req, res) => {
   const { adopted_homeA, id_Dog, id_User } = req.body
@@ -13,7 +17,10 @@ const createAdoptionHandler = async (req, res) => {
     if (!adopted_homeA || !id_Dog || !id_User) {
       return res.status(400).send(`You must complete all fields 😅`)
     } else {
-      const newadop= await createAdoption( adopted_homeA,id_Dog, id_User)   
+      const newadop= await createAdoption( adopted_homeA,id_Dog, id_User)  
+      const user = await getUserById(id_User)
+      console.log(user.emailU)
+      await sendEmailAdoption(user.emailU, adopted_homeA) 
       res.status(200).send(`Adoption ${newadop.id_Adoption} created successfully`)
     }   
   } catch (error) {

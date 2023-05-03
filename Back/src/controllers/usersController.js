@@ -20,7 +20,6 @@ async function getUserByName(nameU) {
       },
     },
   });
-  console.log(1)
   return userByName;
 }
 
@@ -31,7 +30,6 @@ async function getUserByDNI(idNumbU){
       { [Op.iLike]: `%${idNumbU}%`      
     })
   })
-  console.log(2)
   return userByDNI;
 }
 
@@ -43,7 +41,6 @@ async function getUserByLastName(lastNameU) {
       },
     },
   });
-  console.log(3)
   return userByLastName;
 }
 
@@ -55,9 +52,9 @@ async function getUserByEmail(emailU) {
       },
     },
   });
-  console.log(4)
   return userByEmail;
 }
+
 async function getEmailLogin(emailU) {
   const userByEmail = await Users.findOne({
     where: {
@@ -66,7 +63,6 @@ async function getEmailLogin(emailU) {
       },
     },
   });
-  console.log(4)
   return userByEmail;
 }
 
@@ -74,7 +70,6 @@ const updateUser = async (
   id,
   nameU,
   lastNameU,
-  passwordU,
   phoneU,
   addressU,
   reasonU,
@@ -86,7 +81,6 @@ const updateUser = async (
     {
       nameU: nameU,
       lastNameU: lastNameU,
-      passwordU: passwordU,
       phoneU: phoneU,
       addressU: addressU,
       reasonU: reasonU,
@@ -160,14 +154,14 @@ const forgotPass = async (token,emailU) =>{
   })
 }
 
-const resetPass = async (passwordU, emailU) =>{
+const resetPass = async (passwordU, token) =>{
   await Users.update({
     passwordU: passwordU
   }, {
     where: {
-      emailU: {
-        [Op.eq]: emailU,
-      }
+      resetLink: {
+        [Op.eq]: token,
+      },
     }
   })
 }
