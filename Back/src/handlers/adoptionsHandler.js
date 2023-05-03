@@ -49,11 +49,12 @@ const getAllAdoptionHandler = async (req, res) => {
 // Update statusA for Admin
 const statusAdoptionHandler = async (req, res) => {
   const {id} = req.params
+  const {status} = req.body
   try {
     if(!id){
       return res.status(400).json({message: `Adoption not found`})
     } else {
-      const adoption = statusAdoption(id)
+      const adoption = statusAdoption(id, status)
       res.status(200).json(adoption) 
     }
   } catch (error) {
