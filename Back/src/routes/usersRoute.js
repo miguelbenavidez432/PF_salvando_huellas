@@ -24,8 +24,9 @@ usersRoute.put("/:id", updateUserHandler);
 usersRoute.post("/login", loginUserHandler);
 usersRoute.put("/ban/:id", banUserHandler);
 usersRoute.put("/unban/:id", unbanUserHandler);
-usersRoute.put("/forgotpass/:id", forgotPassHandler);
-usersRoute.put(":id/resetpass", resetPassHandler);
+
+usersRoute.put('/forgotpass/:id', forgotPassHandler)
+usersRoute.put('/resetpass/:id', resetPassHandler)
 usersRoute.get("/:userId/cart", getCartByUser);
 
 module.exports = usersRoute;

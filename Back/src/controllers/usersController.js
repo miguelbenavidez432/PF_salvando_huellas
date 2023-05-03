@@ -154,14 +154,11 @@ const forgotPass = async (token,emailU) =>{
   })
 }
 
-const resetPass = async (passwordU, emailU, token) =>{
+const resetPass = async (passwordU, token) =>{
   await Users.update({
     passwordU: passwordU
   }, {
     where: {
-      emailU: {
-        [Op.eq]: emailU,
-      },
       resetLink: {
         [Op.eq]: token,
       },
