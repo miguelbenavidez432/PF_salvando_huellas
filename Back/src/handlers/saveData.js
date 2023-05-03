@@ -212,7 +212,7 @@ const savePost = async () => {
       category: "Donación",
     },
     {
-      titleP: "Adoptamos a Bianca",
+      titleP: "Adoptamos a Bianca.",
       commentP:
         "Pude adoptar a un perrito y ahora estamos feliz por el nuevo integrante",
       category: "Adopción",
