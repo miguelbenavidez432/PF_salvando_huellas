@@ -5,12 +5,13 @@ const {
 const { Donations, Carts } = require("../db");
 
 async function createPaymentDonations(req, res) {
-  const { unit_price } = req.body;
+  const { unit_price, userId } = req.body;
 
   const donation = await Donations.create({
     unit_price,
     status: "pending",
     created_at: new Date(),
+    userId
   });
 
   let donations = {
