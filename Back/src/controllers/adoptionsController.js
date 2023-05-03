@@ -77,9 +77,9 @@ async function getAllAdoption() {
 }
 
 // Update statusA for Admin
-async function statusAdoption (id) {
+async function statusAdoption (id, status) {
   await Adoptions.update({
-    statusA: true
+    statusA: status
   }, {
     where: {
       id_Adoption: {
