@@ -51,11 +51,11 @@ const sendEmailUpdate = async (token, emailU, ) =>{
         from: 'mob432@gmail.com',
         to: emailU,
         subject: `Solicitud de cambio de contraseña de ${emailU}`,
-        text: `
-        <h3>Click en el link para reestablecer su contraseña</h3>
-
-        <p>http://localhost:5173/resetpass?token=${token}</p>
-        `
+        text: 
+        
+        `Click en el link para reestablecer su contraseña
+        http://localhost:5173/resetpass?token=${token}`
+        
 
     }
 
@@ -91,8 +91,43 @@ const sendEmailAdoption = async (emailU, adopted_homeA, ) =>{
 
 }
 
+const sendEmailCarts = async (emailU, nameU, lastNameU, price, articles) =>{
+
+    const config = {
+        host: 'smtp.gmail.com',
+        port: 587,
+        auth: {
+            user: 'mob432@gmail.com',               //salvanbohuellasjesusmaria@gmail.com
+            pass: process.env.nodemailer,           //salvandohuellasjesusmaria@gmail.com   
+        }
+    }
+
+    const message = {
+        from: 'mob432@gmail.com',
+        to: emailU,
+        subject: `COMPRA REALIZADA CON ÉXITO`,
+        text: `
+        ${nameU} ${lastNameU}, su compra fue realizada exitosamente.
+
+        Productos: 
+        ${articles}
+
+        Precio final: ${price}
+        Esperamos que disfute de nuestros producto. Puede dejar su comentario de los productos comprado.
+        Saludos
+        `
+    }
+
+    const transport = nodemailer.createTransport(config)
+
+    const info = await transport.sendMail(message)
+
+}
+
+
 module.exports = {
     sendEmail,
     sendEmailUpdate,
     sendEmailAdoption,
+    sendEmailCarts,
 }

@@ -23,9 +23,6 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-    },
-
-    // Invalidates: Date and time fields
-    { timestamps: false }
+    }
   );
 };

@@ -3,6 +3,8 @@ const {
   createPreferenceDonation,
 } = require("../handlers/paymentHandler");
 const { Donations, Carts } = require("../db");
+const { sendEmailCarts } = require('../controllers/sendEmailController')
+const { getUserById } = require('../controllers/usersController')
 
 async function createPaymentDonations(req, res) {
   const { unit_price } = req.body;
@@ -36,8 +38,8 @@ async function createPaymentDonations(req, res) {
 
 async function createPaymentArticles(req, res) {
   const { articles, userId } = req.body;
-  console.log(userId);
-
+  const user = await getUserById(userId)
+  
   if (articles && articles.length > 0) {
     const articlesToSend = {
       items: articles,
@@ -50,13 +52,21 @@ async function createPaymentArticles(req, res) {
       },
     };
     const preferenceId = await createPreferenceArticles(articlesToSend);
-
-    console.log(userId);
+    let price = 0
+    const art = articles.map(a => {
+      price += a.quantity * a.unit_price
+      return `
+      Producto: ${a.title} 
+      Precio: ${a.unit_price} 
+      Cantidad: ${a.quantity} 
+      `
+    })
 
     await Carts.create({
       articles,
       userId,
     });
+    await sendEmailCarts(user.emailU, user.nameU, user.lastNameU, price, art)
 
     res.status(200).json({ preferenceId });
   }
