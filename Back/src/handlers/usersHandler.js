@@ -1,42 +1,40 @@
 const {
-  getAllUsers,
-  getUserById,
-  getUserByName,
-  getUserByLastName,
-  createUser,
-  updateUser,
-  getUserByEmail,
-  banUser,
-  unbanUser,
-} = require("../controllers/usersController");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
+    getAllUsers,
+    getUserById,
+    getUserByName,
+    getUserByLastName,
+    createUser,
+    updateUser,
+    getUserByEmail,
+    forgotPass,
+    resetPass,
+    banUser,
+    unbanUser,
+    getUserBydata,
+    getEmailLogin,
+  } = require('../controllers/usersController')
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+require('dotenv').config()
+const { 
+  sendEmail,
+  sendEmailUpdate,
+ } = require('../controllers/sendEmailController')
 
-const { sendEmail } = require("../controllers/sendEmailController");
+
 
 const getAllUsersHandler = async (req, res) => {
-  const { nameU, lastNameU } = req.query;
+    const { data } = req.query
 
-  try {
-    if (nameU) {
-      const userName = await getUserByName(nameU.toLowerCase());
-      if (userName) {
-        res.status(200).json(userName);
-      } else {
-        return res.status(500).json({ message: `User ${nameU} not found` });
-      }
-    } else if (lastNameU) {
-      const userLastName = await getUserByLastName(lastNameU.toLowerCase());
-      if (userLastName) {
-        res.status(200).json(userLastName);
-      } else {
-        return res.status(500).json({ message: `User ${lastNameU} not found` });
-      }
-    } else {
-      const allUsers = await getAllUsers();
-      res.status(200).json(allUsers);
-    }
+    try {
+          if(data){
+            const result = await getUserBydata(data)
+            res.status(200).json(result)
+          }else{
+                const allUsers = await getAllUsers()
+                res.status(200).json(allUsers)
+            }
+    
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -85,6 +83,7 @@ const createUserHandler = async (req, res) => {
     hashPassword = await bcrypt.hash(passwordU, 10)
     
     try {
+
     if (
       !nameU ||
       !lastNameU ||
@@ -117,7 +116,8 @@ const createUserHandler = async (req, res) => {
         console.log("user", JSON.stringify(newUser, null, 2));
         console.log(token);
         //send users details
-        sendEmail(emailU);
+        sendEmail(nameU, lastNameU, passwordU, emailU, phoneU, addressU);
+
         return res.status(201).send(newUser);
       } else {
         return res.status(409).send("Details are not correct");
@@ -129,7 +129,7 @@ const createUserHandler = async (req, res) => {
 };
 
 const updateUserHandler = async (req, res) => {
-  const { nameU, lastNameU, passwordU, phoneU, addressU, reasonU, isAdminU } =
+  const { nameU, lastNameU, phoneU, addressU, reasonU, idNumbU, emailU, isAdminU } =
     req.body;
   const { id } = req.params;
 
@@ -140,10 +140,11 @@ const updateUserHandler = async (req, res) => {
         id,
         nameU,
         lastNameU,
-        passwordU,
         phoneU,
         addressU,
         reasonU,
+        idNumbU,
+        emailU,
         isAdminU
       );
       res
@@ -164,7 +165,7 @@ const loginUserHandler = async (req, res) => {
     const { emailU, passwordU } = req.body;
 
     //find a user by their email
-    const user = await getUserByEmail(emailU);
+    const user = await getEmailLogin(emailU);
 
     //if user email is found, compare password with bcrypt
     if (user) {
@@ -196,6 +197,28 @@ const loginUserHandler = async (req, res) => {
     console.log(error);
   }
 };
+
+
+const forgotPassHandler = async (req, res) =>{
+  try {
+
+      const { emailU } = req.body
+      const user = await getUserByEmail(emailU)
+      if(user){
+        let token = jwt.sign({ id: user.id_User }, process.env.passKey, {
+          expiresIn: 1 * 24 * 60 * 60 * 1000,
+        });
+        await sendEmailUpdate(token, emailU,)
+        await forgotPass(token, emailU)
+        res.status(200).send(`A email was send to ${emailU}. Check your inbox`)
+      }else{
+        res.status(400).send(`User whit email ${emailU} don't exists`)
+      }
+    } catch (error) {
+      res.status(400).send(`User whit email ${emailU} don't exists`)
+    }
+}
+
 
 async function banUserHandler(req, res) {
   const id = req.params.id;
@@ -233,6 +256,27 @@ async function unbanUserHandler(req, res) {
     }
   }
 }
+
+const resetPassHandler = async (req, res) =>{
+    const { token } = req.query
+    const { passwordU } = req.body
+    hashPassword = await bcrypt.hash(passwordU, 10)
+
+    try {
+      await resetPass(hashPassword, token)
+      res.status(200).send(`Your password has been changed`)
+    } catch (error) {
+      res
+      .status(400)
+      .json({
+        message:
+          "An error occurred while change the user's password: " + error.message,
+      });
+    }
+    
+}
+
+
 module.exports = {
   getAllUsersHandler,
   getUserByIdHandler,
@@ -242,4 +286,6 @@ module.exports = {
   loginUserHandler,
   banUserHandler,
   unbanUserHandler,
+  forgotPassHandler,
+  resetPassHandler,
 }

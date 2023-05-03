@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
     titleP:{
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: false,
     },
     commentP: {
       type: DataTypes.TEXT,
@@ -27,7 +27,8 @@ module.exports = (sequelize) => {
     },
     photoP:{
       type: DataTypes.STRING,
-      defaultValue: "https://desarrollowp.com/wp-content/uploads/2018/01/error-404.jpg"
+      allowNull: false,
+      defaultValue: ""
     },
     isActive:{
       type: DataTypes.BOOLEAN,

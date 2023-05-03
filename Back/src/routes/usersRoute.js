@@ -6,9 +6,13 @@ const {
   createUserHandler,
   updateUserHandler,
   loginUserHandler,
+  forgotPassHandler,
   banUserHandler,
   unbanUserHandler,
+  resetPassHandler,
 } = require("../handlers/usersHandler");
+const { getCartByUser } = require("../controllers/paymentController");
+
 const userAuth = require("../Middleware/userAuth");
 const authjwt = require("../Middleware/authjwt");
 
@@ -20,5 +24,9 @@ usersRoute.put("/:id", updateUserHandler);
 usersRoute.post("/login", loginUserHandler);
 usersRoute.put("/ban/:id", banUserHandler);
 usersRoute.put("/unban/:id", unbanUserHandler);
+
+usersRoute.put('/forgotpass/:id', forgotPassHandler)
+usersRoute.put('/resetpass/:id', resetPassHandler)
+usersRoute.get("/:userId/cart", getCartByUser);
 
 module.exports = usersRoute;

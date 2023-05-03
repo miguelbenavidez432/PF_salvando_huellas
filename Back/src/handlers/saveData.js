@@ -1,4 +1,4 @@
-const {createUserHandler} = require('./usersHandler')
+const { createUserHandler } = require("./usersHandler");
 const {
   Donations,
   Articles,
@@ -29,8 +29,8 @@ const saveReferences = async () => {
     { dogIdDog: 2, referenceIdReference: 1 },
     { dogIdDog: 3, referenceIdReference: 1 },
     { dogIdDog: 4, referenceIdReference: 1 },
-    { dogIdDog: 4, referenceIdReference: 2 },
-    { dogIdDog: 4, referenceIdReference: 3 },
+    { dogIdDog: 5, referenceIdReference: 2 },
+    { dogIdDog: 6, referenceIdReference: 3 },
   ]);
 };
 
@@ -38,9 +38,9 @@ const saveDogs = async () => {
   const dogs = [
     {
       nameD: "Luna",
-      sexD: "hembra",
-      ageD: "cachorra",
-      sizeD: "pequeña",
+      sexD: "female",
+      ageD: "puppy",
+      sizeD: "medium",
       historyD:
         "Luna era una perra de raza mixta que había sido abandonada en las calles de la ciudad. Cuando la encontramos notamos que estaba muy asustada y necesitaba atención médica.",
       photoD:
@@ -48,81 +48,81 @@ const saveDogs = async () => {
     },
     {
       nameD: "Max",
-      sexD: "macho",
-      ageD: "adulto",
-      sizeD: "grande",
+      sexD: "male",
+      ageD: "adult",
+      sizeD: "large",
       historyD: "Old Dog",
       photoD:
         "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2Fperro6.png?alt=media&token=149c9e49-25a3-472e-950b-f32e791a292f",
     },
     {
       nameD: "Bella",
-      sexD: "hembra",
-      ageD: "adulta",
-      sizeD: "mediana",
+      sexD: "female",
+      ageD: "adult",
+      sizeD: "medium",
       historyD: "Puppy",
       photoD:
         "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2Fperro4.png?alt=media&token=b50d14b7-a201-4f41-8c10-c6e87618172b",
     },
     {
       nameD: "Rocky",
-      sexD: "macho",
-      ageD: "adulto",
-      sizeD: "pequeño",
+      sexD: "male",
+      ageD: "adult",
+      sizeD: "small",
       historyD: "Puppy 2",
       photoD:
         "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2Fperro7.png?alt=media&token=93945383-a427-47de-898a-6c8c4a05f9ed",
     },
     {
       nameD: "Zeus",
-      sexD: "macho",
-      ageD: "adulto",
-      sizeD: "mediano",
+      sexD: "male",
+      ageD: "adult",
+      sizeD: "medium",
       historyD: "Puppy 2",
       photoD:
         "https://images.pexels.com/photos/895259/pexels-photo-895259.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       nameD: "Lola",
-      sexD: "hembra",
-      ageD: "adulta",
-      sizeD: "pequeña",
+      sexD: "female",
+      ageD: "adult",
+      sizeD: "small",
       historyD: "Puppy 2",
       photoD:
         "https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       nameD: "Daisy",
-      sexD: "hembra",
-      ageD: "adulta",
-      sizeD: "pequeña",
+      sexD: "female",
+      ageD: "adult",
+      sizeD: "small",
       historyD: "Puppy 2",
       photoD:
         "https://images.pexels.com/photos/2023384/pexels-photo-2023384.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
     {
       nameD: "Chiqui",
-      sexD: "hembra",
-      ageD: "adulta",
-      sizeD: "grande",
+      sexD: "female",
+      ageD: "adult",
+      sizeD: "large",
       historyD: "Puppy 2",
       photoD:
         "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2FChiquiPerra.webp?alt=media&token=614061bf-b8a2-4ded-ba8a-a4314e724015",
     },
     {
       nameD: "Thor",
-      sexD: "macho",
-      ageD: "cachorro",
-      sizeD: "pequeño",
+      sexD: "male",
+      ageD: "puppy",
+      sizeD: "small",
       historyD: "Puppy 2",
       photoD:
         "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2FPerro2.jpg?alt=media&token=5bddddc2-7bbe-4c21-be7d-e614e28f88fe",
     },
     {
       nameD: "Coco",
-      sexD: "hembra",
-      ageD: "cachorra",
-      sizeD: "pequeña",
+      sexD: "female",
+      ageD: "puppy",
+      sizeD: "small",
       historyD: "Puppy 2",
       photoD:
         "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2FPerro3.png?alt=media&token=cb9ea207-0901-4e5d-8425-63f3f9db07a1",
@@ -178,52 +178,62 @@ const saveUsers = async () => {
       reasonU: "Reason",
       isAdminU: false,
     },
-    
   ];
 
   await Users.bulkCreate(users);
-  await createUserHandler({ // Creamos usuario admin
-    body: {
-      nameU: "usuario",
-      lastNameU: "administrador",
-      passwordU: "admin",
-      idNumbU: 123456789,
-      emailU: "admin@mail.com",
-      phoneU: "123456789",
-      addressU: "AV principal 1558",
-      reasonU: "Reason",
-      isAdminU: true,
+  await createUserHandler(
+    {
+      // Creamos usuario admin
+      body: {
+        nameU: "usuario",
+        lastNameU: "administrador",
+        passwordU: "admin",
+        idNumbU: 123456789,
+        emailU: "admin@mail.com",
+        phoneU: "123456789",
+        addressU: "AV principal 1558",
+        reasonU: "Reason",
+        isAdminU: true,
+      },
+    },
+    {
+      status: () => {
+        return { json: () => {}, send: () => {} };
+      },
     }
-},{status: ()=>{return {json: ()=>{}, send: ()=>{}}} })
+  );
 };
 
 const savePost = async () => {
   const posts = [
     {
-      titleP: "titulo 1",
-      commentP: "Muy buenos productos!!",
-      category: "store",
+      titleP: "Ayuda a cambiar vidas: Haz una donación hoy.",
+      commentP: "¡Únete a nosotros en nuestra misión de hacer una diferencia en la vida de los animales necesitados! Haz una donación hoy y ayuda a proporcionar recursos y apoyo a aquellos que más lo necesitan. Tu contribución puede cambiar vidas y marcar la diferencia en la comunidad. ¡Haz tu donación hoy mismo y sé parte del cambio!",
+      category: "Donación",
     },
     {
-      titleP: "titulo 2",
+      titleP: "Adoptamos a Bianca.",
       commentP:
         "Pude adoptar a un perrito y ahora estamos feliz por el nuevo integrante",
-      category: "donation",
+      category: "Adopción",
+      photoP: "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2FPerroconfamilia.jpg?alt=media&token=7bce0f61-d61f-4f33-9b37-360c99f584d8"
     },
     {
-      titleP: "titulo 3",
+      titleP: "",
       commentP: "La mejor pagina para encontrar productos de calidad",
-      category: "store",
+      category: "Tienda",
     },
     {
-      titleP: "titulo 4",
-      commentP: "Que lindo poder adoptar a una mascota de manera tan fácil!!",
-      category: "event",
+      titleP: "Chow",
+      commentP:
+        "Hace 5 meses adoptamos a Chow y se adaptó bastante rápido a nuestro hogar y familia, nos trajo felicidad. Estamos muy agradecidos a Salvando Huellas por haberla rescatado y por darnos la oportunidad de brindarle un hogar y mucho amor.",
+      category: "Adopción",
+      photoP: "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/salvandohuellas%2Fperrito12.png?alt=media&token=1697ac29-24b3-49b6-b83c-2e5fbf297b64"
     },
     {
-      titleP: "titulo 5",
+      titleP: "",
       commentP: "A mi perrito le encanta el alimento de esta página!!",
-      category: "donation",
+      category: "Store",
     },
   ];
   await Posts.bulkCreate(posts);

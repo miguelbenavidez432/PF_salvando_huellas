@@ -19,7 +19,6 @@ async function getDogsHandler(req, res) {
 
 async function getDogByIdHandler(req, res) {
   const id = req.params.id;
-
   try {
     const dogId = await getDogById(id);
     if (!dogId) {

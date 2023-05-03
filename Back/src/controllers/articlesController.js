@@ -84,6 +84,18 @@ async function getAllArticlesDesc() {
   })
   return allArticlesDesc
 }
+// Function: get all active articles in order by name asc
+async function getAllArticlesAsc() {
+  const allArticlesAsc = await Articles.findAll({
+    where: {
+      activeA: true
+    },
+    order: [
+      ['nameA', 'ASC'],
+    ],
+  })
+  return allArticlesAsc
+}
 
 // Function: get all active articles in order by price asc
 async function getAllArticlesPriceAsc() {
@@ -111,14 +123,6 @@ async function getAllArticlesPriceDesc() {
   return allArticlesPriceDesc
 }
 
-const getArticleOpinion = async (articleId) => {
-  const getAllProducts = await Articles.findAll({
-    include: [{
-      model: Opinions,
-      as: "opinion"
-    }], where : {id: articleId}
- })}
-
 module.exports = {
   getAllArticles,
   getArticleById,
@@ -127,6 +131,7 @@ module.exports = {
   deleteArticle,
   updateArticle,
   getAllArticlesDesc,
+  getAllArticlesAsc,
   getAllArticlesPriceAsc,
   getAllArticlesPriceDesc,
 }

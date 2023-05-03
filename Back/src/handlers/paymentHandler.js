@@ -17,9 +17,7 @@ async function createPreferenceDonation(donations) {
 
 async function createPreferenceArticles(articles) {
   try {
-    console.log(articles);
     const response = await mercadopago.preferences.create(articles);
-    console.log(response);
     return response.body.id;
   } catch (error) {
     handleError(error);

@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
 const { Users } = require("../db");
+const sequelize = require('sequelize')
 
 async function getAllUsers() {
   const allUsers = await Users.findAll();
@@ -15,18 +16,28 @@ async function getUserByName(nameU) {
   const userByName = await Users.findAll({
     where: {
       nameU: {
-        [Op.like]: `%${nameU}%`,
+        [Op.iLike]: `%${nameU}%`,
       },
     },
   });
   return userByName;
 }
 
+async function getUserByDNI(idNumbU){
+  const userByDNI = await Users.findAll({
+    where: sequelize.where( 
+      sequelize.cast(sequelize.col('idNumbU'), 'varchar'),
+      { [Op.iLike]: `%${idNumbU}%`      
+    })
+  })
+  return userByDNI;
+}
+
 async function getUserByLastName(lastNameU) {
   const userByLastName = await Users.findAll({
     where: {
       lastNameU: {
-        [Op.like]: `%${lastNameU}%`,
+        [Op.iLike]: `%${lastNameU}%`,
       },
     },
   });
@@ -34,10 +45,21 @@ async function getUserByLastName(lastNameU) {
 }
 
 async function getUserByEmail(emailU) {
+  const userByEmail = await Users.findAll({
+    where: {
+      emailU: {
+        [Op.iLike]: `%${emailU}%`,
+      },
+    },
+  });
+  return userByEmail;
+}
+
+async function getEmailLogin(emailU) {
   const userByEmail = await Users.findOne({
     where: {
       emailU: {
-        [Op.like]: `%${emailU}%`,
+        [Op.eq]: `${emailU}`,
       },
     },
   });
@@ -48,20 +70,22 @@ const updateUser = async (
   id,
   nameU,
   lastNameU,
-  passwordU,
   phoneU,
   addressU,
   reasonU,
-  isAdminU
+  idNumbU,
+  emailU,
+  isAdminU = false
 ) => {
   await Users.update(
     {
       nameU: nameU,
       lastNameU: lastNameU,
-      passwordU: passwordU,
       phoneU: phoneU,
       addressU: addressU,
       reasonU: reasonU,
+      idNumbU: idNumbU,
+      emailU: emailU,
       isAdminU: isAdminU,
     },
     {
@@ -118,6 +142,41 @@ async function unbanUser(id) {
   await user.save();
 }
 
+const forgotPass = async (token,emailU) =>{
+  await Users.update({
+    resetLink: token
+  }, {
+    where: {
+      emailU: {
+        [Op.eq]: emailU,
+      }
+    }
+  })
+}
+
+const resetPass = async (passwordU, token) =>{
+  await Users.update({
+    passwordU: passwordU
+  }, {
+    where: {
+      resetLink: {
+        [Op.eq]: token,
+      },
+    }
+  })
+}
+
+const getUserBydata = async (data) =>{
+    const getByName = await getUserByName(data)
+    const getByLastName = await getUserByLastName(data)
+    const getByEmail = await getUserByEmail(data)
+    const getByDNI = await getUserByDNI(data)
+
+    const users = [...getByName, ...getByLastName, ...getByEmail, ...getByDNI]
+
+    return [...new Set(users)]
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -126,6 +185,11 @@ module.exports = {
   createUser,
   updateUser,
   getUserByEmail,
+  forgotPass,
+  resetPass,
   banUser,
   unbanUser,
-};
+  getUserBydata,
+  getEmailLogin,
+}
+
