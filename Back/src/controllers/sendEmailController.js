@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer')
 require('dotenv').config()
 
 
-const sendEmail = async (nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU ) =>{
+const sendEmail = async (nameU, lastNameU, passwordU, emailU, phoneU, addressU ) =>{
 
     const config = {
         host: 'smtp.gmail.com',
@@ -24,7 +24,6 @@ const sendEmail = async (nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, a
         NOMBRE: ${nameU}
         APELLIDO: ${lastNameU}
         PASSWORD: ${passwordU}
-        DNI: ${idNumbU}
         TELEFONO: ${phoneU}
         DIRECCIÓN: ${addressU}
         `

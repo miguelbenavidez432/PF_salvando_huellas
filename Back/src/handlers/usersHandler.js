@@ -22,7 +22,7 @@ const {
  } = require('../controllers/sendEmailController')
 
 
- 
+
 const getAllUsersHandler = async (req, res) => {
     const { data } = req.query
 
@@ -116,7 +116,7 @@ const createUserHandler = async (req, res) => {
         console.log("user", JSON.stringify(newUser, null, 2));
         console.log(token);
         //send users details
-        sendEmail(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU);
+        sendEmail(nameU, lastNameU, passwordU, emailU, phoneU, addressU);
 
         return res.status(201).send(newUser);
       } else {
