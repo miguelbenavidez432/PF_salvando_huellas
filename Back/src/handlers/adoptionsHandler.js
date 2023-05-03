@@ -19,7 +19,6 @@ const createAdoptionHandler = async (req, res) => {
     } else {
       const newadop= await createAdoption( adopted_homeA,id_Dog, id_User)  
       const user = await getUserById(id_User)
-      console.log(user.emailU)
       await sendEmailAdoption(user.emailU, adopted_homeA) 
       res.status(200).send(`Adoption ${newadop.id_Adoption} created successfully`)
     }   

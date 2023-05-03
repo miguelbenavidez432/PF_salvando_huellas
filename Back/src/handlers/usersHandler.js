@@ -21,6 +21,8 @@ const {
   sendEmailUpdate,
  } = require('../controllers/sendEmailController')
 
+
+
 const getAllUsersHandler = async (req, res) => {
     const { data } = req.query
 
@@ -32,33 +34,7 @@ const getAllUsersHandler = async (req, res) => {
                 const allUsers = await getAllUsers()
                 res.status(200).json(allUsers)
             }
-    //     if(nameU){
-    //         const userName = await getUserByName(nameU.toLowerCase())
-    //         if(userName){
-    //             res.status(200).json(userName)
-    //         }else{
-    //             return res.status(500).json({message: `User ${nameU} not found`})
-    //         }
-    // }
-    // else if(lastNameU){
-    //     const userLastName = await getUserByLastName(lastNameU.toLowerCase())
-    //     if(userLastName){
-    //         res.status(200).json(userLastName)
-    //     }else{
-    //         return res.status(500).json({message: `User ${lastNameU} not found`})
-    //     }
-    // }
-    // else if(emailU){
-    //   const userEmail = await getUserByEmail(emailU)
-    //   if(userEmail){
-    //     res.status(200).json(userEmail)
-    //   }else{
-    //     return res.status(500).json({message: `User email ${emailU} not found`})
-    //   }
-    // }else{
-    //           const allUsers = await getAllUsers()
-    //           res.status(200).json(allUsers)
-    // }
+    
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -140,7 +116,7 @@ const createUserHandler = async (req, res) => {
         console.log("user", JSON.stringify(newUser, null, 2));
         console.log(token);
         //send users details
-        sendEmail(nameU, lastNameU, passwordU, idNumbU, emailU, phoneU, addressU);
+        sendEmail(nameU, lastNameU, passwordU, emailU, phoneU, addressU);
 
         return res.status(201).send(newUser);
       } else {
