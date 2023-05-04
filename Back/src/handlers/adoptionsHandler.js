@@ -8,7 +8,7 @@ const {
 
 const { getUserById } = require('../controllers/usersController')
 
-const { sendEmailAdoption } = require('../controllers/sendEmailController')
+const { sendEmailAdoption, sendEmailUpdateStatus } = require('../controllers/sendEmailController')
 
 // Create an Adoption
 const createAdoptionHandler = async (req, res) => {
@@ -55,6 +55,7 @@ const statusAdoptionHandler = async (req, res) => {
       return res.status(400).json({message: `Adoption not found`})
     } else {
       const adoption = statusAdoption(id, status)
+      await sendEmailUpdateStatus(adoption.user, adoption.status  )
       res.status(200).json(adoption) 
     }
   } catch (error) {

@@ -87,6 +87,9 @@ async function statusAdoption (id, status) {
       }
     }
   })
+  const userAdoptionId = await Adoptions.findByPk(id)
+  const user = await Users.findByPk(userAdoptionId.userId)
+  return {user, status}
 }
 
 // Delete an adoption 
