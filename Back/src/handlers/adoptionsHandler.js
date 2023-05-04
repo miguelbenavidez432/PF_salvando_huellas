@@ -54,7 +54,7 @@ const statusAdoptionHandler = async (req, res) => {
     if(!id){
       return res.status(400).json({message: `Adoption not found`})
     } else {
-      const adoption = statusAdoption(id, status)
+      const adoption = await statusAdoption(id, status)
       await sendEmailUpdateStatus(adoption.user, adoption.status  )
       res.status(200).json(adoption) 
     }
