@@ -53,7 +53,7 @@ const sendEmailUpdate = async (token, emailU, ) =>{
         text: 
         
         `Click en el link para reestablecer su contraseña
-        http://localhost:5173/resetpass?token=${token}`
+        https://front-pf-salvando-huellas-main.vercel.app/resetpass?token=${token}`
         
 
     }
