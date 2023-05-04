@@ -10,7 +10,7 @@ const authjwt = require('../Middleware/authjwt')
 
 postsRoute.get('/', getAllPostsHandler)
 postsRoute.get('/:id', getPostByIdHandler)
-postsRoute.post('/register', authjwt.authjwt, createPostHandler)
+postsRoute.post('/register', createPostHandler)
 postsRoute.put('/update/:id', updatPostHandler)
 postsRoute.delete('/delete/:id', deletePostHandler)
 
