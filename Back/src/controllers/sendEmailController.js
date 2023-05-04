@@ -143,7 +143,7 @@ const sendEmailUpdateStatus = async (user, status) =>{
         `
         ${user.nameU} ${user.lastNameU}, su solicitud de adopción fue aprobada con éxito.
 
-        En breve un representante de Salvado Huellas se pondrá en contacto con usted
+        En breve un representante de Salvando Huellas se pondrá en contacto con usted
         ` :
         `
         ${user.nameU} ${user.lastNameU}, su solicitud de adopción fue rechazada.
