@@ -135,8 +135,8 @@ const saveDogs = async () => {
 const saveUsers = async () => {
   const users = [
     {
-      nameU: "juan",
-      lastNameU: "perez",
+      nameU: "Juan",
+      lastNameU: "Perez",
       passwordU: "123",
       idNumbU: 32323232,
       emailU: "juanperez@gmail.com",
@@ -146,8 +146,8 @@ const saveUsers = async () => {
       isAdminU: false,
     },
     {
-      nameU: "lucas",
-      lastNameU: "diaz",
+      nameU: "Lucas",
+      lastNameU: "Diaz",
       passwordU: "1234",
       idNumbU: 32321232,
       emailU: "LucasDiaz@gmail.com",
@@ -157,8 +157,8 @@ const saveUsers = async () => {
       isAdminU: true,
     },
     {
-      nameU: "daniel",
-      lastNameU: "gonzalez",
+      nameU: "Daniel",
+      lastNameU: "Gonzalez",
       passwordU: "123456",
       idNumbU: 22354552,
       emailU: "Dgonzalez@gmail.com",
@@ -168,8 +168,8 @@ const saveUsers = async () => {
       isAdminU: false,
     },
     {
-      nameU: "rodrigo",
-      lastNameU: "perez",
+      nameU: "Rodrigo",
+      lastNameU: "Perez",
       passwordU: "777",
       idNumbU: 3237192,
       emailU: "rodri@gmail.com",
@@ -242,7 +242,7 @@ const savePost = async () => {
 const saveArticles = async () => {
   const articles = [
     {
-      nameA: "HOP! PERRO ADULTO RAZA MEDIANA Y GRANDE 21 KG",
+      nameA: "HOP! Perro adulto, raza mediana y grande 21 KG",
       priceA: 7780,
       descriptionA:
         "ALIMENTOS CANINOS VITAL CAN HOP! ADULTOS - HOP! PERRO ADULTO RAZA MEDIANA Y GRANDE 21 KG",
@@ -264,7 +264,7 @@ const saveArticles = async () => {
     {
       nameA: "Cucha Durapets Roja",
 
-      priceA: 12.0,
+      priceA: 7500,
       descriptionA:
         "La Cucha Durapets, está pensada para darle a tu mascota un espacio cómodo y sobre todo seguro. Está hecha en un material totalmente inyectado, desarrollado con plástico 100% reciclado, que ofrece mayor resistencia, calidad y durabilidad.",
       photoA:
@@ -273,84 +273,120 @@ const saveArticles = async () => {
       activeA: true,
     },
     {
-      nameA: "article d",
-      priceA: 1452.0,
-      descriptionA: "color yellow",
+      nameA: "Soga para tirar",
+      priceA: 1200,
+      descriptionA: "Especial para que tus cachorros se diviertan",
       photoA:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6zDreRNYH_tl8koWDVb_IDfmUPrZQ2Zpkiw&usqp=CAU",
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2F32fb6fd6-9eaa-46aa-8cff-e9d1551a15ee1-53d6611da17463e7c516665306538254-480-0.jpeg?alt=media&token=16071e8b-0780-4993-8cd2-9191c7e52612",
       stockA: 4,
       activeA: true,
     },
     {
-      nameA: "article d",
-      priceA: 1452.0,
-      descriptionA: "color yellow",
+      nameA: "Combo cama & comedero - perros chicos",
+      priceA: 30000,
+      descriptionA: "Combo ideal para la comodidad de tu mascota asegurándole un buen descanso y correcta postura al comer y beber.",
       photoA:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6zDreRNYH_tl8koWDVb_IDfmUPrZQ2Zpkiw&usqp=CAU",
-      stockA: 4,
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2F86afe43f-02f0-4eda-a2e9-1220e7d5d28b1-2f40959c5d6a14dbf316424275175882-640-0.jpeg?alt=media&token=f30e708a-df70-4449-8600-95d2e3bb5b9b",
+      stockA: 8,
       activeA: true,
     },
     {
-      nameA: "article d",
-      priceA: 1452.0,
-      descriptionA: "color yellow",
+      nameA: "COMEDERO ECO TRIPLE - PERROS CHICOS",
+      priceA: 27500,
+      descriptionA: "Resistente al agua y al sol, APTO EXTERIOR Platos de acero inoxidable y paredes antivuelco, dos de 750cm + uno de 2 litros.",
       photoA:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6zDreRNYH_tl8koWDVb_IDfmUPrZQ2Zpkiw&usqp=CAU",
-      stockA: 4,
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2Fa03b3947-216d-4d99-b9fd-4b5c0e2b4a971-49e490639dd5cbada816606920303967-640-0.jpeg?alt=media&token=5c1ab107-cf7f-4451-a32c-711b8d79aa63",
+      stockA: 2,
       activeA: true,
     },
     {
-      nameA: "article d",
-      priceA: 1452.0,
-      descriptionA: "color yellow",
+      nameA: "Pretal perros pequeños",
+      priceA: 4000,
+      descriptionA: "Ideal para salir de paseo.",
       photoA:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6zDreRNYH_tl8koWDVb_IDfmUPrZQ2Zpkiw&usqp=CAU",
-      stockA: 4,
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2Fa955f178-e55c-4ec8-bac8-a4883f74ff33_nube-dd68d8cfcad09984d816104659563241-640-0.jpg?alt=media&token=da7110ba-67f2-498f-b0fe-4a37a4e58439",
+      stockA: 10,
       activeA: true,
     },
     {
-      nameA: "article d",
-      priceA: 1452.0,
-      descriptionA: "color yellow",
+      nameA: "PELOTA DE GOMA - LIMPIA DIENTES PERRO",
+      priceA: 1800,
+      descriptionA: "Limpia los dientes mientras tu mascota juega.",
       photoA:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6zDreRNYH_tl8koWDVb_IDfmUPrZQ2Zpkiw&usqp=CAU",
-      stockA: 4,
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2Ff9ed67c0-f35a-49bb-87fc-bfc730614b121-b6900a0634a2c93a7f16330357339865-640-0.jpeg?alt=media&token=d6766b22-5f89-41fc-bb59-d967bd0d826b",
+      stockA: 30,
       activeA: true,
     },
     {
-      nameA: "article d",
-      priceA: 1452.0,
-      descriptionA: "color yellow",
+      nameA: "Hueso mediano dosificador - Perros medianos y grandes",
+      priceA: 2250,
+      descriptionA: "Hueso con diferentes texturas. Con espacio para rellenar con snacks Medida: 17,5cm",
       photoA:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6zDreRNYH_tl8koWDVb_IDfmUPrZQ2Zpkiw&usqp=CAU",
-      stockA: 4,
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2Ffb2ca751-4274-4f20-bf6d-38f569dce0b41-2f9492cc7e4e4dfea216285606550306-480-0.jpeg?alt=media&token=bfb3fb23-f90e-4819-a3a6-fff04144247d",
+      stockA: 15,
       activeA: true,
     },
     {
-      nameA: "article d",
-      priceA: 1452.0,
-      descriptionA: "color yellow",
+      nameA: "Eukanuba cachorro Raza Pequeña x 1Kg",
+      priceA: 1630,
+      descriptionA: "Eukanuba Puppy Raza Pequeña es recomendado para cachorros entre 1 y 12 meses de edad.",
       photoA:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6zDreRNYH_tl8koWDVb_IDfmUPrZQ2Zpkiw&usqp=CAU",
-      stockA: 4,
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2Fe34c9b16459e52759aec60646e199525ae7be94e.jpg.webp?alt=media&token=7f62f00e-8623-4cdc-b6eb-02a78b6a6cb6",
+      stockA: 20,
       activeA: true,
     },
     {
-      nameA: "article d",
-      priceA: 1452.0,
-      descriptionA: "color yellow",
+      nameA: "Purina Proplan Active Mind Razas Pequeñas x 3Kg",
+      priceA: 6500,
+      descriptionA: "Purina Proplan Active Mind Razas Pequeñas provee una nutrición de avanzada para proteger a los perros mayores de 7 años manteniéndolos sanos y activos.",
       photoA:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6zDreRNYH_tl8koWDVb_IDfmUPrZQ2Zpkiw&usqp=CAU",
-      stockA: 4,
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2F5388e46360ffee30fb951966067ae9fb09c2b6e2.jpg.webp?alt=media&token=e6162e8d-2e8c-4f72-9a30-5e5be2d912df",
+      stockA: 25,
       activeA: true,
     },
     {
-      nameA: "article d",
-      priceA: 1452.0,
-      descriptionA: "color yellow",
+      nameA: "Pedigree Vital Protection x20Kg",
+      priceA: 15800,
+      descriptionA: "Pedigree Vital Protection x20Kg de 1 a 7 años. Lo mejor para tu mascota.",
       photoA:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6zDreRNYH_tl8koWDVb_IDfmUPrZQ2Zpkiw&usqp=CAU",
-      stockA: 4,
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2Fpngwing.com.png?alt=media&token=76e6d538-ceb6-4fc7-8cc8-31096079cc0d",
+      stockA: 10,
+      activeA: true,
+    },
+    {
+      nameA: "Royal Canin Medium Weight Care x3Kg",
+      priceA: 6280,
+      descriptionA: "Royal Canin Medium Weight Care es un alimento exclusivo para perros de talla mediana con tendencia al aumento de peso. A partir de los 12 meses hasta los 7 años de edad.",
+      photoA:
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2F688e3c440527f91458f6b254de616193ddd99afe.jpg.webp?alt=media&token=f3e0462b-9567-4925-b4c7-c529c24de4de",
+      stockA: 8,
+      activeA: true,
+    },
+    {
+      nameA: "HUESO DE GOMA RASCALS - PERROS CHICOS",
+      priceA: 1450,
+      descriptionA: "Hueso Dispensador de comida - ideal perros pequeños. Desarrolla la inteligencia. Horas de diversión. Material: goma. Medida: 12*5cm. Color azul.",
+      photoA:
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2F95c9e7d8-5aeb-40a3-9d1f-5d161476e7481-e674cbf0da3637b23e16422585979971-640-0.jpeg?alt=media&token=2bf5907b-1f8b-496e-b332-10b1af118a25",
+      stockA: 15,
+      activeA: true,
+    },
+    {
+      nameA: "Pedigree - Postre gelatina sabor a pollo",
+      priceA: 1300,
+      descriptionA: "Pedigree - Postre gelatina sabor a pollo x 100g",
+      photoA:
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2Fpngwing.com.png?alt=media&token=6e5536ca-0eb8-4634-8ba2-e07b5373067c",
+      stockA: 40,
+      activeA: true,
+    },
+    {
+      nameA: "Royal Canin Cardiac Canine",
+      priceA: 4400,
+      descriptionA: "Royal Canin Cardiac Canine es un alimento corrector dietario para perros adultos, destinado a ayudar a la función cardíaca deteriorada. Contiene un bajo nivel de sodio.",
+      photoA:
+        "https://firebasestorage.googleapis.com/v0/b/salvandohuellas.appspot.com/o/Art%C3%ADculos%2F688e3c440527f91458f6b254de616193ddd99afe.jpg.webp?alt=media&token=f3e0462b-9567-4925-b4c7-c529c24de4de",
+      stockA: 12,
       activeA: true,
     },
   ];
