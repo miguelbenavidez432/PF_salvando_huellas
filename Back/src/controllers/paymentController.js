@@ -25,9 +25,9 @@ async function createPaymentDonations(req, res) {
       },
     ],
     back_urls: {
-      success: "http://localhost:5173/donar?status=success",
-      failure: "http://localhost:5173/donar?status=failure",
-      pending: "http://localhost:5173/donar?status=pending",
+      success: "https://front-pf-salvando-huellas-main.vercel.app/donar?status=success",
+      failure: "https://front-pf-salvando-huellas-main.vercel.app/donar?status=failure",
+      pending: "https://front-pf-salvando-huellas-main.vercel.app/donar?status=pending",
     },
     external_reference: donation.id,
   };
@@ -47,9 +47,9 @@ async function createPaymentArticles(req, res) {
       userId,
 
       back_urls: {
-        success: "http://localhost:5173/carrito?status=success",
-        failure: "http://localhost:5173/carrito?status=failure",
-        pending: "http://localhost:5173/carrito?status=pending",
+        success: "https://front-pf-salvando-huellas-main.vercel.app/carrito?status=success",
+        failure: "https://front-pf-salvando-huellas-main.vercel.app/carrito?status=failure",
+        pending: "https://front-pf-salvando-huellas-main.vercel.app/carrito?status=pending",
       },
     };
     const preferenceId = await createPreferenceArticles(articlesToSend);

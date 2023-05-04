@@ -53,7 +53,7 @@ const sendEmailUpdate = async (token, emailU, ) =>{
         text: 
         
         `Click en el link para reestablecer su contraseña
-        http://localhost:5173/resetpass?token=${token}`
+        https://front-pf-salvando-huellas-main.vercel.app/resetpass?token=${token}`
         
 
     }
@@ -123,10 +123,46 @@ const sendEmailCarts = async (emailU, nameU, lastNameU, price, articles) =>{
 
 }
 
+const sendEmailUpdateStatus = async (user, status) =>{
+
+    const config = {
+        host: 'smtp.gmail.com',
+        port: 587,
+        auth: {
+            user: 'mob432@gmail.com',               //salvanbohuellasjesusmaria@gmail.com
+            pass: process.env.nodemailer,           //salvandohuellasjesusmaria@gmail.com   
+        }
+    }
+
+    const message = {
+        from: 'mob432@gmail.com',
+        to: user.emailU,
+        subject: status === 'accepted'? `ADOPCIÓN ACEPTADA ` : `ADOPCIÓN RECHAZADA`,
+        text: 
+        status === 'accepted'?
+        `
+        ${user.nameU} ${user.lastNameU}, su solicitud de adopción fue aprobada con éxito.
+
+        En breve un representante de Salvado Huellas se pondrá en contacto con usted
+        ` :
+        `
+        ${user.nameU} ${user.lastNameU}, su solicitud de adopción fue rechazada.
+
+        Si tienes alguna consulta, puede contactarse con nosotros a través de Whastsapp +54 9 3525 41-8986
+        `
+    }
+
+    const transport = nodemailer.createTransport(config)
+
+    const info = await transport.sendMail(message)
+
+}
+
 
 module.exports = {
     sendEmail,
     sendEmailUpdate,
     sendEmailAdoption,
     sendEmailCarts,
+    sendEmailUpdateStatus,
 }

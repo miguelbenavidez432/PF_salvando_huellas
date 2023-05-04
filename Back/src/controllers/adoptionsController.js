@@ -77,9 +77,9 @@ async function getAllAdoption() {
 }
 
 // Update statusA for Admin
-async function statusAdoption (id) {
+async function statusAdoption (id, status) {
   await Adoptions.update({
-    statusA: true
+    statusA: status
   }, {
     where: {
       id_Adoption: {
@@ -87,6 +87,9 @@ async function statusAdoption (id) {
       }
     }
   })
+  const userAdoptionId = await Adoptions.findByPk(id)
+  const user = await Users.findByPk(userAdoptionId.userId)
+  return {user, status}
 }
 
 // Delete an adoption 

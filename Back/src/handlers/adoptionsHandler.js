@@ -8,7 +8,7 @@ const {
 
 const { getUserById } = require('../controllers/usersController')
 
-const { sendEmailAdoption } = require('../controllers/sendEmailController')
+const { sendEmailAdoption, sendEmailUpdateStatus } = require('../controllers/sendEmailController')
 
 // Create an Adoption
 const createAdoptionHandler = async (req, res) => {
@@ -49,11 +49,13 @@ const getAllAdoptionHandler = async (req, res) => {
 // Update statusA for Admin
 const statusAdoptionHandler = async (req, res) => {
   const {id} = req.params
+  const {status} = req.body
   try {
     if(!id){
       return res.status(400).json({message: `Adoption not found`})
     } else {
-      const adoption = statusAdoption(id)
+      const adoption = statusAdoption(id, status)
+      await sendEmailUpdateStatus(adoption.user, adoption.status  )
       res.status(200).json(adoption) 
     }
   } catch (error) {
